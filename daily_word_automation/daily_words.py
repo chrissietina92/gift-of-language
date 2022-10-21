@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from #rebeccas pythonfile import login_interface
+#from #rebeccas pythonfile import login_interface
 
 
 # Userdefined exception
@@ -23,17 +23,21 @@ def set_reminder_time():
 
     else:          
         if reminderHour == datetime.datetime.now().hour and reminderMin == datetime.now().minute: #if the current time is equal to the reminder time
-
-            display_random_word_and_definition()
+            return
+           # display_random_word_and_definition():
+              
 
         
-
+"""
 def display_random_word_and_definition():
     pass
     #  prints a randomly selected word and its definition from the api
 
 if login_interface() == True:  # if user successfully logs in
     set_reminder_time()        # let them set a time reminder for their random words
-
+"""
     
-    
+dictionary = []
+with open('english.txt') as f:
+    dictionary = [line.rstrip() for line in f]
+    print(dictionary)
