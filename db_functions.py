@@ -1,6 +1,8 @@
 import mysql.connector
 from config import USER, HOST, PASSWORD
 
+class DbConnectionError(Exception):
+    pass
 
 def _connect_to_db(db_name):
     connection = mysql.connector.connect(
