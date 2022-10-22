@@ -10,10 +10,16 @@ def get_definition(word):
     # writing the definition of the word and its examples to a file
     with open('Dictionary.txt', 'w') as dictionary:
 
-        for i in word_data:
-            for j in i['meanings']:
-                for k in j['definitions']:
-                    # print(k)
+        # word_data is in a form of a list of dictionaries.
+        # within each index, the values in the dictionaries are another list of dictionaries
+        # using a nested for loop to obtain the data.
+
+        for i in word_data:  # i is each index in word_data
+            dictionary.writelines('Definition for the word {}\n'.format(word.capitalize()))
+
+            for j in i['meanings']:  # j is the value for the key 'meanings' in i
+
+                for k in j['definitions']:  # k is the value for the key 'definitions' in j
                     definition = k['definition']
                     dictionary.writelines('\nDefinition: ' + definition)
                     if 'example' in k:
