@@ -56,7 +56,8 @@ def randomWordGenerator():
 
     # getting our random word
     randomWord = wordDictionaryList[int(randomDictIndex)]
-    return searchAPIForRandomWord(randomWord)
+    
+    
 
 
 
@@ -68,39 +69,35 @@ def searchAPIForRandomWord(randomWord):
 
     response = requests.get(dictionary_url)
     #print(response.status_code)  #should be 200
-    word_data = response.json()
+    word_data = response.json()    # word_data is the API's list of dictionaries
 
+
+    """
+    Explanation for below code:
+    Word data is a list
+    'dictionary' are the dictionaries in this list
+    the value of the meanings key is a list
+    the first entry of that list is a dictionary
+    definitions is a key inside that dictionary, the value of which is a list
+    there is only one entry in that list, another dictionary
+    definition is the key whose value is what you are wanting to print.
+    
+    So you have a string (the thing you are printing) inside a dictionary,
+    which is inside a list (definitions), which is inside a dictionary, 
+    which is inside a list (meanings) which is inside a dictionary,
+    which is inside a list.
+    
+    """
 
     # printing the name and definition of the word from its dictionary
-    for i in word_data:
-        print(i['word'])
-        print(i['meanings'][0]['definitions'][0]['definition'])
+    for dictionary in word_data:    
+        print(dictionary['word'])   # print the value of the word key
+        print(dictionary['meanings'][0]['definitions'][0]['definition'])  
 
 
-
-
-print(randomWordGenerator())
-
-
-
+searchAPIForRandomWord("cat")
 
 
 
 
 
-
-
-
-"""def connect_to_api(randomWord):
-    dictionary_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/{}'.format(randomWord)
-
-    response = requests.get(dictionary_url)
-    #print(response.status_code)  #should be 200
-    word_data = response.json()
-
-    print(word_data['word'])
-    print(word_data['definitions'])"""
-    
-
-
-    
