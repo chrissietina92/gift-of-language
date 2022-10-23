@@ -17,7 +17,7 @@ def get_definition(word):
         for dictionary in word_data:  # i is each index in word_data
             SearchedWords.writelines("\n\nWord: {}".format(word.capitalize()))
             SearchedWords.writelines("\nDefinition: " + dictionary['meanings'][0]['definitions'][0]['definition'])
-            SearchedWords.writelines("\nExample: " + dictionary['meanings'][0]['definitions'][0]['example'])
+            #SearchedWords.writelines("\nExample: " + dictionary['meanings'][0]['definitions'][0]['example'])
 
 
 # example looking up the word 'House' on the API

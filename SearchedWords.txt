@@ -2,11 +2,9 @@
 
 Word: House
 Definition: A structure built or serving as an abode of human beings.
-Example: This is my house and my family's ancestral home.
 
 Word: House
 Definition: To keep within a structure or container.
-Example: The car is housed in the garage.
 
 Word: House
 Definition: House music.
