@@ -49,6 +49,8 @@ def get_word_learnt(word):
             print("DBConnection closed")
     return word_learnt
 
+
+#make sure your code checks if word already exists in the db of learnt words
 def add_new_word(new_word, definition):
     try:
         db_name = 'dictionary'

@@ -26,11 +26,8 @@ def set_reminder_time():
 
     else:          
         if reminderHour == datetime.datetime.now().hour and reminderMin == datetime.now().minute: #if the current time is equal to the reminder time
-            return display_random_word_and_definition()
+            randomWordGenerator()
               
-
-
-
 
 
 
@@ -38,11 +35,11 @@ def set_reminder_time():
     set_reminder_time()        # let them set a time reminder for their random words
     
 """
-def display_random_word_and_definition():
 
-    # GENERATING THE RANDOM WORD
+# GENERATING THE RANDOM WORD FOR USERS DAILY WORD
+def randomWordGenerator():    
 
-    # Converting the text file of dictionary words into a list of strings
+    # Converting the text file of the dictionary words into a list of strings
     with open("daily_word_automation\english.txt", encoding="utf8") as wordDictionary:
         wordDictionaryList = []       # the wordDictionary in list form
         for line in wordDictionary:
@@ -51,19 +48,22 @@ def display_random_word_and_definition():
 
     # Total number of dictionary words
     dictionaryLength = len(wordDictionaryList)
-    #print(dictionaryLength)  # 
+    #print(dictionaryLength)  
 
     # generates a random number within the range of the index for the list of dictionary words
     randomDictIndex = random.randint(0,dictionaryLength-1) 
     #print(randomDictIndex)  
 
     # getting our random word
-    randomWord = wordDictionaryList[randomDictIndex]
+    randomWord = wordDictionaryList[int(randomDictIndex)]
+    return searchAPIForRandomWord(randomWord)
 
+
+
+
+def searchAPIForRandomWord(randomWord):
 
     # CONNECTING TO AN API TO SEARCH WITH THE RANDOM WORD AND PRINT ITS NAME AND DEFINITION
-
-     
     dictionary_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/{}'.format(randomWord)
 
     response = requests.get(dictionary_url)
@@ -73,10 +73,33 @@ def display_random_word_and_definition():
 
     # printing the name and definition of the word from its dictionary
     for i in word_data:
-        print(word_data["word"])
-        #print(word_data['meanings']['definitions'])
-    
+        print(i['word'])
+        print(i['meanings'][0]['definitions'][0]['definition'])
 
+
+
+
+print(randomWordGenerator())
+
+
+
+
+
+
+
+
+
+
+
+"""def connect_to_api(randomWord):
+    dictionary_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/{}'.format(randomWord)
+
+    response = requests.get(dictionary_url)
+    #print(response.status_code)  #should be 200
+    word_data = response.json()
+
+    print(word_data['word'])
+    print(word_data['definitions'])"""
     
 
 
