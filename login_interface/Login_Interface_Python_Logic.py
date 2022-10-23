@@ -1,4 +1,4 @@
-from db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
+from db_functions_1 import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
 
 # Welcome message.
 print("The Gift of Language")
