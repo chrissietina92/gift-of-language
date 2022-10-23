@@ -1,16 +1,16 @@
 import mysql.connector
 from config import USER, HOST, PASSWORD
 
-
 def _connect_to_db(db_name):
     connection = mysql.connector.connect(
-        host=HOST,
-        user=USER,
-        password=PASSWORD,
-        auth_plugin='mysql_native_password',
-        database=db_name
-    )
+            host=HOST,
+            user=USER,
+            password=PASSWORD,
+            auth_plugin='mysql_native_password',
+            database=db_name
+        )
     return connection
+
 
 
 def does_user_exist(column, value):
@@ -43,7 +43,7 @@ def does_user_exist(column, value):
 
         cur.close()
     except Exception:
-        raise DbConnectionError
+        raise ConnectionError
 
     finally:
         if db_connection:
@@ -71,11 +71,83 @@ def add_a_new_user(userid, firstname, lastname, email, dob, city, username, pass
         cur.close()
 
     except Exception:
-        raise DbConnectionError
+        raise ConnectionError
 
     finally:
         if db_connection:
             db_connection.close()
             print("DB connection closed")
+
+
+def new_user_credentials():
+    # This function implements the add_a_new_user function.
+    # The function was created to prevent the repeat of code.
+
+    email = input('Email: ')
+    userid = input('User id: ')
+    firstname = input('First name: ')
+    lastname = input('Last name: ')
+
+    dob = input('DOB (%d-%m-%Y): ')
+    city = input('City: ')
+    username = input('Username: ')
+    password = input('Password: ')
+
+    add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
+
+
+
+def username_and_password_match(column, value, password_value):
+    db_connection = None
+    try:
+
+        user_attempt = 0
+        while user_attempt < 2:
+
+            db_name = 'GOL_users'
+            # Database engine
+            db_connection = _connect_to_db(db_name)
+            # Cursor
+            cur = db_connection.cursor()
+            print("Database connection Successful")
+
+            # This query checks if the records of the password and username exist in one record. It returns 1 if it does exist and 0 if it does not exist.
+            query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,value,password_value)
+
+            cur.execute(query)
+            result2 = cur.fetchall()
+
+
+            if result2[0][0] == 1:
+                # This query calls the users first name, if the login has been successful.
+                query2 = "SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'".format(
+                    column, value, password_value)
+                cur.execute(query2)
+                result3 = cur.fetchall()
+
+                # This for loop extracts the first name from the tuple case.
+                for data in result3:
+                    name = data[0]
+
+                print("Login Successful. \nWelcome, {}".format(name))
+                break
+
+            else:
+                user_attempt += 1
+                print('Incorrect credentials. Please try again')
+                password_value = input("Enter your password.")
+        else:
+            print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
+
+        cur.close()
+
+    except Exception:
+        raise ConnectionError
+
+    finally:
+        if db_connection:
+            db_connection.close()
+            print("DB connection closed")
+
 
 
