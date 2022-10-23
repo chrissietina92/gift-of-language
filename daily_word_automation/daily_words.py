@@ -18,7 +18,7 @@ def set_reminder_time():
         reminderHour = int(input("Enter the Hour : "))
         reminderMin = int(input("Enter the Minute : "))
 
-        if 24 < reminderHour < 1 and 60 < reminderMin < 1:
+        if 24 < reminderHour < 1 and 00 < reminderMin < 1:
             raise ValueNotInTwentyFourHour
 
     except ValueNotInTwentyFourHour:
@@ -80,7 +80,7 @@ def searchAPIForRandomWord(randomWord):
         #print("Definition: " + dictionary['meanings'][0]['definitions'][0]['example'])
 
 
-searchAPIForRandomWord("coffee")
+searchAPIForRandomWord("water")
 
 
 
