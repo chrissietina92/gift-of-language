@@ -82,7 +82,6 @@ def add_a_new_user(userid, firstname, lastname, email, dob, city, username, pass
 def new_user_credentials():
     # This function implements the add_a_new_user function.
     # The function was created to prevent the repeat of code.
-
     email = input('Email: ')
     userid = input('User id: ')
     firstname = input('First name: ')
