@@ -24,18 +24,18 @@ def existing_customer_check():
 
 
 def login_interface():
-    login_method = input('How would you like to login? (Email/Username)')
-    column = login_method.title()
 
-    if column == 'Email' or 'Username':
-        value = input('Enter your {}: '.format(column.lower()))
-        print("Thank you. Checking your details...")
-        does_user_exist(column, value)
-        password_value = input("Enter your password:")
-        username_and_password_match(column, value, password_value)
+        login_method = input('How would you like to login? (Email/Username)')
+        column = login_method.title()
 
-    else:
-        raise ValueError
+        if column == 'Email' or column == 'Username':
+            value = input('Enter your {}: '.format(column.lower()))
+            print("Thank you. Checking your details...")
+            does_user_exist(column, value)
+            password_value = input("Enter your password:")
+            username_and_password_match(column, value, password_value)
+        else:
+            raise ValueError
 
 _connect_to_db('GOL_users')
 existing_customer_check()
