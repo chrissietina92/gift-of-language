@@ -7,5 +7,20 @@
 </head>
 <body>
 <h1>Sign up here</h1>
+
+<form action="{{ url_for('signup') }}" method="POST">
+
+        Email: <input type="text" id="email" name="email"><br><br>
+        First name: <input type="text" id="firstname" name="firstname"><br><br>
+        Last name: <input type="text" id="lastname" name="lastname"><br><br>
+        DOB: <input type="text" id="dob" name="dob"><br><br>
+        City: <input type="text" id="city" name="city"><br><br>
+        Username: <input type="text" id="username" name="username"><br><br>
+        Password: <input type="text" id="password" name="password"><br><br>
+
+    <input type="submit" name="next" value="Next">
+    </form>
+
+
 </body>
 </html>

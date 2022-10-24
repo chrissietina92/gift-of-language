@@ -6,6 +6,25 @@
     <title>Log in page</title>
 </head>
 <body>
-<h1>Log in here</h1>
+    <h1>Log in here</h1>
+    <form action="{{ url_for('login') }}" method="POST">
+        Log in with:
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="logintype" value="email" id="email-option">
+          <label class="form-check-label" for="email-option">
+            Email
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="logintype" value="username" id="username-option" checked>
+          <label class="form-check-label" for="username-option">
+            Username
+          </label>
+        </div>
+        <input type="text" id="username" name="username"><br><br>
+        Password<br>
+        <input type="text" id="password" name="password"><br><br>
+        <input type="submit" name="next" value="Next">
+    </form>
 </body>
 </html>
