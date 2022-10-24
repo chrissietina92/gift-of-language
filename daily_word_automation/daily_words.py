@@ -1,35 +1,26 @@
-from datetime import datetime
 import requests
+import schedule
 import random
+import time
 
 
-# User-defined exception
-class ValueNotInTwentyFourHour(ValueError):
-    # called if the time entered is not in 24hr time
-    pass
-
+# This code allows user to set a reminder and automate the time they received their daily word
 
 def set_reminder_time():
-    try:
-        print("Please enter the time you would like your daily reminder in 24hr format.")
-        reminderHour = int(input("Enter the Hour : "))
-        reminderMin = int(input("Enter the Minute : "))
 
-        if 24 < reminderHour < 1 and 00 < reminderMin < 1:
-            raise ValueNotInTwentyFourHour
+    reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
 
-    except ValueNotInTwentyFourHour:
-        print("Please enter your reminder time in 24hr format.")
+    # Every day at 'reminderTime' time randomeWordGenerator() is called.
+    schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
 
-    # make this code run constantly
-    else:
-        # while True:
-        # to test if this works you need tp enter the current time
-        if reminderHour == datetime.now().hour and reminderMin == datetime.now().minute:  # If the current time is equal to the reminder time
-            randomWordGenerator()
-        else:
-            print("It's not time for the daily reminder yet.")
+    # Loop so that the scheduling task
+    # keeps on running all time.
 
+    while True:
+        # Checks whether a scheduled task
+        # is pending to run or not
+        schedule.run_pending()
+        time.sleep(1)
 
 
 # Documentation:
@@ -63,7 +54,6 @@ def randomWordGenerator():
     searchAPIForRandomWord(randomWord)
 
 
-
 def searchAPIForRandomWord(randomWord):
     # CONNECTING TO AN API TO SEARCH WITH THE RANDOM WORD AND PRINT ITS NAME AND DEFINITION
     dictionary_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/{}'.format(randomWord)
@@ -71,8 +61,6 @@ def searchAPIForRandomWord(randomWord):
     response = requests.get(dictionary_url)
     # print(response.status_code)  #should be 200
     word_data = response.json()  # word_data is the API's list of dictionaries
-
-
 
     # printing the name and definition of the word from its dictionary
     for dictionary in word_data:
@@ -82,4 +70,4 @@ def searchAPIForRandomWord(randomWord):
     return word_data[0]['meanings'][0]['definitions'][0]['definition']
 
 
-print(set_reminder_time())
+set_reminder_time()

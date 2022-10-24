@@ -10,18 +10,5 @@ def get_definition(word):
 
     return "Word: {}".format(word_data[0]['word']), "Definition: {}".format(word_data[0]['meanings'][0]['definitions'][0]['definition'])
 
-
-"""# writing the word and its definition to a file
-    with open('SearchedWords.txt', 'w') as SearchedWords:
-
-        # word_data is in a form of a list of dictionaries.
-        # within each index, the values in the dictionaries are another list of dictionaries
-
-        for dictionary in word_data:  # i is each index in word_data
-            SearchedWords.writelines("\n\nWord: {}".format(word.capitalize()))
-            SearchedWords.writelines("\nDefinition: " + dictionary['meanings'][0]['definitions'][0]['definition'])
-
-        return word_data[0]['word'] , word_data[0]['definitions'][0]['definition'])"""
-
 # example looking up the word 'House' on the API
 print(get_definition('house'))
