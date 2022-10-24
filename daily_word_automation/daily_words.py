@@ -10,7 +10,7 @@ def set_reminder_time():
 
     reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
 
-    # Every day at 'reminderTime' time randomeWordGenerator() is called.
+    # Every day at 'reminderTime' time randomWordGenerator() is called.
     schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
 
     # Loop so that the scheduling task
