@@ -23,7 +23,7 @@ def set_reminder_time():
 
     # make this code run constantly
     else:
-        #while True:
+        # while True:
         # to test if this works you need tp enter the current time
         if reminderHour == datetime.now().hour and reminderMin == datetime.now().minute:  # If the current time is equal to the reminder time
             randomWordGenerator()
