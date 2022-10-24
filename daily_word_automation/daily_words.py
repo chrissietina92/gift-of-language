@@ -3,9 +3,6 @@ import requests
 import random
 
 
-# from rebeccas pythonfile import login_interface
-
-
 # User-defined exception
 class ValueNotInTwentyFourHour(ValueError):
     # called if the time entered is not in 24hr time
@@ -24,15 +21,9 @@ def set_reminder_time():
     except ValueNotInTwentyFourHour:
         print("Please enter your reminder time in 24hr format.")
 
-    else:
-        if reminderHour == datetime.datetime.now().hour and reminderMin == datetime.now().minute:  # If the current time is equal to the reminder time
+    else:                                                                                 # to test if this works you need tp enter the current time
+        if reminderHour == datetime.now().hour and reminderMin == datetime.now().minute:  # If the current time is equal to the reminder time
             randomWordGenerator()
-
-
-"""if login_interface() == True:  # if user successfully logs in
-    set_reminder_time()        # let them set a time reminder for their random words
-
-"""
 
 
 # Documentation:
@@ -44,22 +35,27 @@ def set_reminder_time():
 # GENERATING THE RANDOM WORD FOR USERS DAILY WORD
 def randomWordGenerator():
     # Converting the text file of the dictionary words into a list of strings
-    with open("daily_word_automation\english.txt", encoding="utf8") as wordDictionary:
+    with open("english.txt", encoding="utf8") as wordDictionary:
         wordDictionaryList = []  # the wordDictionary in list form
         for line in wordDictionary:
-            wordDictionaryList.append(line.strip)
-        #  print(wordDictionaryList)    # the wordDictionary in list form
+            wordDictionaryList.append(line.strip())
+            #  print(wordDictionaryList)    # the wordDictionary in list form
+            #  print(wordDictionaryList)    # the wordDictionary in list form
 
     # Total number of dictionary words
     dictionaryLength = len(wordDictionaryList)
     #  print(dictionaryLength)
 
-    # generates a random number within the range of the index for the list of dictionary words
+    # Generates a random number within the range of the index for the list of dictionary words
     randomDictIndex = random.randint(0, dictionaryLength - 1)
-    #  print(randomDictIndex)
+    #  print("RANDOM DICTIONARY INDEX: " , randomDictIndex)
 
-    # getting our random word
-    randomWord = wordDictionaryList[int(randomDictIndex)]
+    # Getting our random word
+    randomWord = wordDictionaryList[randomDictIndex]
+    #  print("RANDOM WORD: " , randomWord)
+
+    searchAPIForRandomWord(randomWord)
+
 
 
 def searchAPIForRandomWord(randomWord):
@@ -70,6 +66,8 @@ def searchAPIForRandomWord(randomWord):
     # print(response.status_code)  #should be 200
     word_data = response.json()  # word_data is the API's list of dictionaries
 
+
+
     # printing the name and definition of the word from its dictionary
     for dictionary in word_data:
         print("Word: " + dictionary['word'])  # print the value of the word key
@@ -77,4 +75,5 @@ def searchAPIForRandomWord(randomWord):
         # print("Definition: " + dictionary['meanings'][0]['definitions'][0]['example'])
 
 
-searchAPIForRandomWord("water")
+
+set_reminder_time()
