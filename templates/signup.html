@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css.css">
+    <title>Sign up page</title>
+</head>
+<body>
+    <h1>Sign up here</h1>
+
+    <form action="{{ url_for('signup') }}" method="POST">
+
+        Email: <input type="text" id="email" name="email"><br><br>
+        First name: <input type="text" id="firstname" name="firstname"><br><br>
+        Last name: <input type="text" id="lastname" name="lastname"><br><br>
+        DOB (%d-%m-%Y): <input type="text" id="dob" name="dob"><br><br>
+        City: <input type="text" id="city" name="city"><br><br>
+        Username: <input type="text" id="username" name="username"><br><br>
+        Password: <input type="text" id="password" name="password"><br><br>
+
+    <input type="submit" name="next" value="Next">
+    </form>
+    <br><br>
+    {% if clicked %}
+    <h2>Hi {{firstname}}, you are all signed up!<br>
+    <a href="http://127.0.0.1:5001/wordofday">Get your word of the day!</a></h2>
+    {% endif %}
+</body>
+</html>
+
+
+</body>
+</html>
