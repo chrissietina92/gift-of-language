@@ -21,9 +21,15 @@ def set_reminder_time():
     except ValueNotInTwentyFourHour:
         print("Please enter your reminder time in 24hr format.")
 
-    else:                                                                                 # to test if this works you need tp enter the current time
+    # make this code run constantly
+    else:
+        #while True:
+        # to test if this works you need tp enter the current time
         if reminderHour == datetime.now().hour and reminderMin == datetime.now().minute:  # If the current time is equal to the reminder time
             randomWordGenerator()
+        else:
+            print("It's not time for the daily reminder yet.")
+
 
 
 # Documentation:
