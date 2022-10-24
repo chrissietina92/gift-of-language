@@ -107,7 +107,7 @@ def username_and_password_match(column, value, password_value):
             db_connection = _connect_to_db(db_name)
             # Cursor
             cur = db_connection.cursor()
-            print("Database connection Successful")
+            # print("Database connection Successful")
 
             # This query checks if the records of the password and username exist in one record. It returns 1 if it does exist and 0 if it does not exist.
             query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,value,password_value)
@@ -145,7 +145,7 @@ def username_and_password_match(column, value, password_value):
     finally:
         if db_connection:
             db_connection.close()
-            print("DB connection closed")
+            # print("DB connection closed")
 
 
 

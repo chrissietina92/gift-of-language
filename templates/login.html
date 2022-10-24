@@ -26,5 +26,11 @@
         <input type="text" id="password" name="password"><br><br>
         <input type="submit" name="next" value="Next">
     </form>
+
+    <br><br>
+    {% if clicked %}
+    <h2>You are all logged in.<br>
+    <a href="http://127.0.0.1:5001/wordofday">Get your word of the day!</a></h2>
+    {% endif %}
 </body>
 </html>
