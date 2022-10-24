@@ -1,4 +1,4 @@
-from db_functions import does_user_exist, add_a_new_user
+from db_functions import does_user_exist, new_user_credentials
 
 option = int(input("""Would you like to 
                     (1) check if a user exists
@@ -10,12 +10,4 @@ if option == 1:
     value = input('{}: '.format(column))
     does_user_exist(column, value)
 else:
-    userid = input('User id: ')
-    firstname = input('First name: ')
-    lastname = input('Last name: ')
-    email = input('Email: ')
-    dob = input('DOB (%d-%m-%Y): ')
-    city = input('City: ')
-    username = input('Username: ')
-    password = input('Password: ')
-    add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
+    new_user_credentials()

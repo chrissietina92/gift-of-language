@@ -21,7 +21,7 @@ def does_user_exist(column, value):
         db_connection = _connect_to_db(db_name)
         # Cursor
         cur = db_connection.cursor()
-        print("Database connection Successful")
+        # print("Database connection Successful")
 
         query = """
                     SELECT (EXISTS(SELECT FirstName
@@ -48,7 +48,7 @@ def does_user_exist(column, value):
     finally:
         if db_connection:
             db_connection.close()
-            print("DB connection closed")
+            # print("DB connection closed")
 
 
 def add_a_new_user(userid, firstname, lastname, email, dob, city, username, password):
@@ -59,7 +59,7 @@ def add_a_new_user(userid, firstname, lastname, email, dob, city, username, pass
         db_connection = _connect_to_db(db_name)
         # Cursor
         cur = db_connection.cursor()
-        print("Database connection Successful")
+        # print("Database connection Successful")
 
         query = """
                 INSERT INTO the_users (UserID, FirstName, LastName, Email, DOB, City, Username, UserPassword)
@@ -87,12 +87,10 @@ def new_user_credentials():
     userid = input('User id: ')
     firstname = input('First name: ')
     lastname = input('Last name: ')
-
     dob = input('DOB (%d-%m-%Y): ')
     city = input('City: ')
     username = input('Username: ')
     password = input('Password: ')
-
     add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
 
 
