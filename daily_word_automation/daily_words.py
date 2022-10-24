@@ -79,7 +79,7 @@ def searchAPIForRandomWord(randomWord):
         print("Word: " + dictionary['word'])  # print the value of the word key
         print("Definition: " + dictionary['meanings'][0]['definitions'][0]['definition'])
         # print("Definition: " + dictionary['meanings'][0]['definitions'][0]['example'])
+    return word_data[0]['meanings'][0]['definitions'][0]['definition']
 
 
-
-set_reminder_time()
+print(set_reminder_time())
