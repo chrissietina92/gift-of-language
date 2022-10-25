@@ -37,7 +37,7 @@ def login_interface():
         else:
             raise ValueError
 
-_connect_to_db('my_database')
+_connect_to_db('GOL_users')
 
 
 

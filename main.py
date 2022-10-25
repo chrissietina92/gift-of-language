@@ -6,7 +6,7 @@ from api import show_word_and_definition
 
 
 def learn_words():
-    start = input('Would you like to search your Schedule your words, Search your Dictionary, or view your Searched Words? (Schedule Words/Search Dictionary//View Searched Words) ')
+    start = input('Would you like to search your Schedule your words, Search your Dictionary, or view your Searched Words? (Schedule Word/Search Dictionary//View Searched Words) ')
     if start == 'Schedule Word':
         set_reminder_time()
         continue_learning()

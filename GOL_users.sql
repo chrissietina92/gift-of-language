@@ -1,3 +1,4 @@
+-- SQL Code to create database for users
 CREATE DATABASE GOL_users;
 USE GOL_users;
 

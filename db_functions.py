@@ -1,6 +1,8 @@
 import mysql.connector
 from config import USER, HOST, PASSWORD
 
+#db_name = 'GOL_users'
+
 def _connect_to_db(db_name):
     connection = mysql.connector.connect(
             host=HOST,
@@ -16,7 +18,7 @@ def _connect_to_db(db_name):
 def does_user_exist(column, value):
     db_connection = None
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         # Database engine
         db_connection = _connect_to_db(db_name)
         # Cursor
@@ -54,7 +56,7 @@ def does_user_exist(column, value):
 def add_a_new_user(userid, firstname, lastname, email, dob, city, username, password):
     db_connection = None
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         # Database engine
         db_connection = _connect_to_db(db_name)
         # Cursor
@@ -102,7 +104,7 @@ def username_and_password_match(column, value, password_value):
         user_attempt = 0
         while user_attempt < 2:
 
-            db_name = 'my_database'
+            db_name = 'GOL_users'
             # Database engine
             db_connection = _connect_to_db(db_name)
             # Cursor
