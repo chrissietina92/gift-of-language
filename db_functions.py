@@ -16,7 +16,7 @@ def _connect_to_db(db_name):
 def does_user_exist(column, value):
     db_connection = None
     try:
-        db_name = 'GOL_users'
+        db_name = 'my_database'
         # Database engine
         db_connection = _connect_to_db(db_name)
         # Cursor
@@ -37,9 +37,9 @@ def does_user_exist(column, value):
         ## OR [(0,)] WHICH REPRESENTS FALSE
 
         if result[0][0] == 1:
-            print('A user exists with these details')
+            return True
         else:
-            print('A user does not exist with these details')
+            return False
 
         cur.close()
     except Exception:
@@ -54,7 +54,7 @@ def does_user_exist(column, value):
 def add_a_new_user(userid, firstname, lastname, email, dob, city, username, password):
     db_connection = None
     try:
-        db_name = 'GOL_users'
+        db_name = 'my_database'
         # Database engine
         db_connection = _connect_to_db(db_name)
         # Cursor
@@ -76,7 +76,7 @@ def add_a_new_user(userid, firstname, lastname, email, dob, city, username, pass
     finally:
         if db_connection:
             db_connection.close()
-            print("DB connection closed")
+            #print("DB connection closed")
 
 
 def new_user_credentials():
@@ -102,12 +102,12 @@ def username_and_password_match(column, value, password_value):
         user_attempt = 0
         while user_attempt < 2:
 
-            db_name = 'GOL_users'
+            db_name = 'my_database'
             # Database engine
             db_connection = _connect_to_db(db_name)
             # Cursor
             cur = db_connection.cursor()
-            print("Database connection Successful")
+            #print("Database connection Successful")
 
             # This query checks if the records of the password and username exist in one record. It returns 1 if it does exist and 0 if it does not exist.
             query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,value,password_value)
@@ -136,7 +136,6 @@ def username_and_password_match(column, value, password_value):
                 password_value = input("Enter your password.")
         else:
             print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
-
         cur.close()
 
     except Exception:
@@ -145,7 +144,7 @@ def username_and_password_match(column, value, password_value):
     finally:
         if db_connection:
             db_connection.close()
-            print("DB connection closed")
+            #print("DB connection closed")
 
 
 

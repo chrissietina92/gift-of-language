@@ -1,8 +1,8 @@
 from db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
 
 # Welcome message.
-print("The Gift of Language")
-print("Welcome.")
+#print("The Gift of Language")
+#print("Welcome.")
 
 # Programme query to customer.
 # This function checks whether the customer has an existing account or not to their knowledge.
@@ -37,8 +37,8 @@ def login_interface():
         else:
             raise ValueError
 
-_connect_to_db('GOL_users')
-existing_customer_check()
+_connect_to_db('my_database')
+
 
 
 

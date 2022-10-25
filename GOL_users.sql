@@ -12,6 +12,10 @@ CREATE TABLE the_users (
 	UserPassword varchar(65)
 );
 
+CREATE TABLE searched_words (
+    word varchar(50) NOT NULL,
+    definition_ varchar(6000) NOT NULL
+);
 
 INSERT INTO the_users (UserID, FirstName, LastName, Email, DOB, City, Username, UserPassword)
 VALUES (1, 'Jake', 'Callow', 'jcal@email.com', str_to_date('05-12-1992', '%d-%m-%Y'), 'London', 'cobrien1', 'cat123'),
