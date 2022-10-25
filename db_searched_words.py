@@ -79,7 +79,7 @@ def add_searched_word(new_word):
             db_connection.close()
             #print("DBConnection closed")
 
-
+## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
 def clean_db_for_new_user():
     try:
         db_name = 'my_database'
