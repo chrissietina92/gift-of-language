@@ -5,23 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gift-of-language.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GOL_users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/GOL_users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login_Interface_Python_Logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login_Interface_Python_Logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SearchedWords.txt" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wordofday.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GOL_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/GOL_api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client_side.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_word_automation/daily_words.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_word_automation/english.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_words.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/learnt_words_storage_access/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/learnt_words_storage_access/db_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
