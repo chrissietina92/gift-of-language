@@ -34,7 +34,8 @@ def login_interface():
             print("Thank you. Checking your details...")
             does_user_exist(column, value)
             password_value = input("Enter your password:")
-            username_and_password_match(column, value, password_value)
+            matched = username_and_password_match(column, value, password_value)
+            return matched
         else:
             raise ValueError
 
