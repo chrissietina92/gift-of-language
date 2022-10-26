@@ -9,14 +9,13 @@ def learn_words():
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or view your Searched Words? (Schedule Word/Search Dictionary//View Searched Words) ')
     if start == 'Schedule Word':
         set_reminder_time()
-        learn_words()
+        continue_learning()
     elif start == 'Search Dictionary':
         search_words_in_dictionary()
         continue_learning()
     elif start == 'View Searched Words':
         display_all_searched_words()
         continue_learning()
-
 
 
 def search_words_in_dictionary():
