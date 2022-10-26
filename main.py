@@ -58,6 +58,9 @@ def continue_learning():
         exit(0)
     elif cont_learning == 'Yes':
         learn_words()
+    else:
+        print("Please type 'Yes' or 'No'")
+        continue_learning()
 
 
 def run():

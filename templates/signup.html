@@ -23,10 +23,13 @@
 
     <input type="submit" name="next" value="Next">
     </form>
-    <br><br>
+    <br>
     {% if clicked %}
-    <h2>Hi {{firstname}}, you are all signed up!<br>
-    <a href="http://127.0.0.1:5001/wordofday">Get your word of the day!</a></h2>
+            <h2>Hi {{firstname}}, you are all signed up!
+            <br><br>
+            <a href="http://127.0.0.1:5001/wordofday">Get your word of the day!</a>
+            <br><br>
+            <a href="http://127.0.0.1:5001/searchword">Search for a previous word</a></h2>
     {% endif %}
 </body>
 </html>
