@@ -1,27 +1,5 @@
 import requests
-import schedule
 import random
-import time
-
-
-# This code allows user to set a reminder and automate the time they received their daily word
-
-def set_reminder_time():
-
-    reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
-
-    # Every day at 'reminderTime' time randomWordGenerator() is called.
-    schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
-
-    # Loop so that the scheduling task
-    # keeps on running all time.
-    #learn_words()
-    while True:
-        # Checks whether a scheduled task
-        # is pending to run or not
-        schedule.run_pending()
-        time.sleep(1)
-
 
 
 # Documentation:
@@ -70,4 +48,5 @@ def searchAPIForRandomWord(randomWord):
         # print("Definition: " + dictionary['meanings'][0]['definitions'][0]['example'])
 
     return "Word: {}".format(word_data[0]['word']), "Definition: {}".format(word_data[0]['meanings'][0]['definitions'][0]['definition'])
+
 
