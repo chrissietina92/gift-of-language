@@ -5,6 +5,7 @@ import time
 
 # This code allows user to set a reminder and automate the time they received their daily word
 
+
 def continue_learning():
     cont_learning = input('Would you like to continue? (Yes/No) ')
     if cont_learning == 'No':
