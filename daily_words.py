@@ -3,7 +3,6 @@ import schedule
 import random
 import time
 
-
 # This code allows user to set a reminder and automate the time they received their daily word
 
 def set_reminder_time():
