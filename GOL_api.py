@@ -17,7 +17,7 @@ def login():
         clicked = True
         form = request.form
         log_in_right = get_login_details(form)
-        # print(form) #ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
+        # print(form) # returns ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
     return render_template('login.html', clicked = clicked, log_in_right = log_in_right)
 
 def get_login_details(form):
@@ -57,7 +57,21 @@ def get_signup_details(form):
 @app.route('/wordofday')
 def wordofday():
     word_of_day = randomWordGenerator()
-    return render_template('wordofday.html', word_of_day = word_of_day)
+    word = word_of_day[0]
+    definition = word_of_day[1]
+    return render_template('wordofday.html', word = word, definition = definition)
+
+
+@app.route('/searchword', methods=['GET', 'POST'])
+def searchword():
+    clicked = False
+    word_searched = ''
+    if request.method == 'POST':
+        clicked = True
+        form = request.form
+        word_searched = form['searchword']
+        #add in the search word function
+    return render_template('searchword.html', clicked = clicked, word_searched = word_searched)
 
 
 

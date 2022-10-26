@@ -6,18 +6,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/css.css">
-    <title>WORD OF DAY PAGE</title>
+    <title>Search word page</title>
 </head>
 <body>
-    <h1>WORD OF THE DAY!</h1>
-    <div id = "wordanddef">
-        <h2 id = "word">
-            {{ word }}
-            <br>
+    <h1>Search for word</h1>
+    <form action="{{ url_for('searchword') }}" method="POST">
+
+        <input type="text" id="searchword" name="searchword"><br><br>
+        <input type="submit" name="next" value="Next">
+    </form>
+
+    <br><br>
+    {% if clicked %}
+        <h2>
+            You have searched for the word: {{ word_searched }}
         </h2>
-        <h2 id = "definition">
-            {{ definition }}
-        </h2>
-    </div>
+
+    {% endif %}
 </body>
 </html>

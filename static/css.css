@@ -41,4 +41,21 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 25%;
+    }
+
+  #wordanddef {
+   margin-left: auto;
+   margin-right: auto;
+   width: 75%;
+
+   }
+
+
+
+  #word {
+    font-size: 50px;
+  }
+
+  #definition {
+    font-size: 30px;
   }
