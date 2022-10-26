@@ -19,7 +19,7 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="logintype" value="username" id="username-option" checked>
+          <input class="form-check-input" type="radio" name="logintype" value="Username" id="username-option" checked>
           <label class="form-check-label" for="username-option">
             Username
           </label>
@@ -32,8 +32,13 @@
 
     <br><br>
     {% if clicked %}
-    <h2>You are all logged in.<br>
-    <a href="http://127.0.0.1:5001/wordofday">Get your word of the day!</a></h2>
+        {% if log_in_right %}
+            <h2>You are all logged in.<br>
+            <a href="http://127.0.0.1:5001/wordofday">Get your word of the day!</a></h2>
+        {% else %}
+            <h2>Incorrect password, sorry!</h2>
+        {% endif %}
+
     {% endif %}
 </body>
 </html>

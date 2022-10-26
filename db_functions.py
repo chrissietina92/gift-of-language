@@ -130,14 +130,18 @@ def username_and_password_match(column, value, password_value):
                     name = data[0]
 
                 print("Login Successful. \nWelcome, {}".format(name))
+                # return True #will be needed
                 break
 
             else:
+                # return False  # will be needed, this section may have to be removed as not sure how it will work with front end
                 user_attempt += 1
                 print('Incorrect credentials. Please try again')
                 password_value = input("Enter your password.")
+
         else:
             print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
+            # return False #will be needed
         cur.close()
 
     except Exception:

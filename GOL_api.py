@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template
-from db_functions import add_a_new_user
+from db_functions import add_a_new_user, username_and_password_match
 
 app = Flask(__name__)
 
@@ -11,17 +11,21 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     clicked = False
+    log_in_right = False
     if request.method == 'POST':
         clicked = True
         form = request.form
-        get_login_details(form)
+        log_in_right = get_login_details(form)
         # print(form) #ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
-    return render_template('login.html', clicked = clicked)
+    return render_template('login.html', clicked = clicked, log_in_right = log_in_right)
 
 def get_login_details(form):
-    chosen_log_in = form['logintype']
-    chosen_log_in_input = form['username']
+    column = form['logintype']
+    print(column)
+    value = form['username']
     password = form['password']
+    log_in_right = username_and_password_match(column, value, password)
+    return log_in_right
 
 
 
