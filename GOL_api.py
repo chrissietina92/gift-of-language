@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from db_functions import add_a_new_user, username_and_password_match
+from daily_words import randomWordGenerator
 
 app = Flask(__name__)
 
@@ -55,7 +56,8 @@ def get_signup_details(form):
 
 @app.route('/wordofday')
 def wordofday():
-    return render_template('wordofday.html')
+    word_of_day = randomWordGenerator()
+    return render_template('wordofday.html', word_of_day = word_of_day)
 
 
 

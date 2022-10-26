@@ -1,4 +1,4 @@
-from Login_Interface_Python_Logic import existing_customer_check
+from Login_Interface_Python_Logic import login_interface
 from db_functions import new_user_credentials
 from daily_words import randomWordGenerator
 from db_searched_words import add_searched_word, display_all_searched_words, delete_searched_words_for_new_user, clean_db_for_new_user
@@ -71,9 +71,9 @@ def run():
                         Choice (1/2): """))
 
     if option == 1:
-        existing_customer_check()
-        print("Let's start learning")
-        learn_words()
+        if login_interface():
+            print("Let's start learning")
+            learn_words()
 
     else:
         print('Please register adding the required information.')
@@ -83,7 +83,7 @@ def run():
         clean_db_for_new_user()
         start = input('Would you like to log in with your new account to start learning? (Yes/No)')
         if start == 'Yes':
-            Login_Interface_Python_Logic.login_interface()
+            login_interface()
             print("Let's start learning")
             learn_words()
         elif start == 'No':
