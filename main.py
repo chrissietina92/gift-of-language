@@ -9,7 +9,7 @@ def learn_words():
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or view your Searched Words? (Schedule Word/Search Dictionary//View Searched Words) ')
     if start == 'Schedule Word':
         set_reminder_time()
-        continue_learning()
+        learn_words()
     elif start == 'Search Dictionary':
         search_words_in_dictionary()
         continue_learning()
@@ -37,6 +37,7 @@ def continue_learning():
         exit(1)
     elif cont_learning == 'Yes':
         learn_words()
+
 
 def run():
     print('##################################')

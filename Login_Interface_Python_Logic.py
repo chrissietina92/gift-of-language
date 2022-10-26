@@ -25,6 +25,7 @@ def existing_customer_check():
 
 def login_interface():
 
+
         login_method = input('How would you like to login? (Email/Username)')
         column = login_method.title()
 

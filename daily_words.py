@@ -5,6 +5,14 @@ import time
 
 # This code allows user to set a reminder and automate the time they received their daily word
 
+def continue_learning():
+    cont_learning = input('Would you like to continue? (Yes/No) ')
+    if cont_learning == 'No':
+        print('See you next time.')
+        exit(1)
+    elif cont_learning == 'Yes':
+        learn_words()
+
 def set_reminder_time():
 
     reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
@@ -18,8 +26,10 @@ def set_reminder_time():
     while True:
         # Checks whether a scheduled task
         # is pending to run or not
+        continue_learning()
         schedule.run_pending()
         time.sleep(1)
+
 
 
 # Documentation:
