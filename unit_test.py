@@ -4,6 +4,7 @@ from api import get_definition
 from db_functions import does_user_exist
 import daily_words
 from daily_words import randomWordGenerator, searchAPIForRandomWord
+from Login_Interface_Python_Logic import username_and_password_match
 
 class TestLearntWords(TestCase):
     def test_check_in_database_true(self):
@@ -72,3 +73,10 @@ class TestDailyWords(TestCase):
         expected = ('Word: accountants', 'Definition: One who renders account; one accountable.')
         result = randomWordGenerator()
         self.assertNotEqual(expected, result)
+
+class TestUserPasswordMatch(TestCase):
+    def test_user_password_match(self):
+        self.assertTrue(username_and_password_match(column='Username', value='anna123', password_value='anna123'))
+
+    def test_user_password_match(self):
+        self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))

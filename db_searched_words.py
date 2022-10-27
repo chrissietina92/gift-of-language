@@ -22,7 +22,7 @@ def _connect_to_db(db_name):
 
 def check_if_word_in_database(word):
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
         #Cursor
@@ -35,7 +35,7 @@ def check_if_word_in_database(word):
         cur.close()
         result = [list(i) for i in result]
         final_result = list(itertools.chain(*result))
-        if word in final_result:
+        if word.lower() in final_result:
             return True
         else:
             return False
@@ -57,7 +57,7 @@ def display_all_searched_words():
 
 def add_searched_word(new_word):
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
         #Cursor
@@ -67,8 +67,8 @@ def add_searched_word(new_word):
         if not check_if_word_in_database(new_word):
             definition = get_definition(new_word)
             with open('SearchedWords.txt', 'a') as file:
-                file.write("{} - {} \n".format(new_word, definition))
-            query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word, definition)
+                file.write("{} - {} \n".format(new_word.lower(), definition))
+            query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word.lower(), definition)
             cur.execute(query)
             db_connection.commit()
             cur.close()
@@ -82,7 +82,7 @@ def add_searched_word(new_word):
 ## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
 def clean_db_for_new_user():
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
         #Cursor
@@ -101,9 +101,9 @@ def clean_db_for_new_user():
             #print("DBConnection closed")
 
 
-def delete_searched_words_for_new_user():
+def delete_searched_words():
     try:
-        file= open("SearchedWords.txt", "r")
+        file = open("SearchedWords.txt", "r")
     except FileNotFoundError:
         return
     else:

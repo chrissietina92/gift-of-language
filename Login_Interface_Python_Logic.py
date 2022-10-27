@@ -37,7 +37,9 @@ def login_interface():
             matched = username_and_password_match(column, value, password_value)
             return matched
         else:
-            raise ValueError
+            print('Please try again, choosing one of the options.')
+            login_interface()
+
 
 _connect_to_db('GOL_users')
 
