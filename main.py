@@ -13,6 +13,7 @@ def set_reminder_time():
     # Every day at 'reminderTime' time randomWordGenerator() is called.
     schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
     schedule.every().day.at("{}".format(reminderTime)).do(continue_learning)
+    print("Your reminder has been set")
     # Loop so that the scheduling task
     # keeps on running all time.
     #learn_words()
