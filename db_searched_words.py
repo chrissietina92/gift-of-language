@@ -22,7 +22,7 @@ def _connect_to_db(db_name):
 
 def check_if_word_in_database(word):
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
         #Cursor
@@ -57,7 +57,7 @@ def display_all_searched_words():
 
 def add_searched_word(new_word):
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
         #Cursor
@@ -82,7 +82,7 @@ def add_searched_word(new_word):
 ## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
 def clean_db_for_new_user():
     try:
-        db_name = 'my_database'
+        db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
         #Cursor
@@ -101,9 +101,9 @@ def clean_db_for_new_user():
             #print("DBConnection closed")
 
 
-def delete_searched_words_for_new_user():
+def delete_searched_words():
     try:
-        file= open("SearchedWords.txt", "r")
+        file = open("SearchedWords.txt", "r")
     except FileNotFoundError:
         return
     else:
