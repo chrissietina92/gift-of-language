@@ -5,6 +5,7 @@ import itertools
 import os
 
 
+#import connection from db_function
 class DbConnectionError(Exception):
     pass
 
@@ -22,6 +23,8 @@ def _connect_to_db(db_name):
 
 def check_if_word_in_database(word):
     try:
+
+
         db_name = 'GOL_users'
         #Database Engine
         db_connection = _connect_to_db(db_name)
@@ -33,6 +36,7 @@ def check_if_word_in_database(word):
         cur.execute(query)
         result = cur.fetchall()
         cur.close()
+
         result = [list(i) for i in result]
         final_result = list(itertools.chain(*result))
         if word.lower() in final_result:
