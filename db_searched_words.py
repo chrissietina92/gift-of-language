@@ -35,7 +35,7 @@ def check_if_word_in_database(word):
         cur.close()
         result = [list(i) for i in result]
         final_result = list(itertools.chain(*result))
-        if word in final_result:
+        if word.lower() in final_result:
             return True
         else:
             return False
@@ -67,8 +67,8 @@ def add_searched_word(new_word):
         if not check_if_word_in_database(new_word):
             definition = get_definition(new_word)
             with open('SearchedWords.txt', 'a') as file:
-                file.write("{} - {} \n".format(new_word, definition))
-            query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word, definition)
+                file.write("{} - {} \n".format(new_word.lower(), definition))
+            query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word.lower(), definition)
             cur.execute(query)
             db_connection.commit()
             cur.close()
