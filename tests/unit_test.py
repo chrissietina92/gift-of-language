@@ -1,10 +1,10 @@
 from unittest import TestCase, mock
-from db_searched_words import check_if_word_in_database
-from api import get_definition
-from db_functions import does_user_exist
-import daily_words
-from daily_words import randomWordGenerator, searchAPIForRandomWord
-from Login_Interface_Python_Logic import username_and_password_match
+from src.db_searched_words import check_if_word_in_database
+from src.api import get_definition
+from src.db_functions import does_user_exist
+from src import daily_words
+from src.daily_words import randomWordGenerator, searchAPIForRandomWord
+from src.Login_Interface_Python_Logic import username_and_password_match
 
 
 # use mocking to test this

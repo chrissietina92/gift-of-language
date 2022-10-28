@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, request, render_template
-from db_functions import add_a_new_user, username_and_password_match
-from daily_words import randomWordGenerator
+from flask import Flask, request, render_template
+from src.db_functions import add_a_new_user, username_and_password_match
+from src.daily_words import randomWordGenerator
 
 app = Flask(__name__)
 
