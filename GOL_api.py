@@ -73,6 +73,13 @@ def searchword():
         #add in the search word function
     return render_template('searchword.html', clicked = clicked, word_searched = word_searched)
 
+@app.route('/wordofday/<int:userid>')
+def wordofday_by_id(userid):
+    word_of_day = randomWordGenerator()
+    word = word_of_day[0]
+    definition = word_of_day[1]
+    userid = userid
+    return render_template('wordofday.html', word = word, definition = definition, userid = userid)
 
 
 if __name__ == '__main__':
