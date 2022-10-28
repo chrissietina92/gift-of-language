@@ -134,7 +134,7 @@ def username_and_password_match(column, value, password_value):
                 break
 
             else:
-                # return False  # will be needed, this section may have to be removed as not sure how it will work with front end
+                #return False  # will be needed, this section may have to be removed as not sure how it will work with front end
                 user_attempt += 1
                 print('Incorrect credentials. Please try again')
                 password_value = input("Enter your password.")
