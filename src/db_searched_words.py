@@ -1,54 +1,48 @@
 import mysql.connector
-from config import USER, PASSWORD, HOST
-from src.api import get_definition
 import itertools
 import os
+from src.db_functions import db_connection_decorator, _connect_to_db
+from config import USER, PASSWORD, HOST
+from src.api import get_definition
+
 
 
 #import connection from db_function
 class DbConnectionError(Exception):
     pass
 
-
-def _connect_to_db(db_name):
-    cnx = mysql.connector.connect(
-        host=HOST,
-        user=USER,
-        password=PASSWORD,
-        auth_plugin='mysql_native_password',
-        database=db_name
-    )
-    return cnx
-
-
-def check_if_word_in_database(word):
-    try:
+@db_connection_decorator
+def check_if_word_in_database(word, cur, db_connection):
+    query = "SELECT word FROM searched_words; "
+    cur.execute(query)
+    result = cur.fetchall()
+    result = [list(i) for i in result]
+    final_result = list(itertools.chain(*result))
+    if word.lower() in final_result:
+        return True
+    else:
+        return False
 
 
-        db_name = 'GOL_users'
-        #Database Engine
-        db_connection = _connect_to_db(db_name)
-        #Cursor
-        cur = db_connection.cursor()
-
-        query = "SELECT word FROM searched_words; "
-
+@db_connection_decorator
+def add_searched_word(new_word, cur, db_connection):
+    if not check_if_word_in_database(new_word):
+        definition = get_definition(new_word)
+        with open('../docs/SearchedWords.txt', 'a') as file: file.write("{} - {} \n".format(new_word.lower(), definition))
+        query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word.lower(), definition)
         cur.execute(query)
-        result = cur.fetchall()
-        cur.close()
+        db_connection.commit()
 
-        result = [list(i) for i in result]
-        final_result = list(itertools.chain(*result))
-        if word.lower() in final_result:
-            return True
-        else:
-            return False
+# add_searched_word('cat')
 
-    except:
-        raise DbConnectionError
-    finally:
-        if db_connection:
-            db_connection.close()
+## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
+@db_connection_decorator
+def clean_db_for_new_user(cur, db_connection):
+    query = 'TRUNCATE TABLE searched_words;'
+    cur.execute(query)
+    db_connection.commit()
+
+
 
 def display_all_searched_words():
     try:
@@ -58,52 +52,6 @@ def display_all_searched_words():
     else:
         print(file.read())
         file.close()
-
-def add_searched_word(new_word):
-    try:
-        db_name = 'GOL_users'
-        #Database Engine
-        db_connection = _connect_to_db(db_name)
-        #Cursor
-        cur = db_connection.cursor()
-        #print("Database successfully connected")
-
-        if not check_if_word_in_database(new_word):
-            definition = get_definition(new_word)
-            with open('../docs/SearchedWords.txt', 'a') as file:
-                file.write("{} - {} \n".format(new_word.lower(), definition))
-            query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word.lower(), definition)
-            cur.execute(query)
-            db_connection.commit()
-            cur.close()
-    except:
-        raise DbConnectionError
-    finally:
-        if db_connection:
-            db_connection.close()
-            #print("DBConnection closed")
-
-## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
-def clean_db_for_new_user():
-    try:
-        db_name = 'GOL_users'
-        #Database Engine
-        db_connection = _connect_to_db(db_name)
-        #Cursor
-        cur = db_connection.cursor()
-        #print("Database successfully connected")
-
-        query = 'TRUNCATE TABLE searched_words;'
-        cur.execute(query)
-        db_connection.commit()
-        cur.close()
-    except:
-        raise DbConnectionError
-    finally:
-        if db_connection:
-            db_connection.close()
-            #print("DBConnection closed")
-
 
 def delete_searched_words():
     try:
