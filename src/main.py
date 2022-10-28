@@ -1,8 +1,8 @@
-from Login_Interface_Python_Logic import login_interface
-from db_functions import new_user_credentials
-from daily_words import randomWordGenerator
-from db_searched_words import add_searched_word, display_all_searched_words, delete_searched_words, clean_db_for_new_user
-from api import show_word_and_definition
+from src.Login_Interface_Python_Logic import login_interface
+from src.db_functions import new_user_credentials
+from src.daily_words import randomWordGenerator
+from src.db_searched_words import add_searched_word, display_all_searched_words, delete_searched_words, clean_db_for_new_user
+from src.api import show_word_and_definition
 import schedule
 import time
 
