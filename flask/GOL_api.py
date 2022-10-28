@@ -1,7 +1,8 @@
 from flask import Flask, request, render_template
 from src.db_functions import add_a_new_user, username_and_password_match
 from src.daily_words import randomWordGenerator
-
+from src.api import show_word_and_definition
+from src.db_searched_words import add_searched_word
 app = Flask(__name__)
 
 @app.route('/')
@@ -27,8 +28,6 @@ def get_login_details(form):
     password = form['password']
     log_in_right = username_and_password_match(column, value, password)
     return log_in_right
-
-
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -69,7 +68,9 @@ def searchword():
     if request.method == 'POST':
         clicked = True
         form = request.form
-        word_searched = form['searchword']
+        print(form)
+        word_searched = show_word_and_definition(form['searchword'])
+        add_searched_word(form['searchword'])
         #add in the search word function
     return render_template('searchword.html', clicked = clicked, word_searched = word_searched)
 

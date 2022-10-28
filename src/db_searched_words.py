@@ -1,7 +1,7 @@
 import mysql.connector
 import itertools
 import os
-from db_functions import db_connection_decorator, _connect_to_db
+from src.db_functions import db_connection_decorator, _connect_to_db
 from config import USER, PASSWORD, HOST
 from src.api import get_definition
 
