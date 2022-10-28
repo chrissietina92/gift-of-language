@@ -1,6 +1,6 @@
 import mysql.connector
 from config import USER, PASSWORD, HOST
-from api import get_definition
+from src.api import get_definition
 import itertools
 import os
 
@@ -52,7 +52,7 @@ def check_if_word_in_database(word):
 
 def display_all_searched_words():
     try:
-        file= open("SearchedWords.txt", "r")
+        file= open("../docs/SearchedWords.txt", "r")
     except FileNotFoundError:
         print("You haven't searched any words yet.")
     else:
@@ -70,7 +70,7 @@ def add_searched_word(new_word):
 
         if not check_if_word_in_database(new_word):
             definition = get_definition(new_word)
-            with open('SearchedWords.txt', 'a') as file:
+            with open('../docs/SearchedWords.txt', 'a') as file:
                 file.write("{} - {} \n".format(new_word.lower(), definition))
             query = "INSERT INTO searched_words(word, definition_) VALUES ('{}', '{}');".format(new_word.lower(), definition)
             cur.execute(query)
@@ -107,9 +107,9 @@ def clean_db_for_new_user():
 
 def delete_searched_words():
     try:
-        file = open("SearchedWords.txt", "r")
+        file = open("../docs/SearchedWords.txt", "r")
     except FileNotFoundError:
         return
     else:
         file.close()
-        os.remove('SearchedWords.txt')
+        os.remove('../docs/SearchedWords.txt')
