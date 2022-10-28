@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +15,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -45,6 +45,13 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/danie/OneDrive/Desktop/gift-of-language&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\src\main\python\giftOfLanguage" />
+      <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\src\main" />
+      <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\src" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="GOL_api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gift-of-language" />
