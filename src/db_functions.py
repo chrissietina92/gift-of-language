@@ -53,7 +53,7 @@ def does_user_exist(column, value, cur, db_connection):
         return False
 
 
-print(does_user_exist("Username", "Catty"))
+
 
 @db_connection_decorator
 def add_a_new_user(userid, firstname, lastname, email, dob, city, username, password, cur, db_connection):
@@ -65,7 +65,6 @@ def add_a_new_user(userid, firstname, lastname, email, dob, city, username, pass
     cur.execute(query)
     db_connection.commit()
 
-# add_a_new_user(55, "Gail", "Platt", "gail@email.com", "05-12-1992", "London", "GP", "yoyoo")
 
 @db_connection_decorator
 def username_and_password_match(column, value, password_value, cur, db_connection):
@@ -87,7 +86,6 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
         print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
         return False
 
-# username_and_password_match("Username", "GP", "yoyoo")
 def new_user_credentials():
     # This function implements the add_a_new_user function.
     # The function was created to prevent the repeat of code.

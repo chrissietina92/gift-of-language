@@ -42,7 +42,7 @@ def clean_db_for_new_user(cur, db_connection):
     cur.execute(query)
     db_connection.commit()
 
-clean_db_for_new_user()
+
 
 def display_all_searched_words():
     try:

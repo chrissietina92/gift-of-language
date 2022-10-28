@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/SearchedWords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SearchedWords.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask/GOL_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask/GOL_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask/templates/searchword.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/searchword.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_searched_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_searched_words.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +56,7 @@
       <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.GOL_api (1)">
+  <component name="RunManager" selected="Python.db_searched_words">
     <configuration name="GOL_api (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gift-of-language" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -167,10 +164,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.GOL_api (1)" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.db_searched_words" />
         <item itemvalue="Python.db_functions" />
+        <item itemvalue="Python.GOL_api (1)" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.GOL_api" />
       </list>
     </recent_temporary>
