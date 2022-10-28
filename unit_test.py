@@ -6,6 +6,8 @@ import daily_words
 from daily_words import randomWordGenerator, searchAPIForRandomWord
 from Login_Interface_Python_Logic import username_and_password_match
 
+
+# use mocking to test this
 class TestLearntWords(TestCase):
     def test_check_in_database_true(self):
         self.assertTrue(check_if_word_in_database(word = 'House'))
