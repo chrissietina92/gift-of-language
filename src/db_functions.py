@@ -111,7 +111,7 @@ class new_user:
                          '4. Should be between 6 to 20 characters long: \n'
                          'Password: ')
         if not self.check_if_valid_password(password):
-            print("Please enter e valid password")
+            print("Please enter a valid password")
             password = input('Password: ')
         firstname = input('First name: ')
         if not self.check_if_valid_name(firstname):
