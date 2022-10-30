@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from src.db_functions import add_a_new_user, username_and_password_match
 from src.daily_words import randomWordGenerator
-from src.api import show_word_and_definition
+from src.dictionaryapi_functions import show_word_and_definition
 from src.db_searched_words import add_searched_word
 app = Flask(__name__)
 

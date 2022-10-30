@@ -3,7 +3,7 @@ import itertools
 import os
 from src.db_functions import db_connection_decorator, _connect_to_db
 from config import USER, PASSWORD, HOST
-from src.api import get_definition
+from src.dictionaryapi_functions import get_definition
 
 
 

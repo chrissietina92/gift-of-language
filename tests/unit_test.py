@@ -1,6 +1,6 @@
 from unittest import TestCase, mock
 from src.db_searched_words import check_if_word_in_database
-from src.api import get_definition
+from src.dictionaryapi_functions import get_definition
 from src.db_functions import does_user_exist
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
