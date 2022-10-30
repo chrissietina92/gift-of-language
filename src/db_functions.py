@@ -14,7 +14,7 @@ def _connect_to_db(db_name):
             auth_plugin='mysql_native_password',
             database=db_name
         )
-    return connections
+    return connection
 
 def db_connection_decorator(func):
     def wrapper(*args):
