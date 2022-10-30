@@ -17,6 +17,7 @@ def login():
     if request.method == 'POST':
         clicked = True
         form = request.form
+        print(form)
         log_in_right = get_login_details(form)
         # print(form) # returns ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
     return render_template('login.html', clicked = clicked, log_in_right = log_in_right)

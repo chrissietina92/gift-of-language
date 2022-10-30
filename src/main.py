@@ -6,9 +6,7 @@ from src.dictionaryapi_functions import show_word_and_definition
 import schedule
 import time
 
-def set_reminder_time():
-
-    reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
+def set_reminder_time(reminderTime):
 
     # Every day at 'reminderTime' time randomWordGenerator() is called.
     schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
@@ -28,7 +26,8 @@ def set_reminder_time():
 def learn_words():
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or View your Searched Words? (Schedule Word/Search Dictionary/View Searched Words) ').lower()
     if start == 'schedule word':
-        set_reminder_time()
+        reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
+        set_reminder_time(reminderTime)
 
     elif start == 'search dictionary':
         search_words_in_dictionary()
