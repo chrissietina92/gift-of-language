@@ -1,4 +1,4 @@
-from src.db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
+from src.db_functions import _connect_to_db, does_user_exist, new_user, username_and_password_match
 
 # Welcome message.
 #print("The Gift of Language")
@@ -16,7 +16,7 @@ def existing_customer_check():
         login_interface()
     elif user_existing_feedback == 'n':
         print("Create a new account.")
-        new_user_credentials()
+        new_user.new_user_credentials()
         # New user information input.
         # This is added to the DB via the add_a_new_user function called.
     else:
@@ -25,17 +25,24 @@ def existing_customer_check():
 
 def login_interface():
 
-
         login_method = input('How would you like to login? (Email/Username)')
         column = login_method.title()
-
+        new = new_user()
         if column == 'Email' or column == 'Username':
             value = input('Enter your {}: '.format(column.lower()))
             print("Thank you. Checking your details...")
-            does_user_exist(column, value)
-            password_value = input("Enter your password:")
-            matched = username_and_password_match(column, value, password_value)
-            return matched
+            if not new.check_if_valid_username(username = value):
+                print("You haven't entered a valid username. Please try again.")
+                login_interface()
+            else:
+                does_user_exist(column, value)
+                password_value = input("Enter your password:")
+                if not new.check_if_valid_password(passwd=password_value):
+                    print("You haven't entered a valid password. Please try again.")
+                    login_interface()
+                else:
+                    matched = username_and_password_match(column, value, password_value)
+                    return matched
         else:
             print('Please try again, choosing one of the options.')
             login_interface()

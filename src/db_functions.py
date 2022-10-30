@@ -1,5 +1,6 @@
 import mysql.connector
 from config import USER, HOST, PASSWORD
+import re
 
 #db_name = 'GOL_users'
 
@@ -85,18 +86,83 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
     else:
         print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
         return False
+class new_user:
+    def __init__(self):
+        self.userid = input('User id: ')
 
-def new_user_credentials():
-    # This function implements the add_a_new_user function.
-    # The function was created to prevent the repeat of code.
-    email = input('Email: ')
-    userid = input('User id: ')
-    firstname = input('First name: ')
-    lastname = input('Last name: ')
-    dob = input('DOB (%d-%m-%Y): ')
-    city = input('City: ')
-    username = input('Username: ')
-    password = input('Password: ')
-    add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
+    def new_user_credentials(self):
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        # This function implements the add_a_new_user function.
+        # The function was created to prevent the repeat of code.
+        username = input('Username -> Total length of the username should be between 4 and 20.\n'
+                         'It should start with a letter.\n'
+                         'Contains only letters, numbers, underscores and dashes.\n'
+                         'Username: ')
+        if not self.check_if_valid_username(username):
+            print("You have entered an invalid username. Please try again")
+            username = input('Username: ')
+        email = input('Email: ')
+        if not (re.fullmatch(regex, email)):
+            print('You have entered an invalid email. Please try again.')
+            email = input('Email: ')
+        password = input('Password -> 1. Should have at least one number;\n'
+                         ' 2. Should have at least one uppercase and one lowercase character.\n'
+                         '3. Should have at least one special symbol.\n'
+                         '4. Should be between 6 to 20 characters long: \n'
+                         'Password: ')
+        if not self.check_if_valid_password(password):
+            print("Please enter e valid password")
+            password = input('Password: ')
+        firstname = input('First name: ')
+        if not self.check_if_valid_name(firstname):
+            print("Please enter e valid name")
+            firstname = input('Name: ')
+        lastname = input('Last name: ')
+        if not self.check_if_valid_name(lastname):
+            print("Please enter e valid last name")
+            lastname = input('Name: ')
+        dob = input('DOB (%d-%m-%Y): ')
+        city = input('City: ')
+        if not self.check_if_valid_name(city):
+            print("Please enter e valid city")
+            city = input('Name: ')
+        add_a_new_user(self.userid, firstname, lastname, email, dob, city, username, password)
 
+    def check_if_valid_password(self, passwd):
+        reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
+        # compiling regex
+        pat = re.compile(reg)
+        # searching regex
+        mat = re.search(pat, passwd)
+
+        # validating conditions
+        if mat:
+            return True
+        else:
+            return False
+
+    def check_if_valid_username(self, username):
+        reg = "^[A-Za-z0-9_-]{4,20}$"
+        # compiling regex
+        pat = re.compile(reg)
+        # searching regex
+        mat = re.search(pat, username)
+
+        # validating conditions
+        if mat:
+            return True
+        else:
+            return False
+
+    def check_if_valid_name(self, name):
+        reg = "^[A-Za-z]{2,25}$"
+        # compiling regex
+        pat = re.compile(reg)
+        # searching regex
+        mat = re.search(pat, name)
+        # validating conditions
+        if mat:
+            return True
+        else:
+            return False
 

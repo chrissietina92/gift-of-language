@@ -1,7 +1,7 @@
 from unittest import TestCase, mock
-from src.db_searched_words import check_if_word_in_database
+from src.db_searched_words import user_db
 from src.api import get_definition
-from src.db_functions import does_user_exist
+from src.db_functions import does_user_exist, new_user
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
 from src.Login_Interface_Python_Logic import username_and_password_match
@@ -9,21 +9,47 @@ from src.Login_Interface_Python_Logic import username_and_password_match
 
 # use mocking to test this
 class TestLearntWords(TestCase):
-    def test_check_in_database_true(self):
-        self.assertTrue(check_if_word_in_database(word = 'House'))
+    @mock.patch.object(user_db, 'check_if_word_in_database')
+    def test_check_in_database_true(self, mock_query):
+        mock_query.return_value = "SELECT word FROM searched_words_user_4; "
+        result = user_db.check_if_word_in_database(word = 'work')
+        self.assertTrue(result)
 
-    def test_check_in_database_true(self):
-        self.assertTrue(check_if_word_in_database(word = 'play'))
 
-    def test_check_in_database_false(self):
-        excepted = False
-        result = check_if_word_in_database('eat')
-        self.assertEqual(excepted, result)
+    @mock.patch.object(user_db, 'userid')
+    def test_2_check_in_database_true(self, mock_userid):
+        mock_userid.return_value = 3
+        result = user_db.check_if_word_in_database(word='play')
+        self.assertTrue(result)
 
-    def test_check_in_database_false(self):
-        excepted = False
-        result = check_if_word_in_database('go')
-        self.assertEqual(excepted, result)
+    #@mock.patch.object(user_db, 'userid')
+    #def test_2_check_in_database_true(self, mock_userid):
+    #    mock_userid.value = 1
+    #    result = user_db.check_if_word_in_database(word='world')
+    #    self.assertTrue(result)
+
+    #@mock.patch(new_user, 'check_if_word_in_database')
+    #def test_2_check_not_in_database(self, mock_query):
+    #    mock_query.patch('builtins.input', side_effect= "SELECT word FROM searched_words_user_3; ")
+    #    result = user_db.check_if_word_in_database(word='play')
+    #    self.assertTrue(result)
+
+    #def test_check_in_database_true(self):
+    #    with mock.patch.object(new_user, "userid") as attr_mock:
+    #        attr_mock.return_value = 4
+     #    self.assertTrue(user.check_if_valid_username(word='work'))
+    #def test_check_in_database_true(self):
+    #    self.assertTrue(check_if_word_in_database(word = 'play'))
+
+    #def test_check_in_database_false(self):
+    #    excepted = False
+    #    result = check_if_word_in_database('eat')
+    #    self.assertEqual(excepted, result)
+
+   # def test_check_in_database_false(self):
+   #     excepted = False
+   #     result = check_if_word_in_database('go')
+   #     self.assertEqual(excepted, result)
 
 
 class TestGetDefinitionFromAPI(TestCase):
