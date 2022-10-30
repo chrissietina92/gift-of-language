@@ -10,14 +10,32 @@
 </head>
 <body>
     <h1>WORD OF THE DAY!</h1>
-    <div id = "wordanddef">
-        <h2 id = "word">
-            {{ word }}
-            <br>
-        </h2>
-        <h2 id = "definition">
-            {{ definition }}
-        </h2>
-    </div>
+    <form action="{{ url_for('wordofday') }}" method="POST">
+        <h2>Click the button to get a new word</h2>
+        <h3>(HINT: The word will refresh each time you click this button or refresh the page)</h3>
+
+        <input type="submit" name="next" value="NEW WORD">
+    </form>
+
+    {% if clicked %}
+
+       <h1>{{ word }}</h1>
+        <br>
+        <h2>{{ definition }}</h2>
+
+
+    {% endif %}
+
+
+
+<!--    <div id = "wordanddef">-->
+<!--        <h2 id = "word">-->
+<!--            {{ word }}-->
+<!--            <br>-->
+<!--        </h2>-->
+<!--        <h2 id = "definition">-->
+<!--            {{ definition }}-->
+<!--        </h2>-->
+<!--    </div>-->
 </body>
 </html>

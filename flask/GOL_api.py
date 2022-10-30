@@ -3,7 +3,10 @@ from src.db_functions import add_a_new_user, username_and_password_match
 from src.daily_words import randomWordGenerator
 from src.dictionaryapi_functions import show_word_and_definition
 from src.db_searched_words import add_searched_word
+
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -20,7 +23,8 @@ def login():
         print(form)
         log_in_right = get_login_details(form)
         # print(form) # returns ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
-    return render_template('login.html', clicked = clicked, log_in_right = log_in_right)
+    return render_template('login.html', clicked=clicked, log_in_right=log_in_right)
+
 
 def get_login_details(form):
     column = form['logintype']
@@ -40,7 +44,8 @@ def signup():
         form = request.form
         firstname = get_signup_details(form)
         # print(form)
-    return render_template('signup.html', clicked = clicked, firstname = firstname)
+    return render_template('signup.html', clicked=clicked, firstname=firstname)
+
 
 def get_signup_details(form):
     email = form['email']
@@ -54,12 +59,21 @@ def get_signup_details(form):
     add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
     return firstname
 
-@app.route('/wordofday')
+
+@app.route('/wordofday', methods=['GET', 'POST'])
 def wordofday():
-    word_of_day = randomWordGenerator()
-    word = word_of_day[0]
-    definition = word_of_day[1]
-    return render_template('wordofday.html', word = word, definition = definition)
+    clicked = False
+    word = ''
+    definition = ''
+    if request.method == 'POST':
+        clicked = True
+        form = request.form
+        word_of_day = randomWordGenerator()
+        word = word_of_day[0]
+        definition = word_of_day[1]
+    return render_template('wordofday.html', word = word, definition = definition , clicked=clicked)
+
+
 
 
 @app.route('/searchword', methods=['GET', 'POST'])
@@ -72,8 +86,9 @@ def searchword():
         print(form)
         word_searched = show_word_and_definition(form['searchword'])
         add_searched_word(form['searchword'])
-        #add in the search word function
-    return render_template('searchword.html', clicked = clicked, word_searched = word_searched)
+        # add in the search word function
+    return render_template('searchword.html', clicked=clicked, word_searched=word_searched)
+
 
 @app.route('/wordofday/<int:userid>')
 def wordofday_by_id(userid):
@@ -81,7 +96,7 @@ def wordofday_by_id(userid):
     word = word_of_day[0]
     definition = word_of_day[1]
     userid = userid
-    return render_template('wordofday.html', word = word, definition = definition, userid = userid)
+    return render_template('wordofday.html', word=word, definition=definition, userid=userid)
 
 
 if __name__ == '__main__':

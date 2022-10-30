@@ -9,8 +9,10 @@
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/SearchedWords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SearchedWords.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask/GOL_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask/GOL_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/static/css.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask/static/css.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask/templates/wordofday.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/wordofday.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/wordoftheday,html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db_searched_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_searched_words.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,5 +201,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/daily_words.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
