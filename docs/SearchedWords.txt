@@ -11,3 +11,4 @@ sfsd - This word does not exist in the dictionary.
 she - A female. 
 envy - Resentful desire of something possessed by another or others (but not limited to material possessions). 
 hi - The word "hi" used as a greeting. 
+hello - "Hello!" or an equivalent greeting. 

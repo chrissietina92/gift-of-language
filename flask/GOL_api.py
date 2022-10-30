@@ -67,7 +67,6 @@ def wordofday():
     definition = ''
     if request.method == 'POST':
         clicked = True
-        form = request.form
         word_of_day = randomWordGenerator()
         word = word_of_day[0]
         definition = word_of_day[1]

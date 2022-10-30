@@ -9,19 +9,26 @@
     <title>WORD OF DAY PAGE</title>
 </head>
 <body>
+<div class="topnav">
+  <a href="http://127.0.0.1:5001/searchword">SEARCH FOR WORD</a>
+  <a class="active" href="http://127.0.0.1:5001/wordofday">WORD OF THE DAY</a>
+  <a href="http://127.0.0.1:5001">LOG OUT</a>
+    <br>
+    <br>
+    <br>
+    <br>
     <h1>WORD OF THE DAY!</h1>
     <form action="{{ url_for('wordofday') }}" method="POST">
         <h2>Click the button to get a new word</h2>
-        <h3>(HINT: The word will refresh each time you click this button or refresh the page)</h3>
+        <h3>(Important info: The word will refresh each time you click this button or refresh the page)</h3>
 
         <input type="submit" name="next" value="NEW WORD">
     </form>
 
     {% if clicked %}
 
-       <h1>{{ word }}</h1>
-        <br>
-        <h2>{{ definition }}</h2>
+       <p class = "word">{{ word }}</p>
+        <p class = "defintion">{{ definition }}</p>
 
 
     {% endif %}

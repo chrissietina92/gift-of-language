@@ -9,11 +9,19 @@
     <title>Search word page</title>
 </head>
 <body>
+<div class="topnav">
+  <a class="active" href="http://127.0.0.1:5001/searchword">SEARCH FOR WORD</a>
+  <a href="http://127.0.0.1:5001/wordofday">WORD OF THE DAY</a>
+  <a href="http://127.0.0.1:5001">LOG OUT</a>
+    <br>
+    <br>
+    <br>
+    <br>
     <h1>Search for word</h1>
     <form action="{{ url_for('searchword') }}" method="POST">
 
         <input type="text" id="searchword" name="searchword"><br><br>
-        <input type="submit" name="next" value="Next">
+        <input type="submit" name="next" value="Search">
     </form>
 
     <br><br>
@@ -23,5 +31,8 @@
         </h2>
 
     {% endif %}
+
+
+</div>
 </body>
 </html>
