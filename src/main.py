@@ -7,7 +7,7 @@ import schedule
 import time
 
 def set_reminder_time(reminderTime):
-
+    reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
     # Every day at 'reminderTime' time randomWordGenerator() is called.
     schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
     schedule.every().day.at("{}".format(reminderTime)).do(continue_learning)
@@ -26,7 +26,6 @@ def set_reminder_time(reminderTime):
 def learn_words():
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or View your Searched Words? (Schedule Word/Search Dictionary/View Searched Words) ').lower()
     if start == 'schedule word':
-        reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
         set_reminder_time(reminderTime)
 
     elif start == 'search dictionary':
