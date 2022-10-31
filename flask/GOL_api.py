@@ -17,13 +17,18 @@ def index():
 def login():
     clicked = False
     log_in_right = False
+    userid = 0
     if request.method == 'POST':
         clicked = True
         form = request.form
         print(form)
-        log_in_right = get_login_details(form)
+        login_details = get_login_details(form)
+        log_in_right = login_details[0]
+        column = login_details[1]
+        value = login_details[2]
+        userid = get_user_by_column(column, value)
         # print(form) # returns ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
-    return render_template('login.html', clicked=clicked, log_in_right=log_in_right)
+    return render_template('login.html', userid = userid, clicked=clicked, log_in_right=log_in_right)
 
 
 def get_login_details(form):
@@ -32,14 +37,13 @@ def get_login_details(form):
     value = form['username']
     password = form['password']
     log_in_right = username_and_password_match(column, value, password)
-    return log_in_right
+    return log_in_right, column, value
 
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     clicked = False
     firstname = None
-    word_of_day_url = ""
     userid = 0
     if request.method == 'POST':
         clicked = True
@@ -48,9 +52,8 @@ def signup():
         firstname = signupdetails[0]
         email = signupdetails[1]
         userid = get_user_by_column('Email', email)
-        word_of_day_url = "http://127.0.0.1:5001/wordofday/{}".format(userid)
         # print(form)
-    return render_template('signup.html', clicked=clicked, userid = userid, word_of_day_url = word_of_day_url, firstname=firstname)
+    return render_template('signup.html', clicked=clicked, userid = userid,  firstname=firstname)
 
 
 def get_signup_details(form):

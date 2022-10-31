@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
+    <title>Previous searched word page</title>
+</head>
+<body>
+<div class="topnav">
+  <a class="active" href="">SEARCH FOR WORD</a>
+  <a href="{{ url_for('wordofday_by_id', userid=userid) }}">WORD OF THE DAY</a>
+  <a href="http://127.0.0.1:5001">LOG OUT</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>These are your previously searched words:</h1>
+
+
+</div>
+</body>
+</html>
