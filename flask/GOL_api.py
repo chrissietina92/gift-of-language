@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from src.db_functions import add_a_new_user, username_and_password_match
+from src.db_functions import add_a_new_user, username_and_password_match, get_user_by_id, get_user_by_column
 from src.daily_words import randomWordGenerator
 from src.dictionaryapi_functions import show_word_and_definition
 from src.db_searched_words import add_searched_word
@@ -39,12 +39,18 @@ def get_login_details(form):
 def signup():
     clicked = False
     firstname = None
+    word_of_day_url = ""
+    userid = 0
     if request.method == 'POST':
         clicked = True
         form = request.form
-        firstname = get_signup_details(form)
+        signupdetails = get_signup_details(form)
+        firstname = signupdetails[0]
+        email = signupdetails[1]
+        userid = get_user_by_column('Email', email)
+        word_of_day_url = "http://127.0.0.1:5001/wordofday/{}".format(userid)
         # print(form)
-    return render_template('signup.html', clicked=clicked, firstname=firstname)
+    return render_template('signup.html', clicked=clicked, userid = userid, word_of_day_url = word_of_day_url, firstname=firstname)
 
 
 def get_signup_details(form):
@@ -55,48 +61,73 @@ def get_signup_details(form):
     city = form['city']
     username = form['username']
     password = form['password']
-    userid = 100
+    userid = 311
     add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
-    return firstname
+    return firstname, email
 
 
-@app.route('/wordofday', methods=['GET', 'POST'])
-def wordofday():
-    clicked = False
-    word = ''
-    definition = ''
-    if request.method == 'POST':
-        clicked = True
-        word_of_day = randomWordGenerator()
-        word = word_of_day[0]
-        definition = word_of_day[1]
-    return render_template('wordofday.html', word = word, definition = definition , clicked=clicked)
+# @app.route('/wordofday', methods=['GET', 'POST'])
+# def wordofday():
+#     clicked = False
+#     word = ''
+#     definition = ''
+#     if request.method == 'POST':
+#         clicked = True
+#         word_of_day = randomWordGenerator()
+#         word = word_of_day[0]
+#         definition = word_of_day[1]
+#     return render_template('wordofday.html', word = word, definition = definition , clicked=clicked)
 
 
 
 
-@app.route('/searchword', methods=['GET', 'POST'])
-def searchword():
+# @app.route('/searchword', methods=['GET', 'POST'])
+# def searchword():
+#     clicked = False
+#     word_searched = ''
+#     if request.method == 'POST':
+#         clicked = True
+#         form = request.form
+#         print(form)
+#         the_word = form['searchword']
+#         word_searched = show_word_and_definition(the_word)
+#         add_searched_word(the_word)
+#         # add in the search word function
+#     return render_template('searchword.html', clicked=clicked, word_searched=word_searched)
+
+
+@app.route('/searchword/<int:userid>', methods=['GET', 'POST'])
+def searchword_by_id(userid):
+    users = get_user_by_id(userid)
+    userid = users[0][0]
+    firstname = users[0][1]
     clicked = False
     word_searched = ''
     if request.method == 'POST':
         clicked = True
         form = request.form
         print(form)
-        word_searched = show_word_and_definition(form['searchword'])
-        add_searched_word(form['searchword'])
+        the_word = form['searchword']
+        word_searched = show_word_and_definition(the_word)
+        add_searched_word(the_word) #add userid after
         # add in the search word function
-    return render_template('searchword.html', clicked=clicked, word_searched=word_searched)
+    return render_template('searchword.html', firstname = firstname, userid = userid, clicked=clicked, word_searched=word_searched)
 
-
-@app.route('/wordofday/<int:userid>')
+@app.route('/wordofday/<int:userid>', methods=['GET', 'POST'])
 def wordofday_by_id(userid):
-    word_of_day = randomWordGenerator()
-    word = word_of_day[0]
-    definition = word_of_day[1]
-    userid = userid
-    return render_template('wordofday.html', word=word, definition=definition, userid=userid)
-
+    users = get_user_by_id(userid)
+    userid = users[0][0]
+    # defaults = {'userid': userid}
+    clicked = False
+    word = ''
+    definition = ''
+    firstname = users[0][1]
+    if request.method == 'POST':
+        clicked = True
+        word_of_day = randomWordGenerator()
+        word = word_of_day[0]
+        definition = word_of_day[1]
+    return render_template('wordofday.html', firstname = firstname, userid = userid, word = word, definition = definition , clicked=clicked)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
