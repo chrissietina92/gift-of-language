@@ -31,7 +31,7 @@ def add_searched_word(new_word, cur, db_connection):
         cur.execute(query)
         db_connection.commit()
 
-# add_searched_word('cat')
+
 
 ## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
 @db_connection_decorator

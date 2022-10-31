@@ -83,7 +83,7 @@ def get_user_by_column(column, value, cur, db_connection):
     userid = result[0][0]
     return userid
 
-print(get_user_by_column('Username', 'Fishy'))
+# print(get_user_by_column('Username', 'Fishy'))
 
 @db_connection_decorator
 def username_and_password_match(column, value, password_value, cur, db_connection):
