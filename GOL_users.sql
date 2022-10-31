@@ -40,4 +40,3 @@ VALUES ('Jake', 'Callow', 'jcal@email.com', str_to_date('05-12-1992', '%d-%m-%Y'
 ('Hayley', 'Bieber', 'hayley99@email.com', str_to_date('01-09-1997', '%d-%m-%Y'), 'Cambridge', 'hbieber1997', 'ilovejustin1'),
 ('Luciano', 'Sovino', 'lucosovino89@email.com', str_to_date('02-10-1989', '%d-%m-%Y'), 'Cardiff', 'lucosov89', 'helloworld0');
     
--- POTENTIAL TRIGGER TO BE RAISED FOR DUPLICATE ENTRIES INTO CODE. 

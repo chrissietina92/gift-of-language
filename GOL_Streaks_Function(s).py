@@ -14,7 +14,6 @@ def _connect_to_db(db_name):
     return connection
 
 
-
 def overalluserstreaksfunction(column, value):
 
 # PART 1:
@@ -33,7 +32,7 @@ def overalluserstreaksfunction(column, value):
 
 
         #QUERY MADE TO MYSQL
-        streaks_query_1 = "SELECT DATE_FORMAT(Lastlogin, '%d-%m-%Y') FROM user_streaks WHERE {COLUMN} = '{VALUE}';".format(
+        streaks_query_1 = "SELECT DATE_FORMAT(Lastlogin, '%d-%m-%Y') FROM the_users WHERE {COLUMN} = '{VALUE}';".format(
             COLUMN=column, VALUE=value)
         cur.execute(streaks_query_1)
         lastlogindata = cur.fetchall()
@@ -108,7 +107,7 @@ def newuserstreak(column, value):
 
 
         #THIS QUERY SETS THE USER STREAK TO 1 IF THE USERS STREAK IS NONE (I.E. A NEW USER).
-        new_streaker_update = "UPDATE user_streaks SET UserStreak = 1 WHERE {COLUMN} = '{VALUE}'".format(
+        new_streaker_update = "UPDATE the_users SET UserStreak = 1 WHERE {COLUMN} = '{VALUE}'".format(
             COLUMN=column, VALUE=value)
         cur.execute(new_streaker_update)
         db_connection.commit()
@@ -178,19 +177,19 @@ def adjusttheuserstreak(column, value, login_difference):
         if login_difference == 1:
             print("Thanks for joining today! Your streak goes up!")
 
-            streaks_query_1 = "UPDATE user_streaks SET UserStreak = UserStreak + 1, LastLogin = '{DATE}' WHERE {COLUMN} = '{VALUE}'".format(
+            streaks_query_1 = "UPDATE the_users SET UserStreak = UserStreak + 1, LastLogin = '{DATE}' WHERE {COLUMN} = '{VALUE}'".format(
                 COLUMN=column, VALUE=value, DATE=str(today))
 
 
         elif login_difference < 1:
             print("Keep up the hard work. \nDont forget to join us tomorrow too!")
 
-            streaks_query_1 = "UPDATE user_streaks SET LastLogin = '{DATE}' WHERE {COLUMN} = '{VALUE}'".format(
+            streaks_query_1 = "UPDATE the_users SET LastLogin = '{DATE}' WHERE {COLUMN} = '{VALUE}'".format(
                 COLUMN=column, VALUE=value, DATE=str(today))
 
         else:
             print("Nice to see you! It's been a long time.")
-            streaks_query_1 = " UPDATE user_streaks SET UserStreak = 1, LastLogin = '{DATE}' WHERE {COLUMN} = '{VALUE}'".format(
+            streaks_query_1 = " UPDATE the_users SET UserStreak = 1, LastLogin = '{DATE}' WHERE {COLUMN} = '{VALUE}'".format(
                 COLUMN=column, VALUE=value, DATE=today)
 
         cur.execute(streaks_query_1)
@@ -224,7 +223,7 @@ def display_user_streak(column, value):
 
 
         #THE QUERY CALLS THE USER STREAK NUMBER FROM THE DB, SO THAT IT CAN BE DISPLAYED ON THE INTERFACE.
-        streaks_query_2 = "SELECT UserStreak FROM user_streaks WHERE {COLUMN} = '{VALUE}';".format(
+        streaks_query_2 = "SELECT UserStreak FROM the_users WHERE {COLUMN} = '{VALUE}';".format(
             COLUMN=column, VALUE=value)
 
         cur.execute(streaks_query_2)
@@ -248,9 +247,9 @@ def display_user_streak(column, value):
 
 # TESTING 1:
 # WHERE LOGIN DATE VALUES ALREADY EXIST
-column = 'Username'
-value = 'cobrien1'
-overalluserstreaksfunction(column, value)
+# column = 'Username'
+# value = 'cobrien1'
+# overalluserstreaksfunction(column, value)
 
 
 # TESTING 2:
@@ -259,8 +258,8 @@ overalluserstreaksfunction(column, value)
 # value = 'lucosov89'
 # overalluserstreaksfunction(column, value)
 
-# TESTING 2:
+# TESTING 3:
 # WHERE LOGIN DATE VALUES DO NOT EXIST (FIRST TIME)
-column = 'Username'
-value = 'hbieber1997'
-overalluserstreaksfunction(column, value)
+# column = 'Username'
+# value = 'hbieber1997'
+# overalluserstreaksfunction(column, value)
