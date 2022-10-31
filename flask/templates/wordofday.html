@@ -5,13 +5,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
     <title>WORD OF DAY PAGE</title>
 </head>
 <body>
 <div class="topnav">
-  <a href="http://127.0.0.1:5001/searchword">SEARCH FOR WORD</a>
-  <a class="active" href="http://127.0.0.1:5001/wordofday">WORD OF THE DAY</a>
+  <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
+  <a class="active" href="">WORD OF THE DAY</a>
   <a href="http://127.0.0.1:5001">LOG OUT</a>
     <br>
     <br>
@@ -28,7 +28,7 @@
     {% if clicked %}
 
        <p class = "word">{{ word }}</p>
-        <p class = "defintion">{{ definition }}</p>
+        <p class = "definition">{{ definition }}</p>
 
 
     {% endif %}

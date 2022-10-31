@@ -80,7 +80,6 @@ def get_signup_details(form):
 
 
 
-
 # @app.route('/searchword', methods=['GET', 'POST'])
 # def searchword():
 #     clicked = False
@@ -106,7 +105,7 @@ def searchword_by_id(userid):
     if request.method == 'POST':
         clicked = True
         form = request.form
-        print(form)
+        # print(form)
         the_word = form['searchword']
         word_searched = show_word_and_definition(the_word)
         add_searched_word(the_word) #add userid after
