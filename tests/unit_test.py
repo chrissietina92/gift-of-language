@@ -5,13 +5,16 @@ from src.db_functions import does_user_exist, new_user
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
 from src.Login_Interface_Python_Logic import username_and_password_match
+from src.db_functions import new_user.check_if_valid_username
 
 
 
-class TestGiftOfLanguage(TestCase):
+"""class TestGiftOfLanguage(TestCase):
 
-    @mock.patch("")
+    @mock.patch("db_functions.check_if_valid_username")
+    def test_valid_username(self,mock_check_if_valid_username):
 
+        return mock_check_if_valid_username =
 
 
 # use mocking to test this
@@ -27,7 +30,7 @@ class TestLearntWords(TestCase):
     def test_2_check_in_database_true(self, mock_userid):
         mock_userid.return_value = 3
         result = user_db.check_if_word_in_database(word='play')
-        self.assertTrue(result)
+        self.assertTrue(result)"""
 
     #@mock.patch.object(user_db, 'userid')
     #def test_2_check_in_database_true(self, mock_userid):
@@ -59,7 +62,7 @@ class TestLearntWords(TestCase):
    #     self.assertEqual(excepted, result)
 
 
-class TestGetDefinitionFromAPI(TestCase):
+"""class TestGetDefinitionFromAPI(TestCase):
     def test_get_right_definition_from_API(self):
         excepted = 'Each of the seven major bodies which move relative to the fixed stars in the night sky—the Moon, Mercury, Venus, the Sun, Mars, Jupiter and Saturn.'
         result = get_definition('planet')
@@ -107,7 +110,7 @@ class TestDailyWords(TestCase):
         mock_searchAPIForRandomWord.return_value = ('Word: accountants')
         expected = ('Word: accountants', 'Definition: One who renders account; one accountable.')
         result = randomWordGenerator()
-        self.assertNotEqual(expected, result)
+        self.assertNotEqual(expected, result)"""
 
 class TestUserPasswordMatch(TestCase):
     def test_user_password_match(self):
@@ -115,3 +118,15 @@ class TestUserPasswordMatch(TestCase):
 
     def test_user_password_match(self):
         self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))
+
+
+class TestUsername(TestCase):
+
+    user_test = new_user(1)
+
+    def test_valid_username(self):
+
+
+        self.assertEqual(new_user.check_if_valid_username(""), True)
+        self.assertEqual(new_user.check_if_valid_username("uhd"), False)
+

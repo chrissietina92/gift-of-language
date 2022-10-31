@@ -91,6 +91,19 @@ class new_user:
     def __init__(self):
         self.userid = input('User id: ')
 
+    def check_if_valid_username(self, username):
+        reg = "^[A-Za-z0-9_-]{4,20}$"
+        # compiling regex
+        pat = re.compile(reg)
+        # searching regex
+        mat = re.search(pat, username)
+
+        # validating conditions
+        if mat:
+            return True
+        else:
+            return False
+
     def new_user_credentials(self):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         # This function implements the add_a_new_user function.
@@ -142,18 +155,7 @@ class new_user:
         else:
             return False
 
-    def check_if_valid_username(self, username):
-        reg = "^[A-Za-z0-9_-]{4,20}$"
-        # compiling regex
-        pat = re.compile(reg)
-        # searching regex
-        mat = re.search(pat, username)
 
-        # validating conditions
-        if mat:
-            return True
-        else:
-            return False
 
     def check_if_valid_name(self, name):
         reg = "^[A-Za-z]{2,25}$"
