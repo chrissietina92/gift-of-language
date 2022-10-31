@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
-    <title>Search word page</title>
+    <title>Previous searched word page</title>
 </head>
 <body>
 <div class="topnav">
@@ -17,21 +17,7 @@
     <br>
     <br>
     <br>
-    <h1>Search for word</h1>
-    <h2>Hey, {{ firstname }}! Search for a word here: </h2>
-    <form action= "{{ url_for('searchword_by_id', userid=userid) }}" method="POST">
-
-        <input type="text" id="searchword" name="searchword"><br><br>
-        <input type="submit" name="next" value="Search">
-    </form>
-
-    <br><br>
-    {% if clicked %}
-        <h2>
-            {{ word_searched }}
-        </h2>
-
-    {% endif %}
+    <h1>These are your previously searched words:</h1>
 
 
 </div>

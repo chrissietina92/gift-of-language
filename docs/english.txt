@@ -182,7 +182,6 @@ horse
 cow
 ability
 able
-abortion
 about
 above
 abroad
@@ -190,7 +189,6 @@ absence
 absolute
 absolutely
 absorb
-abuse
 academic
 accept
 access
@@ -216,7 +214,6 @@ actor
 actress
 actual
 actually
-ad
 adapt
 add
 addition
@@ -246,8 +243,6 @@ affair
 affect
 afford
 afraid
-African
-African-American
 after
 afternoon
 again
@@ -257,16 +252,12 @@ agency
 agenda
 agent
 aggressive
-ago
 agree
 agreement
 agricultural
-ah
 ahead
 aid
 aide
-AIDS
-aim
 air
 aircraft
 airline
@@ -274,7 +265,6 @@ airport
 album
 alcohol
 alive
-all
 alliance
 allow
 ally
@@ -287,7 +277,6 @@ alter
 alternative
 although
 always
-AM
 amazing
 American
 among
@@ -296,7 +285,6 @@ analysis
 analyst
 analyze
 ancient
-and
 anger
 angle
 angry
@@ -333,7 +321,6 @@ appropriate
 approval
 approve
 approximately
-Arab
 architect
 area
 argue
@@ -352,8 +339,6 @@ art
 article
 artist
 artistic
-as
-Asian
 aside
 ask
 asleep
@@ -373,7 +358,6 @@ association
 assume
 assumption
 assure
-at
 athlete
 athletic
 atmosphere
@@ -1359,7 +1343,6 @@ glance
 glass
 global
 glove
-go
 goal
 God
 gold
@@ -1414,7 +1397,6 @@ hardly
 hat
 hate
 have
-he
 head
 headline
 headquarters
@@ -1439,8 +1421,6 @@ here
 heritage
 hero
 herself
-hey
-hi
 hide
 high
 highlight
@@ -1490,15 +1470,12 @@ hunting
 hurt
 husband
 hypothesis
-I
 ice
 idea
 ideal
 identification
 identify
 identity
-ie
-if
 ignore
 ill
 illegal
@@ -1524,7 +1501,6 @@ impression
 impressive
 improve
 improvement
-in
 incentive
 incident
 include
@@ -1604,24 +1580,16 @@ invite
 involve
 involved
 involvement
-Iraqi
 Irish
 iron
-Islamic
 island
-Israeli
 issue
-it
-Italian
 item
 its
 itself
 jacket
 jail
-Japanese
 jet
-Jew
-Jewish
 job
 join
 joint
@@ -1739,7 +1707,6 @@ locate
 location
 lock
 long
-long-term
 look
 loose
 lose
@@ -1879,9 +1846,6 @@ mouth
 move
 movement
 movie
-Mr
-Mrs
-Ms
 much
 multiple
 murder
@@ -1955,7 +1919,6 @@ notion
 novel
 now
 nowhere
-n't
 nuclear
 number
 numerous
@@ -2084,7 +2047,6 @@ pattern
 pause
 pay
 payment
-PC
 peace
 peak
 peer
@@ -2636,8 +2598,6 @@ smoke
 smooth
 snap
 snow
-so
-so-called
 soccer
 social
 society
@@ -2972,7 +2932,6 @@ try
 tube
 tunnel
 turn
-TV
 twelve
 twenty
 twice

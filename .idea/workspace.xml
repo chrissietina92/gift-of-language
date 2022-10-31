@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/SearchedWords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SearchedWords.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask/GOL_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask/GOL_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_searched_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_searched_words.py" afterDir="false" />
-    </list>
+    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -168,8 +161,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.GOL_api (1)" />
-        <item itemvalue="Python.db_searched_words" />
         <item itemvalue="Python.db_functions" />
+        <item itemvalue="Python.db_searched_words" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.GOL_api" />
       </list>
