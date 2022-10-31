@@ -1,10 +1,17 @@
-from unittest import TestCase, mock
+from unittest import mock, TestCase
 from src.db_searched_words import user_db
 from src.api import get_definition
 from src.db_functions import does_user_exist, new_user
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
 from src.Login_Interface_Python_Logic import username_and_password_match
+
+
+
+class TestGiftOfLanguage(TestCase):
+
+    @mock.patch("")
+
 
 
 # use mocking to test this

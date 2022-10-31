@@ -86,6 +86,7 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
     else:
         print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
         return False
+
 class new_user:
     def __init__(self):
         self.userid = input('User id: ')

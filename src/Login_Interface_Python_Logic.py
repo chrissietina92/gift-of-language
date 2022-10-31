@@ -45,7 +45,7 @@ def login_interface():
                     return matched
         else:
             print('Please try again, choosing one of the options.')
-            login_interface()
+            login_interface()  # recursion
 
 
 _connect_to_db('GOL_users')

@@ -59,7 +59,7 @@ class user_:
         search_again = input('Would you like to continue searching your dictionary? (Yes/No) ').lower()
         if search_again == 'no':
             print('You are leaving your dictionary...')
-            return
+            return False
         elif search_again == 'yes':
             search = input('Please search for a word in your dictionary: ')
             show_word_and_definition(search)
