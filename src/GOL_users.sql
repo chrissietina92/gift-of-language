@@ -1,5 +1,7 @@
 -- SQL Code to create database for users
--- NEW AND IMPROVED:
+-- RUN THIS CODE SCRIPT IN MY SQL WORKBENCH
+
+
 CREATE DATABASE GOL_users;
 USE GOL_users;
 
