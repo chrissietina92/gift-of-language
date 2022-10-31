@@ -54,7 +54,6 @@ def does_user_exist(column, value, cur, db_connection):
 
 
 
-
 @db_connection_decorator
 def add_a_new_user(userid, firstname, lastname, email, dob, city, username, password, cur, db_connection):
     query = """
@@ -65,6 +64,26 @@ def add_a_new_user(userid, firstname, lastname, email, dob, city, username, pass
     cur.execute(query)
     db_connection.commit()
 
+@db_connection_decorator
+def get_user_by_id(userid, cur, db_connection):
+    query = """SELECT UserID, Firstname, Lastname, Username
+                FROM the_users
+                WHERE UserID = {USERID};""".format(USERID=userid)
+    cur.execute(query)
+    result = cur.fetchall()
+    return result
+
+@db_connection_decorator
+def get_user_by_column(column, value, cur, db_connection):
+    query = """SELECT UserID
+                FROM the_users
+                WHERE {COLUMN} = '{VALUE}';""".format(COLUMN=column, VALUE=value)
+    cur.execute(query)
+    result = cur.fetchall()
+    userid = result[0][0]
+    return userid
+
+print(get_user_by_column('Username', 'Fishy'))
 
 @db_connection_decorator
 def username_and_password_match(column, value, password_value, cur, db_connection):

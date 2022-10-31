@@ -18,7 +18,8 @@
     <br>
     <br>
     <h1>Search for word</h1>
-    <form action="{{ url_for('searchword') }}" method="POST">
+    <h2>Hey, {{ firstname }}! Search for a word here: </h2>
+    <form action= "{{ url_for('searchword_by_id', userid=userid) }}" method="POST">
 
         <input type="text" id="searchword" name="searchword"><br><br>
         <input type="submit" name="next" value="Search">

@@ -18,8 +18,8 @@
     <br>
     <br>
     <h1>WORD OF THE DAY!</h1>
-    <form action="{{ url_for('wordofday') }}" method="POST">
-        <h2>Click the button to get a new word</h2>
+    <form action="{{ url_for('wordofday_by_id', userid=userid) }}" method="POST">
+        <h2>Hi {{ firstname }}! Click the button to get a new word</h2>
         <h3>(Important info: The word will refresh each time you click this button or refresh the page)</h3>
 
         <input type="submit" name="next" value="NEW WORD">
