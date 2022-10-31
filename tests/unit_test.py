@@ -82,3 +82,5 @@ class TestUserPasswordMatch(TestCase):
 
     def test_user_password_match(self):
         self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))
+
+

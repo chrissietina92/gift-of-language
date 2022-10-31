@@ -22,7 +22,6 @@ def set_reminder_time(reminderTime):
         time.sleep(1)
 
 
-
 def learn_words():
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or View your Searched Words? (Schedule Word/Search Dictionary/View Searched Words) ').lower()
     if start == 'schedule word':

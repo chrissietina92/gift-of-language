@@ -55,11 +55,11 @@ def does_user_exist(column, value, cur, db_connection):
 
 
 @db_connection_decorator
-def add_a_new_user(userid, firstname, lastname, email, dob, city, username, password, cur, db_connection):
+def add_a_new_user(firstname, lastname, email, dob, city, username, password, cur, db_connection):
     query = """
-            INSERT INTO the_users (UserID, FirstName, LastName, Email, DOB, City, Username, UserPassword)
-            VALUES ('{USERID}', '{FIRSTNAME}', '{LASTNAME}', '{EMAIL}', str_to_date('{DOB}', '%d-%m-%Y'), '{CITY}', '{USERNAME}', '{PASSWORD}')
-            """.format(USERID=userid, FIRSTNAME=firstname, LASTNAME=lastname, EMAIL=email, DOB=dob,
+            INSERT INTO the_users (FirstName, LastName, Email, DOB, City, Username, UserPassword)
+            VALUES ('{FIRSTNAME}', '{LASTNAME}', '{EMAIL}', str_to_date('{DOB}', '%d-%m-%Y'), '{CITY}', '{USERNAME}', '{PASSWORD}')
+            """.format(FIRSTNAME=firstname, LASTNAME=lastname, EMAIL=email, DOB=dob,
                         CITY=city, USERNAME=username, PASSWORD=password)
     cur.execute(query)
     db_connection.commit()
@@ -102,20 +102,19 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
             print("Login Successful. \nWelcome, {}".format(name))
         return True
     else:
-        print("You have entered an incorrect password several times; you are now locked out of your account.\nPlease contact your customer care for support.")
+        print("You have entered an incorrect password ; you are now locked out of your account.\nPlease contact your customer care for support.")
         return False
 
 def new_user_credentials():
     # This function implements the add_a_new_user function.
     # The function was created to prevent the repeat of code.
     email = input('Email: ')
-    userid = input('User id: ')
     firstname = input('First name: ')
     lastname = input('Last name: ')
     dob = input('DOB (%d-%m-%Y): ')
     city = input('City: ')
     username = input('Username: ')
     password = input('Password: ')
-    add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
+    add_a_new_user(firstname, lastname, email, dob, city, username, password)
 
 
