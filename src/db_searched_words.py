@@ -52,14 +52,14 @@ def display_users_searched_word(userid, cur, db_connection):
 #     db_connection.commit()
 #
 #
-#def display_all_searched_words():
-#     try:
-#         file= open("../docs/SearchedWords.txt", "r")
-#     except FileNotFoundError:
-#         print("You haven't searched any words yet.")
-#     else:
-#         print(file.read())
-#         file.close()
+def display_all_searched_words():
+     try:
+         file= open("../docs/SearchedWords.txt", "r")
+     except FileNotFoundError:
+         print("You haven't searched any words yet.")
+     else:
+         print(file.read())
+         file.close()
 #
 # def delete_searched_words():
 #     try:

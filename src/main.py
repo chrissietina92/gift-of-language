@@ -1,7 +1,7 @@
 from src.Login_Interface_Python_Logic import login_interface
 from src.db_functions import new_user_credentials
 from src.daily_words import randomWordGenerator
-from src.db_searched_words import add_searched_word, display_users_searched_word
+from src.db_searched_words import add_searched_word, display_users_searched_word, display_all_searched_words
 from src.dictionaryapi_functions import show_word_and_definition
 import schedule
 import time
@@ -38,7 +38,7 @@ def learn_words():
         search_words_in_dictionary()
         continue_learning()
     elif start == 'view searched words':
-        display_users_searched_word()
+        display_all_searched_words()
         continue_learning()
     else:
         print('Please try again')
