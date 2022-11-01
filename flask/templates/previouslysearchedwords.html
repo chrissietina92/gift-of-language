@@ -9,23 +9,19 @@
     <title>Previous searched word page</title>
 </head>
 <body>
-<div class="topnav">
-    <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
-    <a href="{{ url_for('wordofday_by_id', userid=userid) }}">WORD OF THE DAY</a>
-    <a class="active" href="">PREVIOUSLY SEARCHED WORDS</a>
-    <a href="http://127.0.0.1:5001">LOG OUT</a>
+    <div class="topnav">
+        <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
+        <a href="{{ url_for('wordofday_by_id', userid=userid) }}">WORD OF THE DAY</a>
+        <a class="active" href="">PREVIOUSLY SEARCHED WORDS</a>
+        <a href="http://127.0.0.1:5001">LOG OUT</a>
+    </div>
     <br>
     <br>
     <h1>{{ firstname }}'s searched words:</h1>
-
     <ul>
     {% for i in users_searched_words %}
         <li>{{ i[0] }} - {{ i[1] }}</li>
     {%endfor%}
-
     </ul>
-
-
-</div>
 </body>
 </html>
