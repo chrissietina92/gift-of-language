@@ -84,17 +84,21 @@ def run_user_input():
                             (2) Register as a new user
                             Choice (1/2): """)
     if option == '1':
-        if login_interface():
+        login = login_interface()
+        if login:
             print("Let's start learning")
             learn_words()
 
     elif option == '2':
         print('Please register adding the required information.')
-        new_user_credentials()
-        print("Congratulations! Registration completed.")
-        delete_searched_words()
-        clean_db_for_new_user()
-        start = input('Would you like to log in with your new account to start learning? (Yes/No)')
+        duplicate = new_user_credentials()
+        if duplicate:
+            start = input('A user already exists with these details, would you like to log in? (Yes/No)')
+        else:
+            print("Congratulations! Registration completed.")
+            delete_searched_words()
+            clean_db_for_new_user()
+            start = input('Would you like to log in with your new account to start learning? (Yes/No)')
         if start == 'Yes':
             login_interface()
             print("Let's start learning")
@@ -107,5 +111,6 @@ def run_user_input():
     else:
         print('Please try again. Please select one of the two options.')
         run_user_input()
+
 if __name__ == '__main__':
     run()

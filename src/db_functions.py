@@ -143,7 +143,12 @@ def new_user_credentials():
     while not check_if_valid_name(city):
         print("Please enter e valid city")
         city = input('Name: ')
-    add_a_new_user(firstname, lastname, email, dob, city, username, password)
+    if does_user_exist('Email', email) or does_user_exist('Username', username):
+        duplicate = True
+    else:
+        duplicate = False
+        add_a_new_user(firstname, lastname, email, dob, city, username, password)
+    return duplicate
 
 
 def check_if_valid_password(passwd):

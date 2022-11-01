@@ -9,6 +9,9 @@
     <title>Log in page</title>
 </head>
 <body>
+    <div class="topnav">
+    <a href="{{ url_for('index') }}">BACK</a>
+    </div>
     <h1>Log in here</h1>
     <form action="{{ url_for('login') }}" method="POST">
         Log in with:
@@ -38,7 +41,7 @@
             <br><br>
             <a href="{{ url_for('searchword_by_id', userid=userid) }}">Search for a word</a></h2>
         {% else %}
-            <h2>Incorrect password, sorry!</h2>
+            <h2>Incorrect username/password, sorry!</h2>
         {% endif %}
 
     {% endif %}
