@@ -5,8 +5,7 @@ from src.db_functions import does_user_exist, new_user
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
 from src.Login_Interface_Python_Logic import username_and_password_match
-from src.db_functions import new_user.check_if_valid_username
-
+from src.db_functions import new_user
 
 
 """class TestGiftOfLanguage(TestCase):
@@ -111,14 +110,14 @@ class TestDailyWords(TestCase):
         expected = ('Word: accountants', 'Definition: One who renders account; one accountable.')
         result = randomWordGenerator()
         self.assertNotEqual(expected, result)"""
-
+"""
 class TestUserPasswordMatch(TestCase):
     def test_user_password_match(self):
         self.assertTrue(username_and_password_match(column='Username', value='anna123', password_value='anna123'))
 
     def test_user_password_match(self):
         self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))
-
+"""
 
 class TestUsername(TestCase):
 
@@ -126,7 +125,6 @@ class TestUsername(TestCase):
 
     def test_valid_username(self):
 
-
-        self.assertEqual(new_user.check_if_valid_username(""), True)
-        self.assertEqual(new_user.check_if_valid_username("uhd"), False)
+        self.assertTrue(new_user.check_if_valid_username(self,""))
+        self.assertFalse(new_user.check_if_valid_username(self,"uhd"))
 

@@ -136,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.db_searched_words" />
         <item itemvalue="Python tests.Python tests for unit_test.TestLearntWords.test_2_check_in_database_true" />
         <item itemvalue="Python tests.Python tests for unit_test.TestLearntWords.test_check_in_database_true" />
         <item itemvalue="Python tests.Python tests for unit_test.TestLearntWords.test_2_check_not_in_database" />
         <item itemvalue="Python tests.Python tests for unit_test.TestLearntWords.test_randomWordGenerator_not_working" />
-        <item itemvalue="Python.db_searched_words" />
       </list>
     </recent_temporary>
   </component>
