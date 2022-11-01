@@ -124,7 +124,7 @@ def new_user_credentials():
         email = input('Email: ')
     password = input('Password -> 1. Should have at least one number;\n'
                      ' 2. Should have at least one uppercase and one lowercase character.\n'
-                     '3. Should have at least one special symbol.\n'
+                     '3. Should have at least one special symbol.(No dashes or underscores)\n'
                      '4. Should be between 6 to 20 characters long: \n'
                      'Password: ')
     while not check_if_valid_password(password):
