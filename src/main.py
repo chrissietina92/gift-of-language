@@ -1,7 +1,7 @@
 from src.Login_Interface_Python_Logic import login_interface
 from src.db_functions import new_user_credentials
 from src.daily_words import randomWordGenerator
-from src.db_searched_words import add_searched_word, display_all_searched_words, delete_searched_words, clean_db_for_new_user
+from src.db_searched_words import add_searched_word, display_users_searched_word, display_all_searched_words
 from src.dictionaryapi_functions import show_word_and_definition
 import schedule
 import time
@@ -93,11 +93,9 @@ def run_user_input():
         print('Please register adding the required information.')
         duplicate = new_user_credentials()
         if duplicate:
-            start = input('A user already exists with these details, would you like to log in? (Yes/No)')
+            start = input('A User already exists with these details, would you like to log in? (Yes/No)')
         else:
             print("Congratulations! Registration completed.")
-            delete_searched_words()
-            clean_db_for_new_user()
             start = input('Would you like to log in with your new account to start learning? (Yes/No)')
         if start == 'Yes':
             login_interface()

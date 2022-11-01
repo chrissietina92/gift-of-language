@@ -1,11 +1,6 @@
-from unittest import TestCase, mock
-from db_searched_words import check_if_word_in_database
-from dictionaryapi_functions import get_definition
+from unittest import TestCase
 from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name
 from dictionaryapi_functions import show_word_and_definition
-from src import daily_words
-from src.daily_words import randomWordGenerator, searchAPIForRandomWord
-from src.Login_Interface_Python_Logic import username_and_password_match
 
 
 # use mocking to test this
@@ -25,7 +20,6 @@ from src.Login_Interface_Python_Logic import username_and_password_match
         excepted = False
         result = check_if_word_in_database('go')
         self.assertEqual(excepted, result)
-
 
 class TestGetDefinitionFromAPI(TestCase):
     def test_get_right_definition_from_API(self):
