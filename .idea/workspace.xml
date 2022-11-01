@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_searched_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_searched_words.py" afterDir="false" />
-    </list>
+    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,7 +198,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/daily_words.py</url>
-          <line>35</line>
+          <line>34</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
