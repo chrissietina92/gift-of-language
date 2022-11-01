@@ -31,31 +31,42 @@ def add_searched_word(new_word, userid, cur, db_connection):
         cur.execute(query)
         db_connection.commit()
 
-
-
-## THESE 2 FUNCTIONS BELOW NEED TO BE PUT IN A SEPERATE FILE
 @db_connection_decorator
-def clean_db_for_new_user(cur, db_connection):
-    query = 'TRUNCATE TABLE searched_words;'
+def display_users_searched_word(userid, cur, db_connection):
+    query = """SELECT word, definition_
+                FROM searched_words
+                WHERE UserID = {} ;""".format(userid)
     cur.execute(query)
-    db_connection.commit()
+    result = cur.fetchall() # a list of tuples
+    return result
+
+# print(display_users_searched_word(1))
 
 
-def display_all_searched_words():
-    try:
-        file= open("../docs/SearchedWords.txt", "r")
-    except FileNotFoundError:
-        print("You haven't searched any words yet.")
-    else:
-        print(file.read())
-        file.close()
 
-def delete_searched_words():
-    try:
-        file = open("../docs/SearchedWords.txt", "r")
-    except FileNotFoundError:
-        return
-    else:
-        file.close()
-        os.remove('../docs/SearchedWords.txt')
+## THESE 2 FUNCTIONS BELOW AREN'T USED ANYMORE
+# @db_connection_decorator
+# def clean_db_for_new_user(cur, db_connection):
+#     query = 'TRUNCATE TABLE searched_words;'
+#     cur.execute(query)
+#     db_connection.commit()
+#
+#
+# def display_all_searched_words():
+#     try:
+#         file= open("../docs/SearchedWords.txt", "r")
+#     except FileNotFoundError:
+#         print("You haven't searched any words yet.")
+#     else:
+#         print(file.read())
+#         file.close()
+#
+# def delete_searched_words():
+#     try:
+#         file = open("../docs/SearchedWords.txt", "r")
+#     except FileNotFoundError:
+#         return
+#     else:
+#         file.close()
+#         os.remove('../docs/SearchedWords.txt')
 
