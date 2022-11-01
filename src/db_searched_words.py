@@ -40,8 +40,8 @@ def display_users_searched_word(userid, cur, db_connection):
     result = cur.fetchall() # a list of tuples
     return result
 
-# print(display_users_searched_word(1))
 
+# print(display_users_searched_word(1))
 
 
 ## THESE 2 FUNCTIONS BELOW AREN'T USED ANYMORE
@@ -52,7 +52,7 @@ def display_users_searched_word(userid, cur, db_connection):
 #     db_connection.commit()
 #
 #
-# def display_all_searched_words():
+#def display_all_searched_words():
 #     try:
 #         file= open("../docs/SearchedWords.txt", "r")
 #     except FileNotFoundError:
