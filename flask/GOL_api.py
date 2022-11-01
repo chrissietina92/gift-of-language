@@ -64,8 +64,8 @@ def get_signup_details(form):
     city = form['city']
     username = form['username']
     password = form['password']
-    userid = 311
-    add_a_new_user(userid, firstname, lastname, email, dob, city, username, password)
+
+    add_a_new_user(firstname, lastname, email, dob, city, username, password)
     return firstname, email
 
 

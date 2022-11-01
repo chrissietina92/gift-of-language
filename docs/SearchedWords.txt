@@ -17,3 +17,5 @@ cat - An animal of the family Felidae:
 frog - A small tailless amphibian of the order Anura that typically hops. 
 cat - An animal of the family Felidae: 
 winter - Traditionally the fourth of the four seasons, typically regarded as being from December 23 to March 20 in continental regions of the Northern Hemisphere or the months of June, July and August in the Southern Hemisphere. It is the time when the sun is lowest in the sky, resulting in short days, and the time of year with the lowest atmospheric temperatures for the region. 
+fish - A cold-blooded vertebrate animal that lives in water, moving with the help of fins and breathing with gills. 
+goose - Any of various grazing waterfowl of the family Anatidae, which have feathers and webbed feet and are capable of flying, swimming, and walking on land, and which are bigger than ducks. 
