@@ -41,7 +41,6 @@ def clean_db_for_new_user(cur, db_connection):
     db_connection.commit()
 
 
-
 def display_all_searched_words():
     try:
         file= open("../docs/SearchedWords.txt", "r")
@@ -59,3 +58,4 @@ def delete_searched_words():
     else:
         file.close()
         os.remove('../docs/SearchedWords.txt')
+

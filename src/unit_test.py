@@ -1,14 +1,14 @@
 from unittest import TestCase, mock
-from src.db_searched_words import check_if_word_in_database
-from src.dictionaryapi_functions import get_definition
-from src.db_functions import does_user_exist
+from db_searched_words import check_if_word_in_database
+from dictionaryapi_functions import get_definition
+from db_functions import check_if_valid_password, check_if_valid_username
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
 from src.Login_Interface_Python_Logic import username_and_password_match
 
 
 # use mocking to test this
-class TestLearntWords(TestCase):
+"""class TestLearntWords(TestCase):
     def test_check_in_database_true(self):
         self.assertTrue(check_if_word_in_database(word = 'House'))
 
@@ -83,4 +83,79 @@ class TestUserPasswordMatch(TestCase):
     def test_user_password_match(self):
         self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))
 
+"""
+class TestPasswordValidation(TestCase):
+
+    def test_valid_password(self):
+        self.assertEqual(check_if_valid_password("Rebecca123!"), True)
+
+    def test_invalid_password(self):
+        self.assertEqual(check_if_valid_password("password"), False)
+
+    # Passwords can not be empty
+    def test_invalid_empty_password(self):
+        self.assertEqual(check_if_valid_password(""), False)
+
+    # Passwords need at least one number
+    def test_valid_password_with_a_number(self):
+        self.assertEqual(check_if_valid_password("Freddy123@"), True)
+
+    def test_invalid_password_without_a_number(self):
+        self.assertEqual(check_if_valid_password("Freddy@"),False)
+
+    # Password need at least one Uppercase and one lower case letter
+    def test_valid_password_with_upper_and_lowercase(self):
+        self.assertEqual(check_if_valid_password("SamAntah123@"), True)
+
+    def test_invalid_password_without_upper_and_lowercase(self):
+        self.assertEqual(check_if_valid_password("samantha123@"), False)
+
+    # Passwords need at least one special symbol:
+    def test_valid_password_with_at_least_one_symbol(self):
+        self.assertEqual(check_if_valid_password("Pinapple123@?"), True)
+
+    def test_invalid_password_without_any_symbols(self):
+        self.assertEqual(check_if_valid_password("Pinapple123"), False)
+
+    def test_invalid_password_with_dashes_or_underscores(self):
+        self.assertEqual(check_if_valid_password("Pinapple123_"), False)
+        self.assertEqual(check_if_valid_password("Pinapple123-"), False)
+
+    # Passwords should not be shorter than 6 characters
+    def test_invalid_password_shorter_than_6(self):
+        self.assertEqual(check_if_valid_password("Pi3@"), False)
+
+    # Passwords should not be longer than 20 characters
+    def test_invalid_password_longer_than_20(self):
+        self.assertEqual(check_if_valid_password("Pinapplepen123!Oranges"), False)
+
+
+
+class TestUsernameValidation(TestCase):
+
+    def test_valid_username(self):
+        self.assertEqual(check_if_valid_username("Gammy"), True)
+
+    def test_valid_username(self):
+        self.assertEqual(check_if_valid_username("Gammy"), True)
+
+    # Usernames can not be empty
+    def test_invalid_empty_username(self):
+        self.assertEqual(check_if_valid_username(""), False)
+
+    # Usernames are not allowed to be shorter than 4
+    def test_invalid_username_length_below_4(self):
+        self.assertEqual(check_if_valid_username("Ahd"), False)
+
+    # Usernames are not allowed to be longer than 20
+    def test_invalid_username_length_above_20(self):
+        self.assertEqual(check_if_valid_username("Sshjjdjcjjjrnnnsjfyyj"), False)
+
+    # Usernames are only allowed the symbols underscore(_) and dash (-)
+    def test_invalid_username_symbols(self):
+        self.assertEqual(check_if_valid_username("Ahhud!"), False)
+
+    # Usernames must start with a letter
+""" def test_invalid_username_not_starting_with_letter(self):
+        self.assertEqual(check_if_valid_username("1Gimmy"), False)"""
 
