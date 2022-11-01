@@ -22,5 +22,3 @@ def show_word_and_definition(word):
         print('The word is: {}'.format(word))
         print('The definition is: {}'.format(get_definition(word)))
         return """The definition of {} is: {}""".format(word, get_definition(word))
-
-

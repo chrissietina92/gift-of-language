@@ -1,7 +1,8 @@
 from unittest import TestCase, mock
 from db_searched_words import check_if_word_in_database
 from dictionaryapi_functions import get_definition
-from db_functions import check_if_valid_password, check_if_valid_username
+from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name
+from dictionaryapi_functions import show_word_and_definition
 from src import daily_words
 from src.daily_words import randomWordGenerator, searchAPIForRandomWord
 from src.Login_Interface_Python_Logic import username_and_password_match
@@ -84,6 +85,18 @@ class TestUserPasswordMatch(TestCase):
         self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))
 
 """
+
+
+# Test to check if a words name and its definition is printed when user searches it
+class TestWordAndDefinition(TestCase):
+
+    def test_correct_functionality(self):
+        self.assertEqual(show_word_and_definition("House"),"The definition of House is: A structure built or serving as an abode of human beings.")
+
+    def test_correct_functionality2(self):
+        self.assertEqual(show_word_and_definition("Socks"),"The definition of Socks is: A knitted or woven covering for the foot.")
+
+
 class TestPasswordValidation(TestCase):
 
     def test_valid_password(self):
@@ -158,4 +171,30 @@ class TestUsernameValidation(TestCase):
     # Usernames must start with a letter
 """ def test_invalid_username_not_starting_with_letter(self):
         self.assertEqual(check_if_valid_username("1Gimmy"), False)"""
+
+
+class TestNameValidation(TestCase):
+
+    # The name can't include any number, only letters
+    def test_valid_name_letters_only(self):
+        self.assertEqual(check_if_valid_name("Daniella"), True)
+
+    def test_invalid_name_letters_and_numbers(self):
+        self.assertEqual(check_if_valid_name("123Daniella"), False)
+
+    # The name can't be shorter than 2
+    def test_invalid_name_shorter_than_2(self):
+        self.assertEqual(check_if_valid_name("D"), False)
+
+    def test_valid_name_longer_than_2(self):
+        self.assertEqual(check_if_valid_name("Dan"), True)
+
+    # The name can't be longer than 25
+    def test_invalid_name_longer_than_25(self):
+        self.assertEqual(check_if_valid_name("DaniellaDaniellaDaniellaDaniella"), False)
+
+    def test_valid_name_shorter_than_25(self):
+        self.assertEqual(check_if_valid_name("Dani"), True)
+
+
 

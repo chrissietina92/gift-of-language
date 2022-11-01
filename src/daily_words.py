@@ -1,7 +1,6 @@
 import requests
 import random
 
-
 # Documentation:
 # I'm using this manual method below for the random word generator based on the words in our chosen api
 # instead of using the random words library as :
