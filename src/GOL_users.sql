@@ -37,7 +37,7 @@ CONSTRAINT
 -- INITIAL POPULATING THE USERS TABLE
 
 INSERT INTO the_users (FirstName, LastName, Email, DOB, City, Username, UserPassword)
-VALUES ('Jake', 'Callow', 'jcal@email.com', str_to_date('05-12-1992', '%d-%m-%Y'), 'London', 'cobrien1', 'cat123'),
+VALUES ('Jake', 'Callow', 'jcal@email.com', str_to_date('05-12-1992', '%d-%m-%Y'), 'London', 'jcal', 'cat123'),
 ('Fred', 'Smith', 'fsmith@email.com', str_to_date('19-02-1995', '%d-%m-%Y'),'Bristol', 'freddy95', 'bristol11'),
 ('Hayley', 'Bieber', 'hayley99@email.com', str_to_date('01-09-1997', '%d-%m-%Y'), 'Cambridge', 'hbieber1997', 'ilovejustin1'),
 ('Luciano', 'Sovino', 'lucosovino89@email.com', str_to_date('02-10-1989', '%d-%m-%Y'), 'Cardiff', 'lucosov89', 'helloworld0');

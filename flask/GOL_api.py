@@ -111,7 +111,7 @@ def searchword_by_id(userid):
         # print(form)
         the_word = form['searchword']
         word_searched = show_word_and_definition(the_word)
-        add_searched_word(the_word) #add userid after
+        add_searched_word(the_word, userid)
         # add in the search word function
     return render_template('searchword.html', firstname = firstname, userid = userid, clicked=clicked, word_searched=word_searched)
 
