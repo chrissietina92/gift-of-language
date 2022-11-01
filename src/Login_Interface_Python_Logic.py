@@ -1,5 +1,5 @@
 from src.db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
-
+from db_functions import check_if_valid_username
 # Welcome message.
 #print("The Gift of Language")
 #print("Welcome.")
@@ -24,21 +24,22 @@ def existing_customer_check():
 
 
 def login_interface():
-
-
-        login_method = input('How would you like to login? (Email/Username)')
-        column = login_method.title()
-
-        if column == 'Email' or column == 'Username':
-            value = input('Enter your {}: '.format(column.lower()))
-            print("Thank you. Checking your details...")
+    login_method = input('How would you like to login? (Email/Username)')
+    column = login_method.title()
+    if column == 'Email' or column == 'Username':
+        value = input('Enter your {}: '.format(column.lower()))
+        print("Thank you. Checking your details...")
+        if not check_if_valid_username(username=value):
+            print("You haven't entered a valid username. Please try again.")
+            login_interface()
+        else:
             does_user_exist(column, value)
             password_value = input("Enter your password:")
             matched = username_and_password_match(column, value, password_value)
             return matched
-        else:
-            print('Please try again, choosing one of the options.')
-            login_interface()
+    else:
+        print('Please try again, choosing one of the options.')
+        login_interface()
 
 
 _connect_to_db('GOL_users')

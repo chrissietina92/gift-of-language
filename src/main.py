@@ -5,28 +5,34 @@ from src.db_searched_words import add_searched_word, display_all_searched_words,
 from src.dictionaryapi_functions import show_word_and_definition
 import schedule
 import time
-
-def set_reminder_time(reminderTime):
+import re
+def set_reminder_time():
     reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
-    # Every day at 'reminderTime' time randomWordGenerator() is called.
-    schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
-    schedule.every().day.at("{}".format(reminderTime)).do(continue_learning)
-    print("Your reminder has been set")
-    # Loop so that the scheduling task
-    # keeps on running all time.
-    #learn_words()
-    while True:
-        # Checks whether a scheduled task
-        # is pending to run or not
-        schedule.run_pending()
-        time.sleep(1)
-
-
+    regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]"
+    pattern = re.compile(regex)
+    # searching regex
+    match = re.search(pattern, reminderTime)
+    # validating conditions
+    if match:
+        schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
+        schedule.every().day.at("{}".format(reminderTime)).do(continue_learning)
+        print("Your reminder has been set")
+        # Loop so that the scheduling task
+        # keeps on running all time.
+        # learn_words()
+        while True:
+            # Checks whether a scheduled task
+            # is pending to run or not
+            schedule.run_pending()
+            time.sleep(1)
+    else:
+        print('Please enter the right format of the time HH:MM')
+        set_reminder_time()
 
 def learn_words():
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or View your Searched Words? (Schedule Word/Search Dictionary/View Searched Words) ').lower()
     if start == 'schedule word':
-        set_reminder_time(reminderTime)
+        set_reminder_time()
 
     elif start == 'search dictionary':
         search_words_in_dictionary()
