@@ -24,6 +24,12 @@ body {
     font-size: 20px;
   }
 
+  ul {
+    color: #104d91;
+    text-align: left;
+    font-size: 20px;
+  }
+
  p.word {
     color: #d82d2b;
     text-align: center;

@@ -3,7 +3,7 @@ from src.db_functions import add_a_new_user, username_and_password_match, get_us
     does_user_exist
 from src.daily_words import randomWordGenerator
 from src.dictionaryapi_functions import show_word_and_definition
-from src.db_searched_words import add_searched_word
+from src.db_searched_words import add_searched_word,display_users_searched_word
 
 app = Flask(__name__)
 
@@ -98,7 +98,6 @@ def searchword_by_id(userid):
 def wordofday_by_id(userid):
     users = get_user_by_id(userid)
     userid = users[0][0]
-    # defaults = {'userid': userid}
     clicked = False
     word = ''
     definition = ''
@@ -111,6 +110,13 @@ def wordofday_by_id(userid):
     return render_template('wordofday.html', firstname=firstname, userid=userid, word=word, definition=definition,
                            clicked=clicked)
 
+@app.route('/wordssearched/<int:userid>', methods=['GET', 'POST'])
+def wordssearched_by_id(userid):
+    users = get_user_by_id(userid)
+    userid = users[0][0]
+    firstname = users[0][1]
+    users_searched_words = display_users_searched_word(userid)
+    return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid, users_searched_words = users_searched_words)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

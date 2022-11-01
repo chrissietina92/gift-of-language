@@ -10,8 +10,9 @@
 </head>
 <body>
 <div class="topnav">
-  <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
-  <a class="active" href="">WORD OF THE DAY</a>
+    <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
+    <a class="active" href="">WORD OF THE DAY</a>
+    <a href="{{ url_for('wordssearched_by_id', userid=userid) }}" >PREVIOUSLY SEARCHED WORDS</a>
     <a href="http://127.0.0.1:5001">LOG OUT</a></div>
     <br>
     <br>
