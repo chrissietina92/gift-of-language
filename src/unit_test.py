@@ -80,8 +80,7 @@ class TestUserPasswordMatch(TestCase):
 
 """
 
-
-# Test to check if a words name and its definition is printed when user searches it
+# Testing the word and definition function that prints a specific word and it's definition form the API when it's searched for via user input
 class TestWordAndDefinition(TestCase):
 
     def test_correct_functionality(self):
@@ -90,7 +89,7 @@ class TestWordAndDefinition(TestCase):
     def test_correct_functionality2(self):
         self.assertEqual(show_word_and_definition("Socks"),"The definition of Socks is: A knitted or woven covering for the foot.")
 
-
+# Testing the password validation function
 class TestPasswordValidation(TestCase):
 
     def test_valid_password(self):
@@ -137,7 +136,7 @@ class TestPasswordValidation(TestCase):
         self.assertEqual(check_if_valid_password("Pinapplepen123!Oranges"), False)
 
 
-
+# Testing the username validation function
 class TestUsernameValidation(TestCase):
 
     def test_valid_username(self):

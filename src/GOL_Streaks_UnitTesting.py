@@ -66,24 +66,10 @@ class TestUserStreakAndDateUpdate(unittest.TestCase):
 
     # NO NEED TO TEST FOR FLOATS AS TIMEDELTA-DAYS FUNCTION WILL ALWAYS PRODUCE INTEGER.
 
-
-
 class TestUserStreaksDisplayFunction(unittest.TestCase):
     def test_ViewingUserStreak(self):
         self.TUS = TheUserStreak(1, 'Username', 'cobrien1')
         self.assertEqual(self.TUS.display_user_streak(), "Gift of Learning Streak: 1 Day(s).")
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
