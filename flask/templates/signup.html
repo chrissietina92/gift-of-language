@@ -26,10 +26,6 @@
         <br><br>
         Password: <input type="text" id="password" name="password">
         <br><br>
-        <div class ="smalltext">(Email should be in form emai@email.com)</div>
-        <div class ="smalltext">(Date can only be in form %d-%m-%Y)</div>
-        <div class ="smalltext">(Username should be between 4 and 20 characters, should start with a letter and only contain letters, numbers, underscores and dashes)</div>
-        <div class ="smalltext">(Password should contain at least one number, one uppercase letter, one lowercase letter, one special symbol [not - or _], it should be between 6 and 20 characters longer) </div>
 
     <input type="submit" name="next" value="Sign up">
     </form>
@@ -49,6 +45,12 @@
         <h2>There is a problem with either your email, DOB, username or password. Please try again!</h2>
         {% endif %}
     {% endif %}
+
+    <div class ="smalltext">SIGN UP DETAILS RULES: </div>
+    <div class ="smalltext">(Email should be in form emai@email.com & Date can only be in form %d-%m-%Y)</div>
+    <div class ="smalltext">(Username should be between 4 and 20 characters, should start with a letter and only contain letters, numbers, underscores and dashes)</div>
+    <div class ="smalltext">(Password should contain at least one number, one uppercase letter, one lowercase letter, one special symbol [not - or _], it should be between 6 and 20 characters longer) </div>
+
 </body>
 </html>
 
