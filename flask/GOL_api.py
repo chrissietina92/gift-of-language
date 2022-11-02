@@ -1,9 +1,11 @@
 from flask import Flask, request, render_template
 from src.db_functions import add_a_new_user, username_and_password_match, get_user_by_id, get_user_by_column, \
-    does_user_exist
+    does_user_exist, check_if_valid_email, check_if_valid_username, check_if_valid_password, check_if_valid_date
 from src.daily_words import randomWordGenerator
 from src.dictionary_api_functions import show_word_and_definition
-from src.db_searched_words import add_searched_word,display_users_searched_word
+from src.db_searched_words import add_searched_word, display_users_searched_word
+import schedule
+import time
 
 app = Flask(__name__)
 
@@ -47,6 +49,7 @@ def signup():
     firstname = None
     userid = 0
     duplicate = False
+    passed_regex_check = False
     if request.method == 'POST':
         clicked = True
         form = request.form
@@ -54,9 +57,12 @@ def signup():
         firstname = signupdetails[0]
         email = signupdetails[1]
         duplicate = signupdetails[2]
-        userid = get_user_by_column('Email', email)
+        passed_regex_check = signupdetails[3]
+        if email is not None:
+            userid = get_user_by_column('Email', email)
         # print(form)
-    return render_template('signup.html', clicked=clicked, duplicate=duplicate, userid=userid, firstname=firstname)
+    return render_template('signup.html', clicked=clicked, passed_regex_check=passed_regex_check, duplicate=duplicate,
+                           userid=userid, firstname=firstname)
 
 
 def get_signup_details(form):
@@ -67,12 +73,19 @@ def get_signup_details(form):
     city = form['city']
     username = form['username']
     password = form['password']
-    if does_user_exist('Email', email) or does_user_exist('Username', username):
-        duplicate = True
+    if check_if_valid_password(password) and check_if_valid_username(username) and check_if_valid_email(email) and check_if_valid_date(dob):
+        passed_regex_check = True
+        if does_user_exist('Email', email) or does_user_exist('Username', username):
+            duplicate = True
+            email = None
+        else:
+            duplicate = False
+            add_a_new_user(firstname, lastname, email, dob, city, username, password)
     else:
-        duplicate = False
-        add_a_new_user(firstname, lastname, email, dob, city, username, password)
-    return firstname, email, duplicate
+        passed_regex_check = False
+        duplicate = None
+        email = None
+    return firstname, email, duplicate, passed_regex_check
 
 
 @app.route('/searchword/<int:userid>', methods=['GET', 'POST'])
@@ -110,13 +123,32 @@ def wordofday_by_id(userid):
     return render_template('wordofday.html', firstname=firstname, userid=userid, word=word, definition=definition,
                            clicked=clicked)
 
+
 @app.route('/wordssearched/<int:userid>', methods=['GET', 'POST'])
 def wordssearched_by_id(userid):
     users = get_user_by_id(userid)
     userid = users[0][0]
     firstname = users[0][1]
     users_searched_words = display_users_searched_word(userid)
-    return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid, users_searched_words = users_searched_words)
+    return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid,
+                           users_searched_words=users_searched_words)
+
+
+@app.route('/timedword/<int:userid>', methods=['GET', 'POST'])
+def timed_word(userid):
+    users = get_user_by_id(userid)
+    userid = users[0][0]
+    firstname = users[0][1]
+    chosen_time = 0
+    if request.method == 'POST':
+        form = request.form
+        chosen_time = form['time']
+        schedule.every().day.at("{}".format(chosen_time)).do(randomWordGenerator)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+    return render_template('timedword.html', userid=userid, firstname=firstname, chosen_time=chosen_time)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

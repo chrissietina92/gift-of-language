@@ -2,21 +2,22 @@ import mysql.connector
 from config import USER, HOST, PASSWORD
 import re
 
-#db_name = 'GOL_users'
 
+# db_name = 'GOL_users'
+
+# convert this into a decorator for other functions
 def _connect_to_db(db_name):
-
+    # attribute
     connection = mysql.connector.connect(
-            host=HOST,
-            user=USER,
-            password=PASSWORD,
-            auth_plugin='mysql_native_password',
-            database=db_name
-        )
+        host=HOST,
+        user=USER,
+        password=PASSWORD,
+        auth_plugin='mysql_native_password',
+        database=db_name
+    )
     return connection
 
 
-# Database connection decorator function
 def db_connection_decorator(func):
     def wrapper(*args):
         db_connection = None
@@ -34,7 +35,9 @@ def db_connection_decorator(func):
             if db_connection:
                 db_connection.close()
                 # print("DB connection closed")
+
     return wrapper
+
 
 @db_connection_decorator
 def does_user_exist(column, value, cur, db_connection):
@@ -42,7 +45,7 @@ def does_user_exist(column, value, cur, db_connection):
             SELECT (EXISTS(SELECT FirstName
             FROM the_users
             WHERE {COLUMN} = '{VALUE}'));
-            """.format(COLUMN = column, VALUE = value)
+            """.format(COLUMN=column, VALUE=value)
     cur.execute(query)
     result = cur.fetchall()
     # print(result)
@@ -55,16 +58,16 @@ def does_user_exist(column, value, cur, db_connection):
         return False
 
 
-
 @db_connection_decorator
 def add_a_new_user(firstname, lastname, email, dob, city, username, password, cur, db_connection):
     query = """
             INSERT INTO the_users (FirstName, LastName, Email, DOB, City, Username, UserPassword)
             VALUES ('{FIRSTNAME}', '{LASTNAME}', '{EMAIL}', str_to_date('{DOB}', '%d-%m-%Y'), '{CITY}', '{USERNAME}', '{PASSWORD}')
             """.format(FIRSTNAME=firstname, LASTNAME=lastname, EMAIL=email, DOB=dob,
-                        CITY=city, USERNAME=username, PASSWORD=password)
+                       CITY=city, USERNAME=username, PASSWORD=password)
     cur.execute(query)
     db_connection.commit()
+
 
 @db_connection_decorator
 def get_user_by_id(userid, cur, db_connection):
@@ -74,6 +77,7 @@ def get_user_by_id(userid, cur, db_connection):
     cur.execute(query)
     result = cur.fetchall()
     return result
+
 
 @db_connection_decorator
 def get_user_by_column(column, value, cur, db_connection):
@@ -85,15 +89,22 @@ def get_user_by_column(column, value, cur, db_connection):
     userid = result[0][0]
     return userid
 
+
+print(get_user_by_column('Username', 'Fishy'))
+
+
 @db_connection_decorator
 def username_and_password_match(column, value, password_value, cur, db_connection):
     # This query checks if the records of the password and username exist in one record. It returns 1 if it does exist and 0 if it does not exist.
-    query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,value,password_value)
+    query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,
+                                                                                                             value,
+                                                                                                             password_value)
     cur.execute(query)
     result2 = cur.fetchall()
     if result2[0][0] == 1:
         # This query calls the users first name, if the login has been successful.
-        query2 = "SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'".format(column, value, password_value)
+        query2 = "SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'".format(column, value,
+                                                                                                  password_value)
         cur.execute(query2)
         result3 = cur.fetchall()
         # This for loop extracts the first name from the tuple case.
@@ -102,7 +113,8 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
             print("Login Successful. \nWelcome, {}".format(name))
         return True
     else:
-        print("You have entered an incorrect password ; you are now locked out of your account.\nPlease contact your customer care for support.")
+        print(
+            "You have entered an incorrect password ; you are now locked out of your account.\nPlease contact your customer care for support.")
         return False
 
 
@@ -191,3 +203,24 @@ def check_if_valid_name(name):
         return False
 
 
+def check_if_valid_email(email):
+    reg = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    # compiling regex
+    pattern = re.compile(reg)
+    # searching regex
+    match = re.search(pattern, email)
+    # validating conditions
+    if match:
+        return True
+    else:
+        return False
+
+
+def check_if_valid_date(date):
+    reg = r'(\d+-\d+-\d+)'
+    pattern = re.compile(reg)
+    match = re.search(pattern, date)
+    if match:
+        return True
+    else:
+        return False
