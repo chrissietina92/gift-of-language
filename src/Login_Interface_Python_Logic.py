@@ -1,5 +1,5 @@
 from src.db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
-from db_functions import check_if_valid_username
+from db_functions import check_if_valid_username, get_user_by_column
 # Welcome message.
 #print("The Gift of Language")
 #print("Welcome.")
@@ -36,7 +36,8 @@ def login_interface():
             does_user_exist(column, value)
             password_value = input("Enter your password:")
             matched = username_and_password_match(column, value, password_value)
-            return matched
+            userid = get_user_by_column(column, value)
+            return matched, userid
     else:
         print('Please try again, choosing one of the options.')
         login_interface()

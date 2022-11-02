@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/GOL_Streaks_Functions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GOL_Streaks_UnitTesting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -56,7 +52,7 @@
       <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\tests" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="GOL_api (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gift-of-language" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -164,10 +160,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.db_functions" />
-        <item itemvalue="Python.GOL_api (1)" />
-        <item itemvalue="Python.db_searched_words" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.GOL_api (1)" />
+        <item itemvalue="Python.db_functions" />
+        <item itemvalue="Python.db_searched_words" />
         <item itemvalue="Python.GOL_api" />
       </list>
     </recent_temporary>
