@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 from src.db_functions import add_a_new_user, username_and_password_match, get_user_by_id, get_user_by_column, \
     does_user_exist, check_if_valid_email, check_if_valid_username, check_if_valid_password, check_if_valid_date
 from src.daily_words import randomWordGenerator
-from src.dictionaryapi_functions import show_word_and_definition
+from src.dictionary_api_functions import show_word_and_definition
 from src.db_searched_words import add_searched_word, display_users_searched_word
 import schedule
 import time
