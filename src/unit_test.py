@@ -3,91 +3,26 @@ from db_functions import check_if_valid_password, check_if_valid_username, check
 from dictionary_api_functions import show_word_and_definition
 
 
-# use mocking to test this
-"""class TestLearntWords(TestCase):
-    def test_check_in_database_true(self):
-        self.assertTrue(check_if_word_in_database(word = 'House'))
 
-    def test_check_in_database_true(self):
-        self.assertTrue(check_if_word_in_database(word = 'play'))
+# Make a unit test mocking
 
-    def test_check_in_database_false(self):
-        excepted = False
-        result = check_if_word_in_database('eat')
-        self.assertEqual(excepted, result)
 
-    def test_check_in_database_false(self):
-        excepted = False
-        result = check_if_word_in_database('go')
-        self.assertEqual(excepted, result)
-
-class TestGetDefinitionFromAPI(TestCase):
-    def test_get_right_definition_from_API(self):
-        excepted = 'Each of the seven major bodies which move relative to the fixed stars in the night sky—the Moon, Mercury, Venus, the Sun, Mars, Jupiter and Saturn.'
-        result = get_definition('planet')
-        self.assertEqual(excepted, result)
-
-    def test_get_wrong_definition_from_API(self):
-        excepted = 'Each of the seven major bodies which move relative to the fixed stars in the night sky—the Moon, Mercury, Venus, the Sun, Mars, Jupiter and Saturn.'
-        result = get_definition('word')
-        self.assertNotEqual(excepted, result)
-
-class TestCheckUsers(TestCase):
-    def test_does_user_exist_True(self):
-        self.assertTrue(does_user_exist(column='Username', value='anna123'))
-
-    def test_does_user_exist_True(self):
-        self.assertTrue(does_user_exist(column='Email', value='hayley99@email.com'))
-
-    def test_does_user_exist_False(self):
-        self.assertFalse(does_user_exist(column='Username', value='john342'))
-
-    def test_does_user_exist_False(self):
-        self.assertFalse(does_user_exist(column='Username', value='my_friend1'))
-
-class TestDailyWords(TestCase):
-
-    def test_searchAPIForRandomWord_correct_res(self):
-        expected = ('Word: house', 'Definition: A structure built or serving as an abode of human beings.')
-        result = searchAPIForRandomWord(randomWord='House')
-        self.assertEqual(expected, result)
-
-    def test_searchAPIForRandomWord_wrong_res(self):
-        expected = ('Word: play', 'Definition: A structure built or serving as an abode of human beings.')
-        result = searchAPIForRandomWord(randomWord='Play')
-        self.assertNotEqual(expected, result)
-
-    @mock.patch.object(daily_words, 'searchAPIForRandomWord')
-    def test_randomWordGenerator_works(self, mock_searchAPIForRandomWord):
-        mock_searchAPIForRandomWord.return_value = ('Word: accountants', 'Definition: One who renders account; one accountable.')
-        expected = ('Word: accountants', 'Definition: One who renders account; one accountable.')
-        result = randomWordGenerator()
-        self.assertEqual(expected, result)
-
-    @mock.patch.object(daily_words, 'searchAPIForRandomWord')
-    def test_randomWordGenerator_not_working(self, mock_searchAPIForRandomWord):
-        mock_searchAPIForRandomWord.return_value = ('Word: accountants')
-        expected = ('Word: accountants', 'Definition: One who renders account; one accountable.')
-        result = randomWordGenerator()
-        self.assertNotEqual(expected, result)
-
-class TestUserPasswordMatch(TestCase):
-    def test_user_password_match(self):
-        self.assertTrue(username_and_password_match(column='Username', value='anna123', password_value='anna123'))
-
-    def test_user_password_match(self):
-        self.assertTrue(username_and_password_match(column='Email', value='jcal@email.com', password_value='cat123'))
-
-"""
 
 # Testing the word and definition function that prints a specific word and it's definition form the API when it's searched for via user input
 class TestWordAndDefinition(TestCase):
 
-    def test_correct_functionality(self):
-        self.assertEqual(show_word_and_definition("House"),"The definition of House is: A structure built or serving as an abode of human beings.")
+    # These test if a user enters a word to search that does exist in the api
+    def test_word_that_exists_in_API1(self):
+        self.assertEqual(show_word_and_definition("House"),True)
 
-    def test_correct_functionality2(self):
-        self.assertEqual(show_word_and_definition("Socks"),"The definition of Socks is: A knitted or woven covering for the foot.")
+    def test_word_that_exists_in_API2(self):
+        self.assertEqual(show_word_and_definition("Socks"),True)
+
+    # This tests if a user enters a word to search that doesn't exist in the api
+    def test_incorrect_functionality(self):
+        self.assertEqual(show_word_and_definition("hdjhsd"), False)
+
+
 
 # Testing the password validation function
 class TestPasswordValidation(TestCase):
