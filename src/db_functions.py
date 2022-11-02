@@ -118,7 +118,7 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
 def new_user_credentials():
     # This function implements the add_a_new_user function.
     # The function was created to prevent the repeat of code.
-    username = input('Username -> Total length of the username should be between 4 and 20.\n'
+    username = input('Username -> Total length of the username should be between 5 and 21.\n'
                      'It should start with a letter.\n'
                      'Contains only letters, numbers, underscores and dashes.\n'
                      'Username: ')
@@ -214,8 +214,9 @@ def check_if_valid_email():
     reg = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     return reg
 
+#date format should be dd-mm-yyyy
 @regex_decorator
 def check_if_valid_date():
-    reg = r'(\d+-\d+-\d+)'
+    reg = '^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$'
     return reg
 
