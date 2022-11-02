@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="" />
+    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="regex decorator">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_functions.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +55,7 @@
       <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.GOL_api (1)">
+  <component name="RunManager" selected="Python.db_functions">
     <configuration name="GOL_api (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gift-of-language" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -177,6 +180,14 @@
       <option name="presentableId" value="Default" />
       <updated>1666732749444</updated>
     </task>
+    <task id="LOCAL-00001" summary="regex decorator">
+      <created>1667411807561</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667411807561</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -192,5 +203,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="regex decorator" />
+    <option name="LAST_COMMIT_MESSAGE" value="regex decorator" />
   </component>
 </project>

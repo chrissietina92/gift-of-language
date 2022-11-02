@@ -174,22 +174,41 @@ def regex_decorator(func):
             return False
     return wrapper
 
+
+"""
+Password should have at least one number
+Should have at least one uppercase and one lowercase character
+Should have at least one special symbol.(No dashes or underscores)
+Should be between 6 to 20 characters long
+"""
 @regex_decorator
 def check_if_valid_password():
     reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
     return reg
 
 
+"""
+Total length of the username should be between 4 and 20
+It should start with a letter
+Contains only letters, numbers, underscores and dashes
+"""
 @regex_decorator
 def check_if_valid_username():
     reg = "^[A-Za-z][A-Za-z0-9_-]{4,20}$"
     return reg
 
+"""
+The first name, last name and city should contain only letter, in length 2 to 25
+"""
 @regex_decorator
 def check_if_valid_name():
     reg = "^[A-Za-z]{2,25}$"
     return reg
 
+"""
+The email should be a subset of ASCII characters separated into two parts by @ symbol
+It can contain letters and numbers
+"""
 @regex_decorator
 def check_if_valid_email():
     reg = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
