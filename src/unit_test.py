@@ -4,19 +4,20 @@ from dictionary_api_functions import show_word_and_definition
 
 
 
-# Make a unit test mocking
+# Make a unit test
 
-
+#check_if_valid_email - for registering
+#check if valid date - for registering
 
 # Testing the word and definition function that prints a specific word and it's definition form the API when it's searched for via user input
 class TestWordAndDefinition(TestCase):
 
     # These test if a user enters a word to search that does exist in the api
     def test_word_that_exists_in_API1(self):
-        self.assertEqual(show_word_and_definition("House"),True)
+        self.assertEqual(show_word_and_definition("House"), True)
 
     def test_word_that_exists_in_API2(self):
-        self.assertEqual(show_word_and_definition("Socks"),True)
+        self.assertEqual(show_word_and_definition("Socks"), True)
 
     # This tests if a user enters a word to search that doesn't exist in the api
     def test_incorrect_functionality(self):
