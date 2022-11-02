@@ -13,7 +13,6 @@
     <div class="topnav">
     <a href="{{ url_for('index') }}">BACK</a>
    </div>
-    <br>
     <h1>Sign up here</h1>
 
     <form action="{{ url_for('signup') }}" method="POST">
@@ -23,8 +22,14 @@
         Last name: <input type="text" id="lastname" name="lastname"><br><br>
         DOB (%d-%m-%Y): <input type="text" id="dob" name="dob"><br><br>
         City: <input type="text" id="city" name="city"><br><br>
-        Username: <input type="text" id="username" name="username"><br><br>
-        Password: <input type="text" id="password" name="password"><br><br>
+        Username: <input type="text" id="username" name="username">
+        <br><br>
+        Password: <input type="text" id="password" name="password">
+        <br><br>
+        <div class ="smalltext">(Email should be in form emai@email.com)</div>
+        <div class ="smalltext">(Date can only be in form %d-%m-%Y)</div>
+        <div class ="smalltext">(Username should be between 4 and 20 characters, should start with a letter and only contain letters, numbers, underscores and dashes)</div>
+        <div class ="smalltext">(Password should contain at least one number, one uppercase letter, one lowercase letter, one special symbol [not - or _], it should be between 6 and 20 characters longer) </div>
 
     <input type="submit" name="next" value="Sign up">
     </form>

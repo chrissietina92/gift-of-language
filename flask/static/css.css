@@ -38,6 +38,10 @@ body {
 
   }
 
+  .smalltext {
+  font-size: 15px;
+  }
+
 p.definition {
    color: #104d91;
 }
