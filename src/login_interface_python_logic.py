@@ -1,13 +1,10 @@
 from src.db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
 from db_functions import check_if_valid_username, get_user_by_column
-# Welcome message.
-#print("The Gift of Language")
-#print("Welcome.")
+
 
 # Programme query to customer.
 # This function checks whether the customer has an existing account or not to their knowledge.
 # If customer inputs that they do not, this gives them an opportunity to sign up for an account.
-
 def existing_customer_check():
     existing_user_query = input("Do you have an existing account with us? (y/n)")
     user_existing_feedback = existing_user_query.lower()
@@ -53,6 +50,3 @@ _connect_to_db('GOL_users')
 
 
 
-# For testing the code:
-# password_input = 'helloworld0'
-# username_and_password_match('Email', 'lucosovino89@email.com', password_input)

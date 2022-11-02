@@ -1,3 +1,5 @@
+
+
 USER = "root"
-PASSWORD = "bingo5olie121" # THIS IS YOUR PASSWORD
+PASSWORD = "bingo5olie121" # THIS IS YOUR MYSQLWORKBENCH PASSWORD
 HOST = "localhost"

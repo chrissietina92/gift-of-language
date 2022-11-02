@@ -1,11 +1,13 @@
-from src.Login_Interface_Python_Logic import login_interface
+from src.login_interface_python_logic import login_interface
 from src.db_functions import new_user_credentials
 from src.daily_words import randomWordGenerator
 from src.db_searched_words import add_searched_word, display_users_searched_word
-from src.dictionaryapi_functions import show_word_and_definition
+from src.dictionary_api_functions import show_word_and_definition
 import schedule
 import time
 import re
+
+
 def set_reminder_time(userid):
     reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
     regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]"
@@ -17,9 +19,9 @@ def set_reminder_time(userid):
         schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
         schedule.every().day.at("{}".format(reminderTime)).do(continue_learning, userid)
         print("Your reminder has been set")
-        # Loop so that the scheduling task
+
+        # While loop so that the daily scheduling runs continuously
         # keeps on running all time.
-        # learn_words()
         while True:
             # Checks whether a scheduled task
             # is pending to run or not
@@ -29,6 +31,8 @@ def set_reminder_time(userid):
         print('Please enter the right format of the time HH:MM')
         set_reminder_time(userid)
 
+
+# Function takes in user input to let the user choose how the would like to proceed after logging in
 def learn_words(userid):
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or View your Searched Words? (Schedule Word/Search Dictionary/View Searched Words) ').lower()
     if start == 'schedule word':
@@ -49,7 +53,7 @@ def learn_words(userid):
         print('Please try again')
         continue_learning(userid)
 
-
+# Function takes in user input to search for a word and it's definition from the API
 def search_words_in_dictionary(userid):
     search_again = input('Would you like to continue searching your dictionary? (Yes/No) ').lower()
     if search_again == 'no':
@@ -64,6 +68,7 @@ def search_words_in_dictionary(userid):
         print('Please try again.')
         search_words_in_dictionary(userid) #JACK SAID TO GET RID OF THESE RECURSION, MAYBE JUST EXIT PROGRAMME
 
+# Function takes in user input to decide whether they would like to exit their current option or continue learning via the app
 def continue_learning(userid):
     cont_learning = input('Would you like to continue? (Yes/No) ').lower()
     if cont_learning == 'no':
@@ -83,6 +88,8 @@ def run():
     print()
     run_user_input()
 
+
+# This is the first initial function that is ran to start the flow of the entire program/app
 def run_user_input():
     option = input("""Would you like to 
                             (1) Login as an existing user

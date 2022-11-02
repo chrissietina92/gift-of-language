@@ -4,8 +4,8 @@ import random
 # Documentation:
 # I'm using this manual method below for the random word generator based on the words in our chosen api
 # instead of using the random words library as :
-# 1. A lot of the words don#t exist in the api we are using so the definition and examples etc can't be searched
-# 2. The words it generates are extremely advanced english that i don't even know myself and aren't commonly used in day too day speaking
+# 1. A lot of the words don't exist in the api we are using so the definition and examples etc can't be searched
+# 2. The words it generates are extremely advanced english that I don't even know myself and aren't commonly used in day too day speaking
 
 # GENERATING THE RANDOM WORD FOR USERS DAILY WORD
 def randomWordGenerator():
@@ -32,6 +32,8 @@ def randomWordGenerator():
     return searchAPIForRandomWord(randomWord)
 
 
+
+#  SEARCHING THE API WITH A RANDOMLY GENERATED WORD
 def searchAPIForRandomWord(randomWord):
     # CONNECTING TO AN API TO SEARCH WITH THE RANDOM WORD AND PRINT ITS NAME AND DEFINITION
     dictionary_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/{}'.format(randomWord)
