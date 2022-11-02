@@ -10,7 +10,6 @@ class TestEmailValidation(TestCase):
     def test_valid_email(self):
         self.assertEqual(check_if_valid_email("gemma@gmail.com"), True)
 
-
     def test_invalid_email(self):
         self.assertEqual(check_if_valid_email("gemmagmail.com"), False)
 
@@ -101,9 +100,9 @@ class TestUsernameValidation(TestCase):
     def test_invalid_empty_username(self):
         self.assertEqual(check_if_valid_username(""), False)
 
-    # Usernames are not allowed to be shorter than 4
+    # Usernames are not allowed to be shorter than 5
     def test_invalid_username_length_below_4(self):
-        self.assertEqual(check_if_valid_username("Ahd"), False)
+        self.assertEqual(check_if_valid_username("Ahd5"), False)
 
     # Usernames are not allowed to be longer than 21
     def test_invalid_username_length_above_21(self):

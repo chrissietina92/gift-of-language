@@ -188,7 +188,7 @@ def check_if_valid_password():
 
 
 """
-Total length of the username should be between 4 and 20
+Total length of the username should be between 5 and 21
 It should start with a letter
 Contains only letters, numbers, underscores and dashes
 """
