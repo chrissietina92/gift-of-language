@@ -39,7 +39,9 @@ body {
   }
 
   .smalltext {
+  text-align: center;
   font-size: 15px;
+  color: #104d91;
   }
 
 p.definition {
