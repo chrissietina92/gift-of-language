@@ -1,5 +1,5 @@
 from unittest import TestCase
-from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name,check_if_valid_email
+from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name, check_if_valid_email, check_if_valid_date
 from dictionary_api_functions import show_word_and_definition
 
 
@@ -18,6 +18,7 @@ class TestWordAndDefinition(TestCase):
         self.assertEqual(show_word_and_definition("hdjhsd"), False)
 
 
+# USER REGISTRATION TESTS
 
 # A that a user email input has an @ symbol
 class TestEmailValidation(TestCase):
@@ -29,14 +30,15 @@ class TestEmailValidation(TestCase):
     def test_invalid_email(self):
         self.assertEqual(check_if_valid_email("gemmagmail.com"), False)
 
+
+# User input date format must be dd-mm-yyyy
 class TestDateValidation(TestCase):
+    def test_valid_date(self):
+        self.assertEqual(check_if_valid_date("27-08-2000"), True)
 
-    # A user email input must have an @ symbol
-    def test_valid_email(self):
-        self.assertEqual(check_if_valid_email("gemma@gmail.com"), True)
+    def test_invalid_date(self):
+        self.assertEqual(check_if_valid_date("27-08-00"), False)
 
-    def test_invalid_email(self):
-        self.assertEqual(check_if_valid_email("gemmagmail.com"), False)
 
 
 
@@ -88,6 +90,9 @@ class TestPasswordValidation(TestCase):
         self.assertEqual(check_if_valid_password("Pinapplepen123!Oranges"), False)
 
 
+
+
+
 # Testing the username validation function
 class TestUsernameValidation(TestCase):
 
@@ -116,6 +121,8 @@ class TestUsernameValidation(TestCase):
     # Usernames must start with a letter
 """ def test_invalid_username_not_starting_with_letter(self):
         self.assertEqual(check_if_valid_username("1Gimmy"), False)"""
+
+
 
 
 class TestNameValidation(TestCase):

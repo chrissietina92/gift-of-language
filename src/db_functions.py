@@ -214,7 +214,7 @@ def check_if_valid_email():
     reg = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     return reg
 
-#date format should be dd-mm-yyyy
+# date format should be dd-mm-yyyy
 @regex_decorator
 def check_if_valid_date():
     reg = '^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$'
