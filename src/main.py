@@ -8,6 +8,7 @@ import time
 import re
 
 
+# Function takes in user input to set time for a word and its definition to be displayed
 def set_reminder_time(userid):
     reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
     regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]"

@@ -5,7 +5,6 @@ import re
 
 # db_name = 'GOL_users'
 
-# convert this into a decorator for other functions
 def _connect_to_db(db_name):
     # attribute
     connection = mysql.connector.connect(
