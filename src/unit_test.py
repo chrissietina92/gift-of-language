@@ -1,13 +1,29 @@
 from unittest import TestCase
-from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name
+from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name,check_if_valid_email
 from dictionary_api_functions import show_word_and_definition
 
 
+# A that a user email input has an @ symbol
+class TestEmailValidation(TestCase):
 
-# Make a unit test
+    # Email inputs must have an @ symbol
+    def test_valid_email(self):
+        self.assertEqual(check_if_valid_email("gemma@gmail.com"), True)
 
-#check_if_valid_email - for registering
-#check if valid date - for registering
+
+    def test_invalid_email(self):
+        self.assertEqual(check_if_valid_email("gemmagmail.com"), False)
+
+class TestDateValidation(TestCase):
+
+    # A user email input must have an @ symbol
+    def test_valid_email(self):
+        self.assertEqual(check_if_valid_email("gemma@gmail.com"), True)
+
+    def test_invalid_email(self):
+        self.assertEqual(check_if_valid_email("gemmagmail.com"), False)
+
+
 
 # Testing the word and definition function that prints a specific word and it's definition form the API when it's searched for via user input
 class TestWordAndDefinition(TestCase):
@@ -89,9 +105,9 @@ class TestUsernameValidation(TestCase):
     def test_invalid_username_length_below_4(self):
         self.assertEqual(check_if_valid_username("Ahd"), False)
 
-    # Usernames are not allowed to be longer than 20
-    def test_invalid_username_length_above_20(self):
-        self.assertEqual(check_if_valid_username("Sshjjdjcjjjrnnnsjfyyj"), False)
+    # Usernames are not allowed to be longer than 21
+    def test_invalid_username_length_above_21(self):
+        self.assertEqual(check_if_valid_username("D123456789112345678911"), False)
 
     # Usernames are only allowed the symbols underscore(_) and dash (-)
     def test_invalid_username_symbols(self):
