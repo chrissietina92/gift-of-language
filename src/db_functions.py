@@ -4,9 +4,8 @@ import re
 
 #db_name = 'GOL_users'
 
-# convert this into a decorator for other functions
 def _connect_to_db(db_name):
-    #attribute
+
     connection = mysql.connector.connect(
             host=HOST,
             user=USER,
@@ -16,6 +15,8 @@ def _connect_to_db(db_name):
         )
     return connection
 
+
+# Database connection decorator function
 def db_connection_decorator(func):
     def wrapper(*args):
         db_connection = None
@@ -83,8 +84,6 @@ def get_user_by_column(column, value, cur, db_connection):
     result = cur.fetchall()
     userid = result[0][0]
     return userid
-
-# print(get_user_by_column('Username', 'Fishy'))
 
 @db_connection_decorator
 def username_and_password_match(column, value, password_value, cur, db_connection):
