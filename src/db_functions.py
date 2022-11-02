@@ -161,7 +161,7 @@ def new_user_credentials():
     return duplicate
 
 
-#decorator for regex
+#  Decorator for regex
 def regex_decorator(func):
     def wrapper(*args):
         pattern = re.compile(func())
