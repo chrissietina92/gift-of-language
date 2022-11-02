@@ -6,7 +6,7 @@ from src.dictionaryapi_functions import show_word_and_definition
 import schedule
 import time
 import re
-def set_reminder_time():
+def set_reminder_time(userid):
     reminderTime = input("Please enter the time you would like your daily reminder in 24hr format:")
     regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]"
     pattern = re.compile(regex)
@@ -15,7 +15,7 @@ def set_reminder_time():
     # validating conditions
     if match:
         schedule.every().day.at("{}".format(reminderTime)).do(randomWordGenerator)
-        schedule.every().day.at("{}".format(reminderTime)).do(continue_learning)
+        schedule.every().day.at("{}".format(reminderTime)).do(continue_learning, userid)
         print("Your reminder has been set")
         # Loop so that the scheduling task
         # keeps on running all time.
@@ -27,12 +27,12 @@ def set_reminder_time():
             time.sleep(1)
     else:
         print('Please enter the right format of the time HH:MM')
-        set_reminder_time()
+        set_reminder_time(userid)
 
 def learn_words(userid):
     start = input('Would you like to search your Schedule your words, Search your Dictionary, or View your Searched Words? (Schedule Word/Search Dictionary/View Searched Words) ').lower()
     if start == 'schedule word':
-        set_reminder_time()
+        set_reminder_time(userid)
 
     elif start == 'search dictionary':
         search_words_in_dictionary(userid)
@@ -92,7 +92,8 @@ def run_user_input():
         login = login_interface()
         if login[0]:
             print("Let's start learning")
-            learn_words(login[1])
+            userid = login[1]
+            learn_words(userid)
 
     elif option == '2':
         print('Please register adding the required information.')

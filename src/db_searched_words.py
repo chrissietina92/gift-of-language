@@ -27,7 +27,7 @@ def add_searched_word(new_word, userid, cur, db_connection):
     if not check_if_word_in_database_for_user(new_word, userid):
         definition = get_definition(new_word)
         # with open('../docs/SearchedWords.txt', 'a') as file: file.write("{} - {} \n".format(new_word.lower(), definition)) #no longer using
-        query = "INSERT INTO searched_words(UserID, word, definition_) VALUES ('{}', '{}', '{}');".format(userid, new_word.lower(), definition)
+        query = 'INSERT INTO searched_words(UserID, word, definition_) VALUES ("{}", "{}", "{}");'.format(userid, new_word.lower(), definition)
         cur.execute(query)
         db_connection.commit()
 

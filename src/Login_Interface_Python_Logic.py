@@ -26,6 +26,8 @@ def existing_customer_check():
 def login_interface():
     login_method = input('How would you like to login? (Email/Username)')
     column = login_method.title()
+    matched = False
+    userid = 0
     if column == 'Email' or column == 'Username':
         value = input('Enter your {}: '.format(column.lower()))
         print("Thank you. Checking your details...")
@@ -36,11 +38,14 @@ def login_interface():
             does_user_exist(column, value)
             password_value = input("Enter your password:")
             matched = username_and_password_match(column, value, password_value)
-            userid = get_user_by_column(column, value)
-            return matched, userid
+            userid = 0
+            if matched:
+                userid = get_user_by_column(column, value)
+
     else:
         print('Please try again, choosing one of the options.')
         login_interface()
+    return matched, userid
 
 
 _connect_to_db('GOL_users')
