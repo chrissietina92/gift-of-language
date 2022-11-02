@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
+    <title>Scheduled word</title>
+</head>
+<body>
+<div class="topnav">
+    <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
+    <a href="{{ url_for('wordofday_by_id', userid=userid) }}">WORD OF THE DAY</a>
+    <a href="{{ url_for('wordssearched_by_id', userid=userid) }}" >PREVIOUSLY SEARCHED WORDS</a>
+    <a class="active" href="">SCHEDULE A WORD</a>
+    <a href="http://127.0.0.1:5001">LOG OUT</a></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Schedule a word!</h1>
+    <form action="{{ url_for('timed_word', userid=userid) }}" method="POST">
+        <h2>Hi {{ firstname }}! Choose a time to schedule a word</h2>
+        <h3>(Important info: you will see a word at your chosen time in the pycharm console as long as you keep this page running. If you keep this page running, the word will appear in the pycharm console every day at your chosen time!)</h3>
+        <label for="time">Select a time:</label>
+        <input type="time" id="time" name="time">
+        <input type="submit" name="next" value="submit">
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+Index: flask/GOL_api.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from flask import Flask, request, render_template\nfrom src.db_functions import add_a_new_user, username_and_password_match, get_user_by_id, get_user_by_column, \\\n    does_user_exist\nfrom src.daily_words import randomWordGenerator\nfrom src.dictionaryapi_functions import show_word_and_definition\nfrom src.db_searched_words import add_searched_word,display_users_searched_word\n\napp = Flask(__name__)\n\n\n@app.route('/')\ndef index():\n    return render_template('index.html')\n\n\n@app.route('/login', methods=['GET', 'POST'])\ndef login():\n    clicked = False\n    log_in_right = False\n    userid = 0\n    if request.method == 'POST':\n        clicked = True\n        form = request.form\n        print(form)\n        login_details = get_login_details(form)\n        log_in_right = login_details[0]\n        column = login_details[1]\n        value = login_details[2]\n        if log_in_right:\n            userid = get_user_by_column(column, value)\n        # print(form) # returns ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])\n    return render_template('login.html', userid=userid, clicked=clicked, log_in_right=log_in_right)\n\n\ndef get_login_details(form):\n    column = form['logintype']\n    print(column)\n    value = form['username']\n    password = form['password']\n    log_in_right = username_and_password_match(column, value, password)\n    return log_in_right, column, value\n\n\n@app.route('/signup', methods=['GET', 'POST'])\ndef signup():\n    clicked = False\n    firstname = None\n    userid = 0\n    duplicate = False\n    if request.method == 'POST':\n        clicked = True\n        form = request.form\n        signupdetails = get_signup_details(form)\n        firstname = signupdetails[0]\n        email = signupdetails[1]\n        duplicate = signupdetails[2]\n        userid = get_user_by_column('Email', email)\n        # print(form)\n    return render_template('signup.html', clicked=clicked, duplicate=duplicate, userid=userid, firstname=firstname)\n\n\ndef get_signup_details(form):\n    email = form['email']\n    firstname = form['firstname']\n    lastname = form['lastname']\n    dob = form['dob']\n    city = form['city']\n    username = form['username']\n    password = form['password']\n    if does_user_exist('Email', email) or does_user_exist('Username', username):\n        duplicate = True\n    else:\n        duplicate = False\n        add_a_new_user(firstname, lastname, email, dob, city, username, password)\n    return firstname, email, duplicate\n\n\n@app.route('/searchword/<int:userid>', methods=['GET', 'POST'])\ndef searchword_by_id(userid):\n    users = get_user_by_id(userid)\n    userid = users[0][0]\n    firstname = users[0][1]\n    clicked = False\n    word_searched = ''\n    if request.method == 'POST':\n        clicked = True\n        form = request.form\n        # print(form)\n        the_word = form['searchword']\n        word_searched = show_word_and_definition(the_word)\n        add_searched_word(the_word, userid)\n        # add in the search word function\n    return render_template('searchword.html', firstname=firstname, userid=userid, clicked=clicked,\n                           word_searched=word_searched)\n\n\n@app.route('/wordofday/<int:userid>', methods=['GET', 'POST'])\ndef wordofday_by_id(userid):\n    users = get_user_by_id(userid)\n    userid = users[0][0]\n    clicked = False\n    word = ''\n    definition = ''\n    firstname = users[0][1]\n    if request.method == 'POST':\n        clicked = True\n        word_of_day = randomWordGenerator()\n        word = word_of_day[0]\n        definition = word_of_day[1]\n    return render_template('wordofday.html', firstname=firstname, userid=userid, word=word, definition=definition,\n                           clicked=clicked)\n\n@app.route('/wordssearched/<int:userid>', methods=['GET', 'POST'])\ndef wordssearched_by_id(userid):\n    users = get_user_by_id(userid)\n    userid = users[0][0]\n    firstname = users[0][1]\n    users_searched_words = display_users_searched_word(userid)\n    return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid, users_searched_words = users_searched_words)\n\nif __name__ == '__main__':\n    app.run(debug=True, port=5001)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/flask/GOL_api.py b/flask/GOL_api.py
+--- a/flask/GOL_api.py	(revision e392493f33a6062c6bd012128d9e0294f77598ff)
++++ b/flask/GOL_api.py	(date 1667398383674)
+@@ -1,9 +1,11 @@
+ from flask import Flask, request, render_template
+ from src.db_functions import add_a_new_user, username_and_password_match, get_user_by_id, get_user_by_column, \
+-    does_user_exist
++    does_user_exist, check_if_valid_email, check_if_valid_username, check_if_valid_password, check_if_valid_date
+ from src.daily_words import randomWordGenerator
+ from src.dictionaryapi_functions import show_word_and_definition
+-from src.db_searched_words import add_searched_word,display_users_searched_word
++from src.db_searched_words import add_searched_word, display_users_searched_word
++import schedule
++import time
+ 
+ app = Flask(__name__)
+ 
+@@ -47,6 +49,7 @@
+     firstname = None
+     userid = 0
+     duplicate = False
++    passed_regex_check = False
+     if request.method == 'POST':
+         clicked = True
+         form = request.form
+@@ -54,9 +57,12 @@
+         firstname = signupdetails[0]
+         email = signupdetails[1]
+         duplicate = signupdetails[2]
+-        userid = get_user_by_column('Email', email)
++        passed_regex_check = signupdetails[3]
++        if email is not None:
++            userid = get_user_by_column('Email', email)
+         # print(form)
+-    return render_template('signup.html', clicked=clicked, duplicate=duplicate, userid=userid, firstname=firstname)
++    return render_template('signup.html', clicked=clicked, passed_regex_check=passed_regex_check, duplicate=duplicate,
++                           userid=userid, firstname=firstname)
+ 
+ 
+ def get_signup_details(form):
+@@ -67,12 +73,19 @@
+     city = form['city']
+     username = form['username']
+     password = form['password']
+-    if does_user_exist('Email', email) or does_user_exist('Username', username):
+-        duplicate = True
+-    else:
+-        duplicate = False
+-        add_a_new_user(firstname, lastname, email, dob, city, username, password)
+-    return firstname, email, duplicate
++    if check_if_valid_password(password) and check_if_valid_username(username) and check_if_valid_email(email) and check_if_valid_date(dob):
++        passed_regex_check = True
++        if does_user_exist('Email', email) or does_user_exist('Username', username):
++            duplicate = True
++            email = None
++        else:
++            duplicate = False
++            add_a_new_user(firstname, lastname, email, dob, city, username, password)
++    else:
++        passed_regex_check = False
++        duplicate = None
++        email = None
++    return firstname, email, duplicate, passed_regex_check
+ 
+ 
+ @app.route('/searchword/<int:userid>', methods=['GET', 'POST'])
+@@ -110,13 +123,32 @@
+     return render_template('wordofday.html', firstname=firstname, userid=userid, word=word, definition=definition,
+                            clicked=clicked)
+ 
++
+ @app.route('/wordssearched/<int:userid>', methods=['GET', 'POST'])
+ def wordssearched_by_id(userid):
+     users = get_user_by_id(userid)
+     userid = users[0][0]
+     firstname = users[0][1]
+     users_searched_words = display_users_searched_word(userid)
+-    return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid, users_searched_words = users_searched_words)
++    return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid,
++                           users_searched_words=users_searched_words)
++
++
++@app.route('/timedword/<int:userid>', methods=['GET', 'POST'])
++def timed_word(userid):
++    users = get_user_by_id(userid)
++    userid = users[0][0]
++    firstname = users[0][1]
++    chosen_time = 0
++    if request.method == 'POST':
++        form = request.form
++        chosen_time = form['time']
++        schedule.every().day.at("{}".format(chosen_time)).do(randomWordGenerator)
++        while True:
++            schedule.run_pending()
++            time.sleep(1)
++    return render_template('timedword.html', userid=userid, firstname=firstname, chosen_time=chosen_time)
++
+ 
+ if __name__ == '__main__':
+     app.run(debug=True, port=5001)
+Index: src/db_functions.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import mysql.connector\nfrom config import USER, HOST, PASSWORD\nimport re\n\n#db_name = 'GOL_users'\n\n# convert this into a decorator for other functions\ndef _connect_to_db(db_name):\n    #attribute\n    connection = mysql.connector.connect(\n            host=HOST,\n            user=USER,\n            password=PASSWORD,\n            auth_plugin='mysql_native_password',\n            database=db_name\n        )\n    return connection\n\ndef db_connection_decorator(func):\n    def wrapper(*args):\n        db_connection = None\n        try:\n            db_name = 'GOL_users'\n            db_connection = _connect_to_db(db_name)\n            cur = db_connection.cursor()\n            result = func(*args, cur, db_connection)\n            return result\n            cur.close()\n        except Exception:\n            raise ConnectionError\n\n        finally:\n            if db_connection:\n                db_connection.close()\n                # print(\"DB connection closed\")\n    return wrapper\n\n@db_connection_decorator\ndef does_user_exist(column, value, cur, db_connection):\n    query = \"\"\"\n            SELECT (EXISTS(SELECT FirstName\n            FROM the_users\n            WHERE {COLUMN} = '{VALUE}'));\n            \"\"\".format(COLUMN = column, VALUE = value)\n    cur.execute(query)\n    result = cur.fetchall()\n    # print(result)\n    ## THE ABOVE QUEUERY WILL EITHER RETURN\n    ## [(1,)] WHICH REPRESENTS TRUE\n    ## OR [(0,)] WHICH REPRESENTS FALSE\n    if result[0][0] == 1:\n        return True\n    else:\n        return False\n\n\n\n@db_connection_decorator\ndef add_a_new_user(firstname, lastname, email, dob, city, username, password, cur, db_connection):\n    query = \"\"\"\n            INSERT INTO the_users (FirstName, LastName, Email, DOB, City, Username, UserPassword)\n            VALUES ('{FIRSTNAME}', '{LASTNAME}', '{EMAIL}', str_to_date('{DOB}', '%d-%m-%Y'), '{CITY}', '{USERNAME}', '{PASSWORD}')\n            \"\"\".format(FIRSTNAME=firstname, LASTNAME=lastname, EMAIL=email, DOB=dob,\n                        CITY=city, USERNAME=username, PASSWORD=password)\n    cur.execute(query)\n    db_connection.commit()\n\n@db_connection_decorator\ndef get_user_by_id(userid, cur, db_connection):\n    query = \"\"\"SELECT UserID, Firstname, Lastname, Username\n                FROM the_users\n                WHERE UserID = {USERID};\"\"\".format(USERID=userid)\n    cur.execute(query)\n    result = cur.fetchall()\n    return result\n\n@db_connection_decorator\ndef get_user_by_column(column, value, cur, db_connection):\n    query = \"\"\"SELECT UserID\n                FROM the_users\n                WHERE {COLUMN} = '{VALUE}';\"\"\".format(COLUMN=column, VALUE=value)\n    cur.execute(query)\n    result = cur.fetchall()\n    userid = result[0][0]\n    return userid\n\n# print(get_user_by_column('Username', 'Fishy'))\n\n@db_connection_decorator\ndef username_and_password_match(column, value, password_value, cur, db_connection):\n    # This query checks if the records of the password and username exist in one record. It returns 1 if it does exist and 0 if it does not exist.\n    query = \"SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))\".format(column,value,password_value)\n    cur.execute(query)\n    result2 = cur.fetchall()\n    if result2[0][0] == 1:\n        # This query calls the users first name, if the login has been successful.\n        query2 = \"SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'\".format(column, value, password_value)\n        cur.execute(query2)\n        result3 = cur.fetchall()\n        # This for loop extracts the first name from the tuple case.\n        for data in result3:\n            name = data[0]\n            print(\"Login Successful. \\nWelcome, {}\".format(name))\n        return True\n    else:\n        print(\"You have entered an incorrect password ; you are now locked out of your account.\\nPlease contact your customer care for support.\")\n        return False\n\n\ndef new_user_credentials():\n    regex = r'\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b'\n    # This function implements the add_a_new_user function.\n    # The function was created to prevent the repeat of code.\n    username = input('Username -> Total length of the username should be between 4 and 20.\\n'\n                     'It should start with a letter.\\n'\n                     'Contains only letters, numbers, underscores and dashes.\\n'\n                     'Username: ')\n    while not check_if_valid_username(username):\n        print(\"You have entered an invalid username. Please try again\")\n        username = input('Username: ')\n    email = input('Email: ')\n    while not (re.fullmatch(regex, email)):\n        print('You have entered an invalid email. Please try again.')\n        email = input('Email: ')\n    password = input('Password -> 1. Should have at least one number;\\n'\n                     ' 2. Should have at least one uppercase and one lowercase character.\\n'\n                     '3. Should have at least one special symbol.(No dashes or underscores)\\n'\n                     '4. Should be between 6 to 20 characters long: \\n'\n                     'Password: ')\n    while not check_if_valid_password(password):\n        print(\"Please enter e valid password\")\n        password = input('Password: ')\n    firstname = input('First name: ')\n    while not check_if_valid_name(firstname):\n        print(\"Please enter e valid name\")\n        firstname = input('Name: ')\n    lastname = input('Last name: ')\n    while not check_if_valid_name(lastname):\n        print(\"Please enter e valid last name\")\n        lastname = input('Name: ')\n    dob = input('DOB (%d-%m-%Y): ')\n    city = input('City: ')\n    while not check_if_valid_name(city):\n        print(\"Please enter e valid city\")\n        city = input('Name: ')\n    if does_user_exist('Email', email) or does_user_exist('Username', username):\n        duplicate = True\n    else:\n        duplicate = False\n        add_a_new_user(firstname, lastname, email, dob, city, username, password)\n    return duplicate\n\n\ndef check_if_valid_password(passwd):\n    reg = \"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!#%*?&]{6,20}$\"\n    # compiling regex\n    pattern = re.compile(reg)\n    # searching regex\n    match = re.search(pattern, passwd)\n\n    # validating conditions\n    if match:\n        return True\n    else:\n        return False\n\n\ndef check_if_valid_username(username):\n    reg = \"^[A-Za-z0-9_-]{4,20}$\"\n    # compiling regex\n    pattern = re.compile(reg)\n    # searching regex\n    match = re.search(pattern, username)\n\n    # validating conditions\n    if match:\n        return True\n    else:\n        return False\n\n\ndef check_if_valid_name(name):\n    reg = \"^[A-Za-z]{2,25}$\"\n    # compiling regex\n    pattern = re.compile(reg)\n    # searching regex\n    match = re.search(pattern, name)\n    # validating conditions\n    if match:\n        return True\n    else:\n        return False\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/db_functions.py b/src/db_functions.py
+--- a/src/db_functions.py	(revision e392493f33a6062c6bd012128d9e0294f77598ff)
++++ b/src/db_functions.py	(date 1667398383686)
+@@ -2,20 +2,22 @@
+ from config import USER, HOST, PASSWORD
+ import re
+ 
+-#db_name = 'GOL_users'
++
++# db_name = 'GOL_users'
+ 
+ # convert this into a decorator for other functions
+ def _connect_to_db(db_name):
+-    #attribute
++    # attribute
+     connection = mysql.connector.connect(
+-            host=HOST,
+-            user=USER,
+-            password=PASSWORD,
+-            auth_plugin='mysql_native_password',
+-            database=db_name
+-        )
++        host=HOST,
++        user=USER,
++        password=PASSWORD,
++        auth_plugin='mysql_native_password',
++        database=db_name
++    )
+     return connection
+ 
++
+ def db_connection_decorator(func):
+     def wrapper(*args):
+         db_connection = None
+@@ -33,15 +35,17 @@
+             if db_connection:
+                 db_connection.close()
+                 # print("DB connection closed")
++
+     return wrapper
+ 
++
+ @db_connection_decorator
+ def does_user_exist(column, value, cur, db_connection):
+     query = """
+             SELECT (EXISTS(SELECT FirstName
+             FROM the_users
+             WHERE {COLUMN} = '{VALUE}'));
+-            """.format(COLUMN = column, VALUE = value)
++            """.format(COLUMN=column, VALUE=value)
+     cur.execute(query)
+     result = cur.fetchall()
+     # print(result)
+@@ -54,17 +58,17 @@
+         return False
+ 
+ 
+-
+ @db_connection_decorator
+ def add_a_new_user(firstname, lastname, email, dob, city, username, password, cur, db_connection):
+     query = """
+             INSERT INTO the_users (FirstName, LastName, Email, DOB, City, Username, UserPassword)
+             VALUES ('{FIRSTNAME}', '{LASTNAME}', '{EMAIL}', str_to_date('{DOB}', '%d-%m-%Y'), '{CITY}', '{USERNAME}', '{PASSWORD}')
+             """.format(FIRSTNAME=firstname, LASTNAME=lastname, EMAIL=email, DOB=dob,
+-                        CITY=city, USERNAME=username, PASSWORD=password)
++                       CITY=city, USERNAME=username, PASSWORD=password)
+     cur.execute(query)
+     db_connection.commit()
+ 
++
+ @db_connection_decorator
+ def get_user_by_id(userid, cur, db_connection):
+     query = """SELECT UserID, Firstname, Lastname, Username
+@@ -74,6 +78,7 @@
+     result = cur.fetchall()
+     return result
+ 
++
+ @db_connection_decorator
+ def get_user_by_column(column, value, cur, db_connection):
+     query = """SELECT UserID
+@@ -84,17 +89,22 @@
+     userid = result[0][0]
+     return userid
+ 
+-# print(get_user_by_column('Username', 'Fishy'))
++
++print(get_user_by_column('Username', 'Fishy'))
++
+ 
+ @db_connection_decorator
+ def username_and_password_match(column, value, password_value, cur, db_connection):
+     # This query checks if the records of the password and username exist in one record. It returns 1 if it does exist and 0 if it does not exist.
+-    query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,value,password_value)
++    query = "SELECT(EXISTS(SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'))".format(column,
++                                                                                                             value,
++                                                                                                             password_value)
+     cur.execute(query)
+     result2 = cur.fetchall()
+     if result2[0][0] == 1:
+         # This query calls the users first name, if the login has been successful.
+-        query2 = "SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'".format(column, value, password_value)
++        query2 = "SELECT FirstName FROM the_users WHERE {} = '{}' AND UserPassword = '{}'".format(column, value,
++                                                                                                  password_value)
+         cur.execute(query2)
+         result3 = cur.fetchall()
+         # This for loop extracts the first name from the tuple case.
+@@ -103,7 +113,8 @@
+             print("Login Successful. \nWelcome, {}".format(name))
+         return True
+     else:
+-        print("You have entered an incorrect password ; you are now locked out of your account.\nPlease contact your customer care for support.")
++        print(
++            "You have entered an incorrect password ; you are now locked out of your account.\nPlease contact your customer care for support.")
+         return False
+ 
+ 
+@@ -192,3 +203,24 @@
+         return False
+ 
+ 
++def check_if_valid_email(email):
++    reg = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
++    # compiling regex
++    pattern = re.compile(reg)
++    # searching regex
++    match = re.search(pattern, email)
++    # validating conditions
++    if match:
++        return True
++    else:
++        return False
++
++
++def check_if_valid_date(date):
++    reg = r'(\d+-\d+-\d+)'
++    pattern = re.compile(reg)
++    match = re.search(pattern, date)
++    if match:
++        return True
++    else:
++        return False
+Index: flask/templates/signup.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <link rel=\"stylesheet\" href=\"static/css.css\">\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap\" rel=\"stylesheet\">\n    <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css.css') }}\">\n    <title>Sign up page</title>\n</head>\n<body>\n    <div class=\"topnav\">\n    <a href=\"{{ url_for('index') }}\">BACK</a>\n   </div>\n    <br>\n    <h1>Sign up here</h1>\n\n    <form action=\"{{ url_for('signup') }}\" method=\"POST\">\n\n        Email: <input type=\"text\" id=\"email\" name=\"email\"><br><br>\n        First name: <input type=\"text\" id=\"firstname\" name=\"firstname\"><br><br>\n        Last name: <input type=\"text\" id=\"lastname\" name=\"lastname\"><br><br>\n        DOB (%d-%m-%Y): <input type=\"text\" id=\"dob\" name=\"dob\"><br><br>\n        City: <input type=\"text\" id=\"city\" name=\"city\"><br><br>\n        Username: <input type=\"text\" id=\"username\" name=\"username\"><br><br>\n        Password: <input type=\"text\" id=\"password\" name=\"password\"><br><br>\n\n    <input type=\"submit\" name=\"next\" value=\"Sign up\">\n    </form>\n    <br>\n    {% if clicked %}\n        {% if duplicate %}\n            <h2>There is already a user with these details!</h2>\n        {% else %}\n            <h2>Hi {{firstname}}, you are all signed up!\n            <br><br>\n            <a href=\"{{ url_for('wordofday_by_id', userid=userid) }}\">Get your word of the day!</a>\n            <br><br>\n            <a href=\"{{ url_for('searchword_by_id', userid=userid) }}\">Search for a word</a></h2>\n        {% endif %}\n    {% endif %}\n</body>\n</html>\n\n\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/flask/templates/signup.html b/flask/templates/signup.html
+--- a/flask/templates/signup.html	(revision e392493f33a6062c6bd012128d9e0294f77598ff)
++++ b/flask/templates/signup.html	(date 1667398428421)
+@@ -30,14 +30,18 @@
+     </form>
+     <br>
+     {% if clicked %}
+-        {% if duplicate %}
+-            <h2>There is already a user with these details!</h2>
+-        {% else %}
+-            <h2>Hi {{firstname}}, you are all signed up!
+-            <br><br>
+-            <a href="{{ url_for('wordofday_by_id', userid=userid) }}">Get your word of the day!</a>
+-            <br><br>
+-            <a href="{{ url_for('searchword_by_id', userid=userid) }}">Search for a word</a></h2>
++        {% if passed_regex_check %}
++            {% if duplicate %}
++                <h2>There is already a user with these details!</h2>
++            {% else %}
++                <h2>Hi {{firstname}}, you are all signed up!
++                <br><br>
++                <a href="{{ url_for('wordofday_by_id', userid=userid) }}">Get your word of the day!</a>
++                <br><br>
++                <a href="{{ url_for('searchword_by_id', userid=userid) }}">Search for a word</a></h2>
++            {% endif %}
++        {% else %}
++        <h2>There is a problem with either your email, DOB, username or password. Please try again!</h2>
+         {% endif %}
+     {% endif %}
+ </body>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"d6ba1349-a8a5-47e8-952b-bbc43df57b27\" name=\"Changes\" comment=\"\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n        <option value=\"HTML File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2GdyRfSOhHcYiTgJqiFlF82PPIZ\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/danie/OneDrive/Desktop/gift-of-language&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\danie\\OneDrive\\Desktop\\gift-of-language\\src\" />\n      <recent name=\"C:\\Users\\danie\\OneDrive\\Desktop\\gift-of-language\" />\n      <recent name=\"C:\\Users\\danie\\OneDrive\\Desktop\\gift-of-language\\flask\" />\n      <recent name=\"C:\\Users\\danie\\OneDrive\\Desktop\\gift-of-language\\docs\" />\n      <recent name=\"C:\\Users\\danie\\OneDrive\\Desktop\\gift-of-language\\tests\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Python.db_functions\">\n    <configuration name=\"GOL_api (1)\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"gift-of-language\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/flask\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/flask/GOL_api.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"GOL_api\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"gift-of-language\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"C:\\Users\\danie\\OneDrive\\Desktop\\gift-of-language\\flask\\GOL_api.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"db_functions\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"gift-of-language\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/src\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/src/db_functions.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"db_searched_words\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"gift-of-language\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/src\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/src/db_searched_words.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"gift-of-language\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/src\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/src/main.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Python.main\" />\n        <item itemvalue=\"Python.GOL_api (1)\" />\n        <item itemvalue=\"Python.db_functions\" />\n        <item itemvalue=\"Python.db_searched_words\" />\n        <item itemvalue=\"Python.GOL_api\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"d6ba1349-a8a5-47e8-952b-bbc43df57b27\" name=\"Changes\" comment=\"\" />\n      <created>1666732749444</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1666732749444</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"UnknownFeatures\">\n    <option featureType=\"com.intellij.fileTypeFactory\" implementationName=\"*.sql\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e392493f33a6062c6bd012128d9e0294f77598ff)
++++ b/.idea/workspace.xml	(date 1667396837449)
+@@ -4,7 +4,16 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="" />
++    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/flask/templates/timedword.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/flask/GOL_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask/GOL_api.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/flask/templates/previouslysearchedwords.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/previouslysearchedwords.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/flask/templates/searchword.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/searchword.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/flask/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/signup.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/flask/templates/wordofday.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/wordofday.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_functions.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -52,7 +61,7 @@
+       <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\tests" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Python.db_functions">
++  <component name="RunManager" selected="Python.GOL_api (1)">
+     <configuration name="GOL_api (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="gift-of-language" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -160,9 +169,9 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Python.main" />
+         <item itemvalue="Python.GOL_api (1)" />
+         <item itemvalue="Python.db_functions" />
++        <item itemvalue="Python.main" />
+         <item itemvalue="Python.db_searched_words" />
+         <item itemvalue="Python.GOL_api" />
+       </list>
+Index: flask/templates/searchword.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap\" rel=\"stylesheet\">\n   <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css.css') }}\">\n    <title>Search word page</title>\n</head>\n<body>\n<div class=\"topnav\">\n    <a class=\"active\" href=\"\">SEARCH FOR WORD</a>\n    <a href=\"{{ url_for('wordofday_by_id', userid=userid) }}\">WORD OF THE DAY</a>\n    <a href=\"{{ url_for('wordssearched_by_id', userid=userid) }}\" >PREVIOUSLY SEARCHED WORDS</a>\n    <a href=\"http://127.0.0.1:5001\">LOG OUT</a></div>\n    <br>\n    <br>\n    <br>\n    <br>\n    <h1>Search for word</h1>\n    <h2>Hey, {{ firstname }}! Search for a word here: </h2>\n    <form action= \"{{ url_for('searchword_by_id', userid=userid) }}\" method=\"POST\">\n\n        <input type=\"text\" id=\"searchword\" name=\"searchword\"><br><br>\n        <input type=\"submit\" name=\"next\" value=\"Search\">\n    </form>\n\n    <br><br>\n    {% if clicked %}\n        <h2>\n            {{ word_searched }}\n        </h2>\n\n    {% endif %}\n\n\n\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/flask/templates/searchword.html b/flask/templates/searchword.html
+--- a/flask/templates/searchword.html	(revision e392493f33a6062c6bd012128d9e0294f77598ff)
++++ b/flask/templates/searchword.html	(date 1667394710682)
+@@ -13,6 +13,7 @@
+     <a class="active" href="">SEARCH FOR WORD</a>
+     <a href="{{ url_for('wordofday_by_id', userid=userid) }}">WORD OF THE DAY</a>
+     <a href="{{ url_for('wordssearched_by_id', userid=userid) }}" >PREVIOUSLY SEARCHED WORDS</a>
++    <a href="{{ url_for('timed_word', userid=userid) }}">SCHEDULE A WORD</a>
+     <a href="http://127.0.0.1:5001">LOG OUT</a></div>
+     <br>
+     <br>
+Index: flask/templates/timedword.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/flask/templates/timedword.html b/flask/templates/timedword.html
+new file mode 100644
+--- /dev/null	(date 1667395039796)
++++ b/flask/templates/timedword.html	(date 1667395039796)
+@@ -0,0 +1,33 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
++    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
++    <title>Scheduled word</title>
++</head>
++<body>
++<div class="topnav">
++    <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
++    <a href="{{ url_for('wordofday_by_id', userid=userid) }}">WORD OF THE DAY</a>
++    <a href="{{ url_for('wordssearched_by_id', userid=userid) }}" >PREVIOUSLY SEARCHED WORDS</a>
++    <a class="active" href="">SCHEDULE A WORD</a>
++    <a href="http://127.0.0.1:5001">LOG OUT</a></div>
++    <br>
++    <br>
++    <br>
++    <br>
++    <h1>Schedule a word!</h1>
++    <form action="{{ url_for('timed_word', userid=userid) }}" method="POST">
++        <h2>Hi {{ firstname }}! Choose a time to schedule a word</h2>
++        <h3>(Important info: you will see a word at your chosen time in the pycharm console as long as you keep this page running. If you keep this page running, the word will appear in the pycharm console every day at your chosen time!)</h3>
++        <label for="time">Select a time:</label>
++        <input type="time" id="time" name="time">
++        <input type="submit" name="next" value="submit">
++    </form>
++
++
++</body>
++</html>
+\ No newline at end of file
+Index: flask/templates/wordofday.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap\" rel=\"stylesheet\">\n    <link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css.css') }}\">\n    <title>WORD OF DAY PAGE</title>\n</head>\n<body>\n<div class=\"topnav\">\n    <a href=\"{{ url_for('searchword_by_id', userid=userid) }}\" >SEARCH FOR WORD</a>\n    <a class=\"active\" href=\"\">WORD OF THE DAY</a>\n    <a href=\"{{ url_for('wordssearched_by_id', userid=userid) }}\" >PREVIOUSLY SEARCHED WORDS</a>\n    <a href=\"http://127.0.0.1:5001\">LOG OUT</a></div>\n    <br>\n    <br>\n    <br>\n    <br>\n    <h1>WORD OF THE DAY!</h1>\n    <form action=\"{{ url_for('wordofday_by_id', userid=userid) }}\" method=\"POST\">\n        <h2>Hi {{ firstname }}! Click the button to get a new word</h2>\n        <h3>(Important info: The word will refresh each time you click this button or refresh the page)</h3>\n\n        <input type=\"submit\" name=\"next\" value=\"NEW WORD\">\n    </form>\n\n    {% if clicked %}\n\n       <p class = \"word\">{{ word }}</p>\n        <p class = \"definition\">{{ definition }}</p>\n\n\n    {% endif %}\n\n\n\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/flask/templates/wordofday.html b/flask/templates/wordofday.html
+--- a/flask/templates/wordofday.html	(revision e392493f33a6062c6bd012128d9e0294f77598ff)
++++ b/flask/templates/wordofday.html	(date 1667394710696)
+@@ -13,6 +13,7 @@
+     <a href="{{ url_for('searchword_by_id', userid=userid) }}" >SEARCH FOR WORD</a>
+     <a class="active" href="">WORD OF THE DAY</a>
+     <a href="{{ url_for('wordssearched_by_id', userid=userid) }}" >PREVIOUSLY SEARCHED WORDS</a>
++    <a href="{{ url_for('timed_word', userid=userid) }}">SCHEDULE A WORD</a>
+     <a href="http://127.0.0.1:5001">LOG OUT</a></div>
+     <br>
+     <br>

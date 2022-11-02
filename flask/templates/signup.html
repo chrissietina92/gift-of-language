@@ -30,14 +30,18 @@
     </form>
     <br>
     {% if clicked %}
-        {% if duplicate %}
-            <h2>There is already a user with these details!</h2>
+        {% if passed_regex_check %}
+            {% if duplicate %}
+                <h2>There is already a user with these details!</h2>
+            {% else %}
+                <h2>Hi {{firstname}}, you are all signed up!
+                <br><br>
+                <a href="{{ url_for('wordofday_by_id', userid=userid) }}">Get your word of the day!</a>
+                <br><br>
+                <a href="{{ url_for('searchword_by_id', userid=userid) }}">Search for a word</a></h2>
+            {% endif %}
         {% else %}
-            <h2>Hi {{firstname}}, you are all signed up!
-            <br><br>
-            <a href="{{ url_for('wordofday_by_id', userid=userid) }}">Get your word of the day!</a>
-            <br><br>
-            <a href="{{ url_for('searchword_by_id', userid=userid) }}">Search for a word</a></h2>
+        <h2>There is a problem with either your email, DOB, username or password. Please try again!</h2>
         {% endif %}
     {% endif %}
 </body>
