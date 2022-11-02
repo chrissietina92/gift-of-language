@@ -89,8 +89,6 @@ def get_user_by_column(column, value, cur, db_connection):
     return userid
 
 
-print(get_user_by_column('Username', 'Fishy'))
-
 
 @db_connection_decorator
 def username_and_password_match(column, value, password_value, cur, db_connection):
@@ -118,7 +116,6 @@ def username_and_password_match(column, value, password_value, cur, db_connectio
 
 
 def new_user_credentials():
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     # This function implements the add_a_new_user function.
     # The function was created to prevent the repeat of code.
     username = input('Username -> Total length of the username should be between 4 and 20.\n'
@@ -129,7 +126,7 @@ def new_user_credentials():
         print("You have entered an invalid username. Please try again")
         username = input('Username: ')
     email = input('Email: ')
-    while not (re.fullmatch(regex, email)):
+    while not check_if_valid_email(email):
         print('You have entered an invalid email. Please try again.')
         email = input('Email: ')
     password = input('Password -> 1. Should have at least one number;\n'
@@ -143,16 +140,19 @@ def new_user_credentials():
     firstname = input('First name: ')
     while not check_if_valid_name(firstname):
         print("Please enter e valid name")
-        firstname = input('Name: ')
+        firstname = input('First name: ')
     lastname = input('Last name: ')
     while not check_if_valid_name(lastname):
         print("Please enter e valid last name")
-        lastname = input('Name: ')
+        lastname = input('Last name: ')
     dob = input('DOB (%d-%m-%Y): ')
+    while not check_if_valid_date(dob):
+        print("Please enter e valid date of birth.")
+        dob = input('DOB (%d-%m-%Y): ')
     city = input('City: ')
     while not check_if_valid_name(city):
         print("Please enter e valid city")
-        city = input('Name: ')
+        city = input('City: ')
     if does_user_exist('Email', email) or does_user_exist('Username', username):
         duplicate = True
     else:
@@ -161,65 +161,42 @@ def new_user_credentials():
     return duplicate
 
 
-def check_if_valid_password(passwd):
+#decorator for regex
+def regex_decorator(func):
+    def wrapper(*args):
+        pattern = re.compile(func())
+        # searching regex
+        match = re.search(pattern, *args)
+        # validating conditions
+        if match:
+            return True
+        else:
+            return False
+    return wrapper
+
+@regex_decorator
+def check_if_valid_password():
     reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
-    # compiling regex
-    pattern = re.compile(reg)
-    # searching regex
-    match = re.search(pattern, passwd)
-
-    # validating conditions
-    if match:
-        return True
-    else:
-        return False
+    return reg
 
 
-def check_if_valid_username(username):
-    reg = "^[A-Za-z0-9_-]{4,20}$"
-    # compiling regex
-    pattern = re.compile(reg)
-    # searching regex
-    match = re.search(pattern, username)
+@regex_decorator
+def check_if_valid_username():
+    reg = "^[A-Za-z][A-Za-z0-9_-]{4,20}$"
+    return reg
 
-    # validating conditions
-    if match:
-        return True
-    else:
-        return False
-
-
-def check_if_valid_name(name):
+@regex_decorator
+def check_if_valid_name():
     reg = "^[A-Za-z]{2,25}$"
-    # compiling regex
-    pattern = re.compile(reg)
-    # searching regex
-    match = re.search(pattern, name)
-    # validating conditions
-    if match:
-        return True
-    else:
-        return False
+    return reg
 
-
-def check_if_valid_email(email):
+@regex_decorator
+def check_if_valid_email():
     reg = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-    # compiling regex
-    pattern = re.compile(reg)
-    # searching regex
-    match = re.search(pattern, email)
-    # validating conditions
-    if match:
-        return True
-    else:
-        return False
+    return reg
 
-
-def check_if_valid_date(date):
+@regex_decorator
+def check_if_valid_date():
     reg = r'(\d+-\d+-\d+)'
-    pattern = re.compile(reg)
-    match = re.search(pattern, date)
-    if match:
-        return True
-    else:
-        return False
+    return reg
+
