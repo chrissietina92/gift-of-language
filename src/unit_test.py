@@ -1,6 +1,6 @@
 from unittest import TestCase
 from db_functions import check_if_valid_password, check_if_valid_username, check_if_valid_name
-from dictionaryapi_functions import show_word_and_definition
+from dictionary_api_functions import show_word_and_definition
 
 
 # use mocking to test this
