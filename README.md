@@ -1,6 +1,4 @@
-📦 Gift Of Language
-<b><u>CFG degree project</u></b>
-
+📦<b>Gift Of Language - CFG degree project</b>
 
 ℹ️<b>Overview</b>:
 
@@ -11,14 +9,14 @@ Having a rich and varied vocabulary  can make it easier for you to express yours
 
 
 
-<b>✍️Authors</b>
+<b>✍️Authors</b>:
 
 Github:
-- https://github.com/daniellaomokore
-- https://github.com/chrissietina92
-- https://github.com/Xhensjola
-- https://github.com/Becky-AJ
-- https://github.com/najatyusuf
+* https://github.com/daniellaomokore
+* https://github.com/chrissietina92
+* https://github.com/Xhensjola
+* https://github.com/Becky-AJ
+* https://github.com/najatyusuf
 
 
 
@@ -31,23 +29,23 @@ Github:
 ⬇️<b>Installation:</b>
 
 <i>Before running the app, you must</i>:
-- run the SQL file in MYSQL in order to USE our created database
-- ensure your computer has installed all the python packages we use in our project, these are as follows:
-                          - requests
-                          - mysql.connector
-                          - flask
-                          - schedule
-                          - time
-                          - itertools
-                          - re
-                          - random
+* run the SQL file in MYSQL in order to USE our created database
+* ensure your computer has installed all the python packages we use in our project, these are as follows:
+                          * requests
+                          * mysql.connector
+                          * flask
+                          * schedule
+                          * time
+                          * itertools
+                          * re
+                          * random
                           
                         
-- have your config file with USER, PASSWORD and HOST details
+* have your config file with USER, PASSWORD and HOST details
 
 <i>The gift of Language app can either be run through the python console OR using an API we have created</i>:
-- If the user choses to run the app through the python console on Pycharm, they can do this by running the main.py file.
-- If they would like to run the app through the FLASK web, they can do this by running the GOL_api.py file.
+* If the user choses to run the app through the python console on Pycharm, they can do this by running the main.py file.
+* If they would like to run the app through the FLASK web, they can do this by running the GOL_api.py file.
 
 
 
