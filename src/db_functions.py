@@ -163,10 +163,10 @@ def new_user_credentials():
 
 #  Decorator for regex
 def regex_decorator(func):
-    def wrapper(*args):
+    def wrapper(*args,**kwargs):
         pattern = re.compile(func())
         # searching regex
-        match = re.search(pattern, *args)
+        match = re.search(pattern, *args,*kwargs)
         # validating conditions
         if match:
             return True

@@ -2,7 +2,6 @@ import mysql.connector
 from config import USER, HOST, PASSWORD
 from datetime import datetime, timedelta, date
 from db_functions import _connect_to_db, db_connection_decorator
-from playsound import playsound
 
 db_name = 'GOL_users'
 db_connection = None
@@ -196,7 +195,6 @@ class TheUserStreak:
         print("...")
         print("....")
         print(".....")
-        playsound('drum-roll-sound-effect.mp3')
         print("This month you've searched {} different words in the app.".format(self.streak_month))
 
         try:
@@ -210,7 +208,6 @@ class TheUserStreak:
             print(feedback)
 
             if self.streak_month > 0:
-                playsound('crowd-cheering-6229.mp3')
                 return feedback
             else:
                 return feedback
@@ -221,7 +218,7 @@ class TheUserStreak:
         # JOINS MONTHLY ANALYTICS METHODS TOGETHER
 
     def run_monthly_app_report_function(self):
-        month_report_consent = input("Would you like to see your months analytics so far? yes/no")
+        month_report_consent = input("Would you like to see your months analytics so far? yes/no : ")
 
         if month_report_consent.lower() == "yes":
             self.get_userid_by_column()
