@@ -1,6 +1,6 @@
 from src.db_functions import _connect_to_db, does_user_exist, new_user_credentials, username_and_password_match
 from db_functions import check_if_valid_username, get_user_by_column
-from GOL_Streaks_Functions import run_the_userstreak_function
+from gol_streaks_functions import run_the_userstreak_function
 
 # Programme query to customer.
 # This function checks whether the customer has an existing account or not to their knowledge.
