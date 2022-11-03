@@ -1,5 +1,0 @@
-
-
-USER = "root"
-PASSWORD = "bingo5olie121" # THIS IS YOUR MYSQLWORKBENCH PASSWORD
-HOST = "localhost"
