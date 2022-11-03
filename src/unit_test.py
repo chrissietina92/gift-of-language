@@ -8,14 +8,14 @@ class TestWordAndDefinition(TestCase):
 
     # These test if a user enters a word to search that does exist in the api
     def test_word_that_exists_in_API1(self):
-        self.assertEqual(show_word_and_definition("House"), True)
+        self.assertEqual(show_word_and_definition("House"), "The Word : House .  The Definition : A structure built or serving as an abode of human beings..")
 
     def test_word_that_exists_in_API2(self):
-        self.assertEqual(show_word_and_definition("Socks"), True)
+        self.assertEqual(show_word_and_definition("Socks"), "The Word : Socks .  The Definition : A knitted or woven covering for the foot..")
 
     # This tests if a user enters a word to search that doesn't exist in the api
     def test_incorrect_functionality(self):
-        self.assertEqual(show_word_and_definition("hdjhsd"), False)
+        self.assertEqual(show_word_and_definition("hdjhsd"), "This word does not exist in the dictionary.")
 
 
 # USER REGISTRATION TESTS

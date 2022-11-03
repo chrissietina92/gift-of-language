@@ -19,8 +19,8 @@ def get_definition(word):
 def show_word_and_definition(word):
     if get_definition(word) == 'This word does not exist in the dictionary.':
         print('This word does not exist in the dictionary.')
-        return False
+        return 'This word does not exist in the dictionary.'
     else:
         print('The word is: {}'.format(word))
         print('The definition is: {}'.format(get_definition(word)))
-        return True
+        return "The Word : {} .  The Definition : {}.".format(word, get_definition(word))
