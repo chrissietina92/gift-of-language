@@ -1,4 +1,4 @@
-📦 gift-of-language
+📦 Gift Of Language
 <b><u>CFG degree project</u></b>
 
 
