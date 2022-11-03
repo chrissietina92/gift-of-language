@@ -183,9 +183,8 @@ class TheUserStreak:
 
         cur.execute(monthly_searched_word_count_query)
         result = cur.fetchall()
-        self.streak_month = result[0][0]
 
-        if result[0][0] == None:
+        if result == []:
             self.streak_month = 0
         else:
             self.streak_month = result[0][0]
@@ -244,10 +243,6 @@ def run_The_User_Streaks_Function(column, value):
     the_user = TheUserStreak(column, value)
     the_user.the_daily_streaks_methods_together()
     the_user.run_monthly_app_report_function()
-
-
-
-
 
 
 # RUNS MONTHLY ANALYTICS WITH ABOVE FUNCTION
