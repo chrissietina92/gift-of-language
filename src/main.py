@@ -1,8 +1,8 @@
-from src.login_interface_python_logic import login_interface
-from src.db_functions import new_user_credentials
-from src.daily_words import randomWordGenerator
-from src.db_searched_words import add_searched_word, display_users_searched_word
-from src.dictionary_api_functions import show_word_and_definition
+from login_interface_python_logic import login_interface
+from db_functions import new_user_credentials
+from daily_words import randomWordGenerator
+from db_searched_words import add_searched_word, display_users_searched_word
+from dictionary_api_functions import show_word_and_definition
 import schedule
 import time
 import re
@@ -99,6 +99,7 @@ def run_user_input():
     if option == '1':
         login = login_interface()
         if login[0]:
+
             print("Let's start learning")
             userid = login[1]
             learn_words(userid)

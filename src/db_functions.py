@@ -17,6 +17,7 @@ def _connect_to_db(db_name):
     return connection
 
 
+
 def db_connection_decorator(func):
     def wrapper(*args):
         db_connection = None
@@ -89,7 +90,7 @@ def get_user_by_column(column, value, cur, db_connection):
     return userid
 
 
-print(get_user_by_column('Username', 'Fishy'))
+# print(get_user_by_column('Username', 'Fishy'))
 
 
 @db_connection_decorator

@@ -1,7 +1,7 @@
 import itertools
 import os
-from src.db_functions import db_connection_decorator
-from src.dictionary_api_functions import get_definition
+from db_functions import db_connection_decorator
+from dictionary_api_functions import get_definition
 
 
 
