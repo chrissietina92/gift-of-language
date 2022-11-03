@@ -7,8 +7,7 @@ from GOL_Streaks_Functions import TheUserStreak
 
 class TestLastLogin(unittest.TestCase):
 
-    def test_returnsLastDateValueIfLastLoginExistsInDB(self):
-
+    def test_returns_last_date_value_if_last_login_exists_in_DB(self):
         with patch('mysql.connector.connect')as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -20,8 +19,7 @@ class TestLastLogin(unittest.TestCase):
             self.assertEqual(self.TUS.get_last_login(), '2022-10-29')
 
 
-    def test_returnsLastDateValueIfLastLoginIsNone(self):
-
+    def test_returns_last_date_value_if_last_login_is_none(self):
         with patch('mysql.connector.connect')as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -36,8 +34,7 @@ class TestLastLogin(unittest.TestCase):
 
 
 class TestGetExistingUserStreak(unittest.TestCase):
-    def test_returnsUserStreakIfExistsInDB(self):
-
+    def test_returns_userstreak_if_a_value_exists_in_db(self):
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -48,7 +45,7 @@ class TestGetExistingUserStreak(unittest.TestCase):
             # TEST ASSERTION
             self.assertEqual(self.TUS.get_existing_user_streak(), '6')
 
-    def test_returns1IfDBEntryIsEqualToNone(self):
+    def test_returns_1_if_db_entry_is_equal_to_none(self):
 
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
@@ -65,7 +62,7 @@ class TestGetExistingUserStreak(unittest.TestCase):
 class TestUserStreakAndDateUpdate(unittest.TestCase):
 
     @patch('mysql.connector.connect')
-    def test_DBIsUpdatedIfLoginDifferenceIsEqualToOne(self, mock_sql):
+    def test_db_is_updated_if_login_difference_is_equal_to_one(self, mock_sql):
         # MOCK RETURN/COMMIT DB CONNECTION
         connection = Mock()
         mock_sql.connect.return_value = connection
@@ -81,7 +78,7 @@ class TestUserStreakAndDateUpdate(unittest.TestCase):
 
 
     @patch('mysql.connector.connect')
-    def test_DBIsUpdatedIfLoginDifferenceIsGreaterThanOne(self, mock_sql):
+    def test_db_is_updated_if_login_difference_is_greater_than_one(self, mock_sql):
         # MOCK RETURN/COMMIT DB CONNECTION
         connection = Mock()
         mock_sql.connect.return_value = connection
@@ -96,7 +93,7 @@ class TestUserStreakAndDateUpdate(unittest.TestCase):
         self.assertEqual(self.TUS.update_userstreak_and_last_login(), "Nice to see you! It's been a long time.")
 
     @patch('mysql.connector.connect')
-    def test_DBIsUpdatedIfLoginDifferenceIsZero(self, mock_sql):
+    def test_db_is_updated_if_login_difference_is_equal_to_zero(self, mock_sql):
         # MOCK RETURN/COMMIT DB CONNECTION
         connection = Mock()
         mock_sql.connect.return_value = connection
@@ -116,7 +113,7 @@ class TestUserStreakAndDateUpdate(unittest.TestCase):
 
 
 class TestUserStreaksDisplayFunction(unittest.TestCase):
-    def test_ViewingUserStreak(self):
+    def test_viewing_userstreak_value(self):
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -132,7 +129,7 @@ class TestUserStreaksDisplayFunction(unittest.TestCase):
 class TestUserMonthlyUserIDFunction(unittest.TestCase):
 
     # USER ID IS AUTO INCREMENTED AND WILL NEVER BE NULL.
-    def test_ViewingUserID(self):
+    def test_viewing_user_id(self):
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -147,7 +144,7 @@ class TestUserMonthlyUserIDFunction(unittest.TestCase):
 class TestUserMonthlySearchedWordCount(unittest.TestCase):
 
     # USER ID IS AUTO INCREMENTED AND WILL NEVER BE NULL.
-    def test_GetSearchedWordMonthlyCountIfNumberIsGreaterThanZero(self):
+    def test_getting_searched_word_monthly_count_if_entries_exist_in_db(self):
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -158,7 +155,7 @@ class TestUserMonthlySearchedWordCount(unittest.TestCase):
             # TEST ASSERTION
             self.assertEqual(self.TUS.get_month_total_searched_word_count(), '10')
 
-    def test_GetSearchedWordMonthlyCountIfNumberIsNone(self):
+    def test_getting_searched_word_monthly_count_if_entries_do_not_exist_in_db(self):
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
@@ -173,17 +170,17 @@ class TestUserMonthlySearchedWordCount(unittest.TestCase):
 class TestDisplayMonthlyAnalytics(unittest.TestCase):
 
     # NEW USER TEST/SOMEONE WHO HAS NOT SEARCHED AT ALL.
-    def test_ResponseForMonthlyAnalyticsThatAreZero(self):
+    def test_display_when_monthly_count_is_zero(self):
         self.TUS = TheUserStreak('Username', 'freddy95', streak_month=0)
-        self.assertEqual(self.TUS.display_monthly_analytics(), False)
+        self.assertEqual(self.TUS.display_monthly_analytics(), 'You need to start using your dictionary more often, buddy.')
 
-    def test_ResponseForMonthlyCountBetweenOneAndFifteen(self):
+    def test_display_when_monthly_count_is_between_one_and_fifteen(self):
         self.TUS = TheUserStreak('Username', 'freddy95', streak_month=13)
-        self.assertEqual(self.TUS.display_monthly_analytics(), True)
+        self.assertEqual(self.TUS.display_monthly_analytics(), "Well done, buddy.")
 
-    def test_ResponseForMonthlyCountGreaterThanFifteen(self):
+    def test_display_when_monthly_count_is_greater_than15(self):
         self.TUS = TheUserStreak('Username', 'freddy95', streak_month=100)
-        self.assertEqual(self.TUS.display_monthly_analytics(), True)
+        self.assertEqual(self.TUS.display_monthly_analytics(), "You're a superstar!")
 
 
 if __name__ == '__main__':

@@ -207,14 +207,13 @@ class TheUserStreak:
             else:
                 feedback ="You're a superstar!"
 
+            print(feedback)
 
             if self.streak_month > 0:
-                print(feedback)
                 playsound('crowd-cheering-6229.mp3')
-                return True
+                return feedback
             else:
-                print(feedback)
-                return False
+                return feedback
 
         except Exception:
             raise ValueError
@@ -239,7 +238,7 @@ class TheUserStreak:
 
 
 # RUNS DAILY AND MONTHLY USER STREAK FUNCTIONS
-def run_The_User_Streaks_Function(column, value):
+def run_the_userstreak_function(column, value):
     the_user = TheUserStreak(column, value)
     the_user.the_daily_streaks_methods_together()
     the_user.run_monthly_app_report_function()
