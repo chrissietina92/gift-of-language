@@ -14,6 +14,12 @@ Having a rich and varied vocabulary  can make it easier for you to express yours
                           - mysql.connector
                           - flask
                           - schedule
+                          - time
+                          - itertools
+                          - re
+                          - random
+                          
+                        
 - have your config file with USER, PASSWORD and HOST details
 
 <i>The gift of Language app can either be run through the python console OR using an API we have created</i>:
