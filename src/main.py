@@ -111,7 +111,7 @@ def run_user_input():
         else:
             print("Congratulations! Registration completed.")
             start = input('Would you like to log in with your new account to start learning? (Yes/No)')
-        if start == 'Yes':
+        if start.title() == 'Yes':
             login = login_interface()
             if login[0]:
                 print("Let's start learning")
@@ -119,7 +119,7 @@ def run_user_input():
             else:
                 print('Sorry your log in details were wrong, goodbye')
                 return
-        elif start == 'No':
+        elif start.title() == 'No':
             print('See you next time.')
         else:
             print('That was an incorrect input, goodbye')

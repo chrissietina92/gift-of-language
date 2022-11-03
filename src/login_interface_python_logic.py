@@ -28,7 +28,7 @@ def login_interface():
     if column == 'Email' or column == 'Username':
         value = input('Enter your {}: '.format(column.lower()))
         print("Thank you. Checking your details...")
-        if not check_if_valid_username(username=value):
+        if not check_if_valid_username(value):
             print("You haven't entered a valid username. Please try again.")
             login_interface()
         else:
