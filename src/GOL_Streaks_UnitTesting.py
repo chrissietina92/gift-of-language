@@ -162,7 +162,7 @@ class TestUserMonthlySearchedWordCount(unittest.TestCase):
         with patch('mysql.connector.connect') as mock_db_connection_decorator:
             connection = mock_db_connection_decorator.return_value
             cur = connection.cursor.return_value
-            cur.fetchall.return_value = [(None,)]
+            cur.fetchall.return_value = []
 
             # INITIALISING ATTRIBUTES
             self.TUS = TheUserStreak('Username', 'cobrien1')
