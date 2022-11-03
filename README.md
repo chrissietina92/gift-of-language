@@ -11,7 +11,7 @@ Having a rich and varied vocabulary  can make it easier for you to express yours
 
 <b>✍️Authors</b>:
 
-Github:
+<i>Github:</i>
 * https://github.com/daniellaomokore
 * https://github.com/chrissietina92
 * https://github.com/Xhensjola
@@ -43,9 +43,13 @@ Github:
                         
 * have your config file with USER, PASSWORD and HOST details
 
-<i>The gift of Language app can either be run through the python console OR using an API we have created</i>:
+
+✨<b>How to Run:</b>
+
+<i>The gift of Language app can either be run through the python console OR using an API we have created:</i>
+
 * If the user choses to run the app through the python console on Pycharm, they can do this by running the main.py file.
-* If they would like to run the app through the FLASK web, they can do this by running the GOL_api.py file.
+* If they would like to run the app through the FLASK web (, they can do this by running the GOL_api.py) click this link: http://127.0.0.1:5001
 
 
 
