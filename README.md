@@ -14,11 +14,11 @@ Having a rich and varied vocabulary  can make it easier for you to express yours
 <b>✍️Authors</b>
 
 Github:
-https://github.com/daniellaomokore
-https://github.com/chrissietina92
-https://github.com/Xhensjola
-https://github.com/Becky-AJ
-https://github.com/najatyusuf
+- https://github.com/daniellaomokore
+- https://github.com/chrissietina92
+- https://github.com/Xhensjola
+- https://github.com/Becky-AJ
+- https://github.com/najatyusuf
 
 
 
