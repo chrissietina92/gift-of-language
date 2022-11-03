@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="regex decorator">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2022__14_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2022__14_18__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GOL_Streaks_Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gol_streaks_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GOL_Streaks_UnitTesting.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crowd-cheering-6229.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/drum-roll-sound-effect.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login_interface_python_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/login_interface_python_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unit_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/unit_test.py" afterDir="false" />
-    </list>
+    <list default="true" id="d6ba1349-a8a5-47e8-952b-bbc43df57b27" name="Changes" comment="regex decorator" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +52,7 @@
       <recent name="C:\Users\danie\OneDrive\Desktop\gift-of-language\tests" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="GOL_api (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gift-of-language" />
       <option name="INTERPRETER_OPTIONS" value="" />

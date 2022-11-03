@@ -9,12 +9,12 @@ import time
 
 app = Flask(__name__)
 
-
+#The web apps homepage
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
+#The log in page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     clicked = False
@@ -33,7 +33,7 @@ def login():
         # print(form) # returns ImmutableMultiDict([('logintype', 'u'), ('username', 'hi'), ('password', 'Chrissie'), ('next', 'Next')])
     return render_template('login.html', userid=userid, clicked=clicked, log_in_right=log_in_right)
 
-
+#a function that is used to  extracts information the log in form
 def get_login_details(form):
     column = form['logintype']
     print(column)
@@ -42,7 +42,7 @@ def get_login_details(form):
     log_in_right = username_and_password_match(column, value, password)
     return log_in_right, column, value
 
-
+# the sign up page
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     clicked = False
@@ -64,7 +64,7 @@ def signup():
     return render_template('signup.html', clicked=clicked, passed_regex_check=passed_regex_check, duplicate=duplicate,
                            userid=userid, firstname=firstname)
 
-
+#a function that is used to  extracts information the sign up form
 def get_signup_details(form):
     email = form['email']
     firstname = form['firstname']
@@ -87,7 +87,7 @@ def get_signup_details(form):
         email = None
     return firstname, email, duplicate, passed_regex_check
 
-
+#a page where the user can search for a word's definition
 @app.route('/searchword/<int:userid>', methods=['GET', 'POST'])
 def searchword_by_id(userid):
     users = get_user_by_id(userid)
@@ -106,7 +106,7 @@ def searchword_by_id(userid):
     return render_template('searchword.html', firstname=firstname, userid=userid, clicked=clicked,
                            word_searched=word_searched)
 
-
+#a page where the user can get a random word and definiton
 @app.route('/wordofday/<int:userid>', methods=['GET', 'POST'])
 def wordofday_by_id(userid):
     users = get_user_by_id(userid)
@@ -123,7 +123,7 @@ def wordofday_by_id(userid):
     return render_template('wordofday.html', firstname=firstname, userid=userid, word=word, definition=definition,
                            clicked=clicked)
 
-
+#a page that displays all the users previously searched words
 @app.route('/wordssearched/<int:userid>', methods=['GET', 'POST'])
 def wordssearched_by_id(userid):
     users = get_user_by_id(userid)
@@ -133,7 +133,7 @@ def wordssearched_by_id(userid):
     return render_template('previouslysearchedwords.html', firstname=firstname, userid=userid,
                            users_searched_words=users_searched_words)
 
-
+#a page where the user can set a timed word
 @app.route('/timedword/<int:userid>', methods=['GET', 'POST'])
 def timed_word(userid):
     users = get_user_by_id(userid)
