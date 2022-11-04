@@ -2,10 +2,9 @@
 
 ℹ️<b>Overview</b>:
 
-[Insert a paragraph explaining your work, who we are, and why we made it.]
 Communication is an important life skill; it enables people to express how they feel, understand the world around them and build connections with others. One of the biggest barriers to communication is understanding language.
 
-For our project, Group 5 created an application called the Gift of Language (GOL). The GOL app is targeted towards those wishing to improve their vocabulary and build their existing knowledge of English and encourage users to use learnt words in the real world. This app can also build life skills such as communication and public speaking as users will gain confidence in the language. 
+For our group project, we created an application called the Gift of Language (GOL). The GOL app is targeted towards those wishing to improve their vocabulary and build their existing knowledge of English and encourage users to use learnt words in the real world. This app can also build life skills such as communication and public speaking as users will gain confidence in the language. 
 
 Having a rich and varied vocabulary can make it easier for you to express yourself or explain concepts both verbally and in writing. Developing your vocabulary can be challenging, especially when it not your native language. The aim of the app is to be a supplementary resource for the learning of the english language by helping them build and grow on their existing english vocabulary. Ultimately, GOL is aiming to support those who are new to the language with a personalised and intimate way of learning English. We would like to improve the quality of communication between English speakers, through the understanding of the core language and the cultural context of the language used. 
 
