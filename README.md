@@ -27,8 +27,11 @@ The app hopes to achieve this by providing a unique word each day for the user t
 🚀<b>Usage</b>:
 [Show off what your software looks like in action! Try to limit it to one-liners if possible and don't delve into API specifics.]
 
+![GOL web page](https://user-images.githubusercontent.com/85261489/199945098-a2b325dd-b795-4692-bd71-a7f971cf3cad.png)
+<i>The first page of the Flask web app, here the user can either choose to either log in or sign up.</i>
 
-
+![GOL word of the day page](https://user-images.githubusercontent.com/85261489/199945131-4f75bc31-f914-412c-b096-7ff3702fc168.png)
+<i>This page is the “word of the day” page. Here the user can click on the  “new word” button and it will print a randomly selected word and definition onto the page.</i>
 
 ⬇️<b>Installation:</b>
 
