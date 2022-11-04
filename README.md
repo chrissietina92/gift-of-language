@@ -56,7 +56,7 @@ The app hopes to achieve this by providing a unique word each day for the user t
 <i>The gift of Language app can either be run through the python console OR using an API we have created:</i>
 
 * If the user choses to run the app through the python console on Pycharm, they can do this by running the main.py file.
-* If they would like to run the app through the FLASK web (, they can do this by running the GOL_api.py) click this link: http://127.0.0.1:5001
+* If they would like to run the app through the FLASK web app (, they can do this by running the GOL_api.py) and then clicking this link: http://127.0.0.1:5001
 
 🌟<b>Features of Gift Of Language</b>
 
