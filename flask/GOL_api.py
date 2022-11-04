@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from src.db_functions import add_a_new_user, username_and_password_match, get_user_by_id, get_user_by_column, \
-    does_user_exist, check_if_valid_email, check_if_valid_username, check_if_valid_password, check_if_valid_date
+    does_user_exist, check_if_valid_email, check_if_valid_username, check_if_valid_password, check_if_valid_date, check_if_valid_name
 from src.daily_words import randomWordGenerator
 from src.dictionary_api_functions import show_word_and_definition
 from src.db_searched_words import add_searched_word, display_users_searched_word
@@ -73,7 +73,7 @@ def get_signup_details(form):
     city = form['city']
     username = form['username']
     password = form['password']
-    if check_if_valid_password(password) and check_if_valid_username(username) and check_if_valid_email(email) and check_if_valid_date(dob):
+    if check_if_valid_password(password) and check_if_valid_username(username) and check_if_valid_email(email) and check_if_valid_date(dob) and check_if_valid_name(firstname):
         passed_regex_check = True
         if does_user_exist('Email', email) or does_user_exist('Username', username):
             duplicate = True
