@@ -3,9 +3,10 @@ from src.db_functions import add_a_new_user, username_and_password_match, get_us
     does_user_exist, check_if_valid_email, check_if_valid_username, check_if_valid_password, check_if_valid_date, check_if_valid_name
 from src.daily_words import randomWordGenerator
 from src.dictionary_api_functions import show_word_and_definition
-from src.db_searched_words import add_searched_word, display_users_searched_word
+from src.db_searched_words import add_searched_word, display_users_searched_word, get_all_searched_words
 import schedule
 import time
+from collections import Counter
 
 app = Flask(__name__)
 
@@ -149,6 +150,15 @@ def timed_word(userid):
             time.sleep(1)
     return render_template('timedword.html', userid=userid, firstname=firstname, chosen_time=chosen_time)
 
+
+# THIS IS A SECRET PAGE ON THE WEB APP WHERE YOU CAN SEE HOW THE STATS FOR THE SEARCHED WORDS
+# (WHAT WORDS HAVE BEEN SEARCHED AND HOW MANY TIMES)
+# http://127.0.0.1:5001/searched-words-statistics
+@app.route('/searched-words-statistics')
+def seached_words_stats():
+    all_searched_words = get_all_searched_words()
+    c_searched_list = Counter(all_searched_words)
+    return c_searched_list
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

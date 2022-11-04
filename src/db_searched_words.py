@@ -38,3 +38,11 @@ def display_users_searched_word(userid, cur, db_connection):
     cur.execute(query)
     result = cur.fetchall() # a list of tuples
     return result
+
+@db_connection_decorator
+def get_all_searched_words(cur, db_connection):
+    query = """SELECT word FROM searched_words;"""
+    cur.execute(query)
+    result = cur.fetchall()
+    result_list = [i[0] for i in result]
+    return result_list
