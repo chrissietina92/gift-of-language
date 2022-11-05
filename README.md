@@ -46,6 +46,8 @@ The app hopes to achieve this by providing a unique word each day for the user t
                           * itertools
                           * re
                           * random
+                          * datetime/Delta
+                          * collections - Counter
                           
                         
 * have your config file with USER, PASSWORD and HOST details
@@ -57,6 +59,8 @@ The app hopes to achieve this by providing a unique word each day for the user t
 
 * If the user choses to run the app through the python console on Pycharm, they can do this by running the main.py file.
 * If they would like to run the app through the FLASK web app (, they can do this by running the GOL_api.py) and then clicking this link: http://127.0.0.1:5001
+* There is also a secret page on the Web App where you can see how the the statistics for the searched words across all users. Link: http://127.0.0.1:5001/searched-words-statistics
+
 
 🌟<b>Features of Gift Of Language</b>
 
