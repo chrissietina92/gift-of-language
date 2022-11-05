@@ -1,5 +1,7 @@
 📦<b>Gift Of Language - CFG degree project</b>
 
+Group 5: Daniella Omokore, Xhensjola Hysa, Rebecca Ayaji, Christina O'Brien, Najat Yusuf
+
 ℹ️<b>Overview</b>:
 
 Communication is an important life skill; it enables people to express how they feel, understand the world around them and build connections with others. One of the biggest barriers to communication is understanding language.
