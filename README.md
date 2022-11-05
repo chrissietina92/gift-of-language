@@ -62,8 +62,9 @@ The app hopes to achieve this by providing a unique word each day for the user t
 
 <i>Before using the application, users must create a new account or log in with their account. The Gift of Language members can then experience these features: </i>
 
-* daily word of the day
-* search words and its definition
-* display previous learnt words
-* streaks
+* Daily Word Scheduler
+* New Word Generator
+* Search words and their definitions
+* Display previously learnt words
+* Daily streaks
 
