@@ -26,7 +26,6 @@ The app hopes to achieve this by providing a unique word each day for the user t
 
 
 🚀<b>Usage</b>:
-[Show off what your software looks like in action! Try to limit it to one-liners if possible and don't delve into API specifics.]
 
 ![GOL web page](https://user-images.githubusercontent.com/85261489/199945098-a2b325dd-b795-4692-bd71-a7f971cf3cad.png)
 <i>The first page of the Flask web app, here the user can either choose to either log in or sign up.</i>
@@ -67,8 +66,4 @@ The app hopes to achieve this by providing a unique word each day for the user t
 * search words and its definition
 * display previous learnt words
 * streaks
-
-💭<b>Feedback and Contribution</b>
-
-**input link**
 
