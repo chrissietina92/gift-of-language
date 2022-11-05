@@ -1,5 +1,7 @@
 📦<b>Gift Of Language - CFG degree project</b>
 
+Group 5: Daniella Omokore, Xhensjola Hysa, Rebecca Ayaji, Christina O'Brien, Najat Yusuf
+
 ℹ️<b>Overview</b>:
 
 Communication is an important life skill; it enables people to express how they feel, understand the world around them and build connections with others. One of the biggest barriers to communication is understanding language.
@@ -24,7 +26,6 @@ The app hopes to achieve this by providing a unique word each day for the user t
 
 
 🚀<b>Usage</b>:
-[Show off what your software looks like in action! Try to limit it to one-liners if possible and don't delve into API specifics.]
 
 ![GOL web page](https://user-images.githubusercontent.com/85261489/199945098-a2b325dd-b795-4692-bd71-a7f971cf3cad.png)
 <i>The first page of the Flask web app, here the user can either choose to either log in or sign up.</i>
@@ -61,12 +62,9 @@ The app hopes to achieve this by providing a unique word each day for the user t
 
 <i>Before using the application, users must create a new account or log in with their account. The Gift of Language members can then experience these features: </i>
 
-* daily word of the day
-* search words and its definition
-* display previous learnt words
-* streaks
-
-💭<b>Feedback and Contribution</b>
-
-**input link**
+* Daily Word Scheduler
+* New Word Generator
+* Search words and their definitions
+* Display previously learnt words
+* Daily streaks
 
