@@ -33,6 +33,35 @@ class TestEmailValidation(TestCase):
         self.assertEqual(check_if_valid_email("gemmagmail.com"), False)
 
 
+# Testing the username validation function
+class TestUsernameValidation(TestCase):
+
+    def test_valid_username(self):
+        self.assertEqual(check_if_valid_username("Gammy"), True)
+
+    def test_valid_username(self):
+        self.assertEqual(check_if_valid_username("Gammy"), True)
+
+    # Usernames can not be empty
+    def test_invalid_empty_username(self):
+        self.assertEqual(check_if_valid_username(""), False)
+
+    # Usernames are not allowed to be shorter than 5
+    def test_invalid_username_length_below_4(self):
+        self.assertEqual(check_if_valid_username("Ahd5"), False)
+
+    # Usernames are not allowed to be longer than 21
+    def test_invalid_username_length_above_21(self):
+        self.assertEqual(check_if_valid_username("D123456789112345678911"), False)
+
+    # Usernames are only allowed the symbols underscore(_) and dash (-)
+    def test_invalid_username_symbols(self):
+        self.assertEqual(check_if_valid_username("Ahhud!"), False)
+
+    # Usernames must start with a letter
+    def test_invalid_username_not_starting_with_letter(self):
+        self.assertEqual(check_if_valid_username("1Gimmy"), False)
+
 # User input date format must be dd-mm-yyyy
 class TestDateValidation(TestCase):
     def test_valid_date(self):
@@ -40,8 +69,6 @@ class TestDateValidation(TestCase):
 
     def test_invalid_date(self):
         self.assertEqual(check_if_valid_date("27-08-00"), False)
-
-
 
 
 
@@ -90,41 +117,6 @@ class TestPasswordValidation(TestCase):
     # Passwords should not be longer than 20 characters
     def test_invalid_password_longer_than_20(self):
         self.assertEqual(check_if_valid_password("Pinapplepen123!Oranges"), False)
-
-
-
-
-
-# Testing the username validation function
-class TestUsernameValidation(TestCase):
-
-    def test_valid_username(self):
-        self.assertEqual(check_if_valid_username("Gammy"), True)
-
-    def test_valid_username(self):
-        self.assertEqual(check_if_valid_username("Gammy"), True)
-
-    # Usernames can not be empty
-    def test_invalid_empty_username(self):
-        self.assertEqual(check_if_valid_username(""), False)
-
-    # Usernames are not allowed to be shorter than 5
-    def test_invalid_username_length_below_4(self):
-        self.assertEqual(check_if_valid_username("Ahd5"), False)
-
-    # Usernames are not allowed to be longer than 21
-    def test_invalid_username_length_above_21(self):
-        self.assertEqual(check_if_valid_username("D123456789112345678911"), False)
-
-    # Usernames are only allowed the symbols underscore(_) and dash (-)
-    def test_invalid_username_symbols(self):
-        self.assertEqual(check_if_valid_username("Ahhud!"), False)
-
-    # Usernames must start with a letter
-""" def test_invalid_username_not_starting_with_letter(self):
-        self.assertEqual(check_if_valid_username("1Gimmy"), False)"""
-
-
 
 
 class TestNameValidation(TestCase):
