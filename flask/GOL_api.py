@@ -155,10 +155,13 @@ def timed_word(userid):
 # (WHAT WORDS HAVE BEEN SEARCHED AND HOW MANY TIMES)
 # http://127.0.0.1:5001/searched-words-statistics
 @app.route('/searched-words-statistics')
-def seached_words_stats():
+def searched_words_stats():
     all_searched_words = get_all_searched_words()
     c_searched_list = Counter(all_searched_words)
     return c_searched_list
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
+
+
