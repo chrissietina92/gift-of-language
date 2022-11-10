@@ -135,23 +135,23 @@ def new_user_credentials():
                      '4. Should be between 6 to 20 characters long: \n'
                      'Password: ')
     while not check_if_valid_password(password):
-        print("Please enter e valid password")
+        print("Please enter a valid password")
         password = input('Password: ')
     firstname = input('First name: ')
     while not check_if_valid_name(firstname):
-        print("Please enter e valid name")
+        print("Please enter a valid name")
         firstname = input('First name: ')
     lastname = input('Last name: ')
     while not check_if_valid_name(lastname):
-        print("Please enter e valid last name")
+        print("Please enter a valid last name")
         lastname = input('Last name: ')
     dob = input('DOB (%d-%m-%Y): ')
     while not check_if_valid_date(dob):
-        print("Please enter e valid date of birth.")
+        print("Please enter a valid date of birth.")
         dob = input('DOB (%d-%m-%Y): ')
     city = input('City: ')
     while not check_if_valid_name(city):
-        print("Please enter e valid city")
+        print("Please enter a valid city")
         city = input('City: ')
     if does_user_exist('Email', email) or does_user_exist('Username', username):
         duplicate = True
